@@ -5,20 +5,19 @@ class Data_enter:
         super(Data_enter, self).__init__()
 
         try:
-            df = pd.read_csv('akks.csv')
+            df = pd.read_csv('csvy/akks.csv')
 
         except Exception as err:
             self.server()
 
 
     def server(self):
-        df = pd.DataFrame(data=[["0", "0"]],
-                          columns=["login", "password"], )
-        df.to_csv('akks.csv', index=False)
+        df = pd.DataFrame(columns=["login", "password"], )
+        df.to_csv('csvy/akks.csv', index=False)
 
 
     def done_registration(self, login_acc, password_acc, sec_password_acc):
-        df = pd.read_csv('akks.csv')
+        df = pd.read_csv('csvy/akks.csv')
 
         if " " in (login_acc + password_acc + sec_password_acc):
             return "Пароль и логин не могут содержать пробелы."
@@ -32,11 +31,11 @@ class Data_enter:
                             columns=["login", "password"], )
 
         df = pd.concat([df, df_1], ignore_index=True)
-        df.to_csv('akks.csv', index=False)
+        df.to_csv('csvy/akks.csv', index=False)
         return ""
 
     def enter_acc(self, login_acc, password_acc):
-        df = pd.read_csv('akks.csv')
+        df = pd.read_csv('csvy/akks.csv')
 
         search_log = df[df["login"] == login_acc]
         try:
@@ -51,19 +50,15 @@ class Data_enter:
             return "Неверный логин или пароль."
 
     def change_data(self, inde, what_change, for_change):
-        df = pd.read_csv('akks.csv')
+        df = pd.read_csv('csvy/akks.csv')
         df.at[inde, what_change] = for_change
-        df.to_csv('akks.csv', index=False)
+        df.to_csv('csvy/akks.csv', index=False)
 
     def del_akk(self, inde):
-        df = pd.read_csv('akks.csv')
+        df = pd.read_csv('csvy/akks.csv')
         df = df.drop(index=inde)
-        df.to_csv('akks.csv', index=False)
+        df.to_csv('csvy/akks.csv', index=False)
 
 
 if __name__ == "__main__":
     window = Data_enter()
-    r = window.done_registration('logy', 'pas', 'pas')
-    r = window.done_registration('logan', 'pas', 'pas')
-    w = window.enter_acc('logy', 'pas')
-    w = window.del_akk(1)
