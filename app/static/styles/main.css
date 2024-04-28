@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+}
+
+.wrapper{
+
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 24px;
+    background-color: #d1d0d0;
+}
+
+ul.nav{
+    margin-left: 0px;
+    padding-left: 0px;
+
+    margin-top: 0px;
+    list-style: none;
+}
+.nav li { 
+    display: inline; 
+    
+}
+ul.nav a {
+    display: inline-block;
+    width: 10em;
+    height: 2em;
+    padding: 20px;
+    padding-top: 30px;
+    background-color: #d1d0d0;
+
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+}
+ul.nav a:hover{
+    background-color: #333;
+    color: #d1d0d0;
+}
+.container{
+    margin-top: 3em;
+    margin-left: 2em;
+    font-family: monospace;
+    font-weight: bold;
+    color: #333;
+   
+    font-size: 24px;
+
+}
+
+.button{
+    font-weight: bold;
+    margin-top: 0;
+    margin-left: 10px;
+    outline: none;
+    border: none;
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #d1d0d0;
+    transition: 0.2s;
+    font-size: 18px;
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #333;
+}
+.href{
+    font-weight: bold;
+    margin-top: 0;
+    margin-left: 10px;
+    outline: none;
+    border: none;
+    display: inline-block;
+    transition: 0.2s;
+    border-radius: 3px;
+    background-color: #d1d0d0;
+    
+    font-size: 18px;
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #333;
+    padding: 7px;
+}
+
+.href:hover{
+    transform: scale(1.1); 
+}
+.button:hover {
+    transform: scale(1.15); 
+}
+
+
+
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
+
+    <link rel="stylesheet" href="/static/styles/main.css">
+    
+</head>
+<body>
+    <div class="wrapper">
+        <ul class="nav">
+            <li><a href="/">Домой</a></li>
+            <li><a href="/transactions">Транзакции</a></li>
+            <li><a href="/analytics">Аналитика</a></li>
+            <li><a href="/budget">Бюджет</a></li>
+        </ul>   
+    </div>
+    
+    {% block content %}{% endblock content %}
+    
+
+</body>
+</html>
