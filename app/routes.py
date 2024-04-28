@@ -1,8 +1,8 @@
 from app import app
-from flask import redirect, render_template, request, session
+from flask import Blueprint, redirect, render_template, request, session
 from datetime import date, datetime
 
-
+routes = Blueprint('routes', __name__)
 # главная страница
 @app.route('/')
 def main():
