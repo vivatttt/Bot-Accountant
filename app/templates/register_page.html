@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>registration</title>
-</head>
-<body>
+{% extends "layout.html" %}
 
-    <h1>Это страница регистрации</h1>
-    
-</body>
-</html>
+{% block title %}{% endblock title %}
+
+{% block content %}
+
+
+<h1>Регистрация</h1>
+<form action="register.php" method="post">
+    <label for="username">Имя пользователя:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <label for="password_confirmation">Подтверждение пароля:</label>
+    <input type="password" id="password_confirmation" name="password_confirmation">
+    <br>
+    <input type="submit" value="Зарегистрироваться">
+</form>
+
+
+
+{% endblock content %}
