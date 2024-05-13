@@ -6,6 +6,15 @@
     <title>log in</title>
 </head>
 <body>
-    <h1>Это страница входа в аккаунт</h1>
+    <h1>Вход</h1>
+  <form action="login.py" method="post">
+    <label for="username">Имя пользователя:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <input type="submit" value="Войти">
+  </form>
 </body>
 </html>
