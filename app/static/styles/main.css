@@ -1,3 +1,35 @@
+:root {
+    --default-font-family: "Montserrat"
+  }
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+.wrepper{
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: #171717;
+}
+.main-container{
+    height: 3252px;
+    width: 1440px;
+    background-image: url(/prsem/public/imgs/lines.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: center;
+}
 body{
     margin: 0;
 }

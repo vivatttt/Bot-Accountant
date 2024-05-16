@@ -10,14 +10,27 @@
     <link rel="stylesheet" href="/static/styles/main.css">
     
 </head>
-<body>
+<body>  
     <div class="wrapper">
-        <ul class="nav">
-            <li><a href="/">Домой</a></li>
-            <li><a href="/transactions">Транзакции</a></li>
-            <li><a href="/analytics">Аналитика</a></li>
-            <li><a href="/budget">Бюджет</a></li>
-        </ul>   
+        <div class="header">
+            <img class="name" src="" alt="">
+            <div class="butttons">
+                <a href=""><button class="" >home</button></a>
+                <a href=""><button class="" >transactions</button></a>
+                <a href=""><button class="" >analytics</button></a>
+                <a href=""><button class="" >buget</button></a>
+                <div class="dropdown">
+                    <button class="dropbtn">ENG 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="#"><button class="ENG-btn" >ENG</button></a>
+                      <a href=""><button class="RUS-btn" >RUS</button></a>
+                    </div>
+                </div>
+                <img class="drpdn-arrow" src="" alt=""> 
+            </div>
+        </div>  
     </div>
     
     {% block content %}{% endblock content %}
