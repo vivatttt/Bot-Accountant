@@ -7,7 +7,7 @@ class Data_trans:
         super(Data_trans, self).__init__()
 
         try:
-            df = pd.read_csv('app/csvy/trans.csv')
+            self.df = pd.read_csv('app/csvy/trans.csv')
 
         except Exception as err:
             self.server()

@@ -24,7 +24,6 @@ class Data_enter:
 
         df = pd.concat([df, df_1], ignore_index=True)
         df.to_csv('app/csvy/akks.csv', index=False)
-        return ""
 
     # def change_goal(self, log, amountic, flag=0):
     #     df = pd.read_csv('app/csvy/akks.csv')
@@ -48,11 +47,12 @@ class Data_enter:
             password_list = df.loc[inde, 'password']
 
             if password_acc != password_list:
-                return "Неверный логин или пароль."
-            return str(inde)
+                return {"error": "Invalid login data", "inde": ""}
+            return {"error": "", "inde": str(inde)}
 
         except Exception as err:
-            return "Неверный логин или пароль."
+            return {"error": "Invalid login data", "inde": ""}
+
 
     def change_data(self, inde, what_change, for_change):
         df = pd.read_csv('app/csvy/akks.csv')
