@@ -17,9 +17,18 @@ def main():
         return render_template(
             'main_page.html'
         )
+    
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
+    user = {
+        'username' : '',
+        'password' : '',
+    }
+    error = ''
+
     return render_template(
-        'main_page.html'
+        'register_page.html',
+        user=user,
+        error=error
     )
 
 # login - GET, POST
@@ -60,19 +69,17 @@ def do_register():
     password = hash_password(user['password'])
     # Добавление в базу данных
 
-    # Здесь вход в аккаунт
     session['username'] = username # добавление имени пользователя в куки 
     flash('User succesfully created', 'success')
-    return redirect('/users/succesfully_created', code=302)
+    return redirect('/', code=302)
 
 
-# страница отображения регистрации 
+# страница отображения входа в аккаунт
 @app.get('/login')
 def show_login():
-    user = user = {
+    user = {
         'username' : '',
         'password' : '',
-        'password_confirmation' : ''
     }
     error = ''
 
@@ -82,7 +89,7 @@ def show_login():
         error=error
     )
 
-# страница обработки регистрации
+# страница обработки входа в аккаунт
 @app.post('/login')
 def do_login():
     user = process_form_data(request.form.to_dict())
@@ -109,7 +116,7 @@ def do_login():
     username = user['username']
     session['username'] = username # добавление имени пользователя в куки 
 
-    return redirect('/users/succesfully_created', code=302)
+    return redirect('/', code=302)
 
 
 
