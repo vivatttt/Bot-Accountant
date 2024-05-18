@@ -63,13 +63,16 @@ def users_post():
             error=error
         ), 422
     
-    # ТУТ ОБРАБОТКА И ДОБАВЛЕНИЕ В БАЗУ ДАННЫХ
 
     username = user['username']
     password = hash_password(user['password'])
-    
+    # Добавление в базу данных
+    print('--------------------------------')
+    print(username)
+    print(password)
+    print('--------------------------------')
     # Здесь вход в аккаунт
-
+    session['username'] = username # добавление имени пользователя в куки 
     return redirect('/users/succesfully_created', code=302)
 
 @app.route('/users/succesfully_created')
