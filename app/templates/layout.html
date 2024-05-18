@@ -14,27 +14,24 @@
     <div class="wrapper">
         <div class="header">
             <img class="name" src="/static/imgs/logo.svg" alt=""></img>
-            <div class="butttons">
-                <a href="/templates/main_page.html"><button class="" >home</button></a>
-                <a href="/templates/transactions_page.html"><button class="" >transactions</button></a>
-                <a href="/templates/analytics_page.html"><button class="" >analytics</button></a>
-                <a href="/templates/budget_page.html"><button class="" >budget</button></a>
+            <div class="buttons">
+                <a href="/"><button class="btn" >home</button></a>
+                <a href="/transactions"><button class="btn" >transactions</button></a>
+                <a href="/analytics"><button class="btn" >analytics</button></a>
+                <a href="/budget"><button class="btn" >budget</button></a>
                 <div class="dropdown">
                     <button class="dropbtn">ENG 
                       <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                      <a href="#"><button class="ENG-btn" >ENG</button></a>
                       <a href=""><button class="RUS-btn" >RUS</button></a>
                     </div>
                 </div>
-
             </div>
         </div>  
     </div>
     
     {% block content %}{% endblock content %}
-    
 
 </body>
 </html>

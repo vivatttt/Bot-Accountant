@@ -15,11 +15,11 @@ def main():
 
         # если пользователь уже зашел в свой аккаунт
         return render_template(
-            'main_page_after_signup.html'
+            'main_page.html'
         )
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
     return render_template(
-        'main_page_before_signup.html'
+        'main_page.html'
     )
 
 # страница аналитики

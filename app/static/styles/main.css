@@ -1,85 +1,122 @@
 :root {
-    --default-font-family: "Montserrat"
+    --default-font-family: -apple-system;
   }
-
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed, 
+  figure, figcaption, footer, header, hgroup, 
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section {
+      display: block;
+  }
+  body {
+      line-height: 1;
+  }
+  ol, ul {
+      list-style: none;
+  }
+  blockquote, q {
+      quotes: none;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+      content: '';
+      content: none;
+  }
+  table {
+      border-collapse: collapse;
+      border-spacing: 0;
+  }
+  body{
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: #2B2D42;
+    justify-content: center;
+    align-items: center;
+  }
 .montserrat {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
 }
+
 *{
     margin: 0;
     padding: 0;
     outline: 0;
     border: 0;
 }
+
 .wrepper{
     display:inline-flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
-    background-color: #171717;
-}
-.main-container{
-    height: 3252px;
-    width: 1440px;
-    background-image: url(/prsem/public/imgs/lines.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    justify-content: center;
-}
-body{
-    margin: 0;
+    background-color: #2B2D42;
 }
 
-.wrapper{
-
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 24px;
-    background-color: #d1d0d0;
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
 }
-
-ul.nav{
-    margin-left: 0px;
-    padding-left: 0px;
-
-    margin-top: 0px;
-    list-style: none;
+.name{
+    padding: 0px 30px;
+    height: 30px;
+    width: 150px;
 }
-.nav li { 
-    display: inline; 
-    
+button{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-family: "Montserrat", sans-serif;
+    color: #8D99AE; 
 }
-ul.nav a {
-    display: inline-block;
-    width: 10em;
-    height: 2em;
-    padding: 20px;
-    padding-top: 30px;
-    background-color: #d1d0d0;
-
-    text-decoration: none;
-    color: #333;
-    text-align: center;
+.buttons{
+    padding: 0px 30px 0px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    height: 39px;
+    width: 50%;
 }
-ul.nav a:hover{
-    background-color: #333;
-    color: #d1d0d0;
+.btn{
+    position: relative;
+    height: 39px;
+    font-size: medium;
+    font-weight: normal;
 }
-.container{
-    margin-top: 3em;
-    margin-left: 2em;
-    font-family: monospace;
-    font-weight: bold;
-    color: #333;
-   
-    font-size: 24px;
-
+@media(hover: hover){
+    button:hover{
+        color: #ffffff;
+    }
 }
-
+@media(hover: none){
+    button:active{
+        color: #ffffff;
+    }
+}
 .dropdown {
     float: left;
     overflow: hidden;
@@ -87,9 +124,9 @@ ul.nav a:hover{
   
 .dropdown .dropbtn {
     position: relative;
-    font-size: 18px;  
-    color: white;
-    background-color: #171717;
+    font-size: normal;  
+    color: #8D99AE;
+    background-color: transparent;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: normal;
@@ -98,68 +135,55 @@ ul.nav a:hover{
   
   
 .dropdown-content {
-display: none;
-position: absolute;
-background-color: transparent;
-min-width: 22px;
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    min-width: 18px;
 
 }
   
 .dropdown-content a {
-float: none;
-color: #ffffff;
-padding: 12px 10px;
-text-decoration: none;
-display: block;
-text-align: left;
-background-color: transparent;
-}
-.ENG-btn{
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    height: 22px;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 18px;
+    float: none;
     color: #ffffff;
+    padding: 5px 0px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background-color: transparent;
 }
+
 .RUS-btn{
     cursor: pointer;
     border: none;
     background-color: transparent;
-    height: 22px;
+    height: 18px;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
     font-size: 18px;
-    color: #ffffff;
+    color: #8D99AE;
     
 }
+
 @media(hover: hover){
-    .ENG-btn:hover{
-        text-decoration: underline;
+    .dropdown .dropbtn:hover{
         color: #ffffff;
     }
 }
 @media(hover: none){
-    .ENG-btn:active{
-        text-decoration: underline;
+    .dropdown .dropbtn:hover{
         color: #ffffff;
     }
 }
+
 @media(hover: hover){
     .RUS-btn:hover{
-        text-decoration: underline;
         color: #ffffff;
     }
 }
 @media(hover: none){
     .RUS-btn:active{
-        text-decoration: underline;
         color: #ffffff;
     }
 }

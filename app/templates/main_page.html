@@ -5,8 +5,19 @@
 
 
 {% block content %}
-
-    <h1>Это стартовая страница после того, как пользователь зашел в свой аккаунт</h1>
-
+<div class = "Log_container">
+    <div class = "top_buttons">
+        <button class="swich_to_login_btn" >Log in</button>
+        <span class= "sepor">/</span>
+        <button class="swich_to_register_btn" >register</button>
+    </div>
+    <form action="login.py" method="post">
+    <input type="text" id="username" name="username" placeholder = "username">
+    <br>
+    <input type="password" id="password" name="password" placeholder = "password">
+    <br>
+    <input type="submit" value="Log in">
+    </form>
+</div>
 {% endblock content %}
 
