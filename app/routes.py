@@ -4,10 +4,13 @@ from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
 from app.utils.process_form_data import process_form_data
+from app.data_of_entering import Data_enter
+from app.data_of_transaction import Data_trans
+
 
 
 routes = Blueprint('routes', __name__)
-
+app.secret_key = 'daria_dusheiko'
 # главная страница
 @app.route('/')
 def main():
@@ -20,11 +23,11 @@ def main():
     
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
     user = {
-        'username' : '',
-        'password' : '',
+        'username': '',
+        'password': '',
+        'password_confirmation': ''
     }
     error = ''
-
     return render_template(
         'register_page.html',
         user=user,
@@ -37,7 +40,10 @@ def main():
 # страница отображения регистрации 
 @app.get('/register')
 def show_register():
-    user = user = {
+
+    if 'username' in session:
+        return redirect('/', code=302)
+    user = {
         'username' : '',
         'password' : '',
         'password_confirmation' : ''
@@ -63,21 +69,32 @@ def do_register():
             user=user,
             error=error
         ), 422
-    
 
     username = user['username']
     password = hash_password(user['password'])
-    # Добавление в базу данных
 
-    session['username'] = username # добавление имени пользователя в куки 
+    # Поменять структуру done_registration()
+
+    # Добавление в базу данных
+    add_user = Data_enter()
+    add_user.done_registration(username, password)
+    inde = add_user.enter_acc(username, password)
+
+    # Здесь вход в аккаунт
+
+    session['inde'] = inde # добавление имени пользователя в куки
+    session['username'] = username
     flash('User succesfully created', 'success')
+
     return redirect('/', code=302)
 
 
-# страница отображения входа в аккаунт
+# страница отображения входа
 @app.get('/login')
 def show_login():
-    user = {
+    if 'username' in session:
+        return redirect('/', code=302)
+    user = user = {
         'username' : '',
         'password' : '',
     }
@@ -89,32 +106,33 @@ def show_login():
         error=error
     )
 
-# страница обработки входа в аккаунт
+# страница обработки входа
 @app.post('/login')
 def do_login():
     user = process_form_data(request.form.to_dict())
-    error = '' # здесь проверка валидности пользователя
+
+    add_user = Data_enter()
+
+    login_result = add_user.enter_acc(user['username'], hash_password(user['password']))
 
     '''
-
     user {
         username : ...
         password : ... !!! Не забываем, что сравниваем не пароль пользователя, а хеш пароля (функция hash_password)
     }
 
     error - строка
-    
     '''
 
-    if error:
+    if login_result['error']:
         return render_template(
             'login_page.html',
             user=user,
-            error=error
+            error=login_result['error']
         ), 422
-    
-    username = user['username']
-    session['username'] = username # добавление имени пользователя в куки 
+
+    session['username'] = user['username'] # добавление имени пользователя в куки
+    session['inde'] = login_result['inde']
 
     return redirect('/', code=302)
 
@@ -140,6 +158,5 @@ def budget():
     return render_template(
         'budget_page.html'
     )
-
 
 
