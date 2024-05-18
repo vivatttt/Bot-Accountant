@@ -10,18 +10,28 @@
     <link rel="stylesheet" href="/static/styles/main.css">
     
 </head>
-<body>
+<body>  
     <div class="wrapper">
-        <ul class="nav">
-            <li><a href="/">Домой</a></li>
-            <li><a href="/transactions">Транзакции</a></li>
-            <li><a href="/analytics">Аналитика</a></li>
-            <li><a href="/budget">Бюджет</a></li>
-        </ul>   
+        <div class="header">
+            <img class="name" src="/static/imgs/logo.svg" alt=""></img>
+            <div class="buttons">
+                <a href="/"><button class="btn" >home</button></a>
+                <a href="/transactions"><button class="btn" >transactions</button></a>
+                <a href="/analytics"><button class="btn" >analytics</button></a>
+                <a href="/budget"><button class="btn" >budget</button></a>
+                <div class="dropdown">
+                    <button class="dropbtn">ENG 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href=""><button class="RUS-btn" >RUS</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>  
     </div>
     
     {% block content %}{% endblock content %}
-    
 
 </body>
 </html>
