@@ -5,16 +5,14 @@
 {% block content %}
 
 
-<h1>Регистрация</h1>
 <form action="/users" method="post">
 
-    <label for="username">Имя пользоxвателя:</label>
+
     <input type="text" id="username" name="username" value="{{ user.username }}">
     <br>
-    <label for="password">Пароль:</label>
+
     <input type="password" id="password" name="password" value="{{ user.password }}">
     <br>
-    <label for="password_confirmation">Подтверждение пароля:</label>
     <input type="password" id="password_confirmation" name="password_confirmation"  value="{{ user.password_confirmation }}">
     <br>
     <input type="submit" value="Зарегистрироваться">
