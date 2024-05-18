@@ -1,5 +1,7 @@
 from typing import Dict
 import re
+import pandas as pd
+from app.data_of_entering import Data_enter
 
 def validate(user : Dict[str, str]) -> str:
 
@@ -24,4 +26,17 @@ def validate(user : Dict[str, str]) -> str:
         return "Пароль должен быть длиной от 8 до 16 символов и содержать как минимум одну цифру, одну букву в верхнем регистре и одну букву в нижнем регистре"
     if password != password_confirmartion:
         return "Пароли не совпадают"
+
+    frame = Data_enter()
+
+    try:
+        df = pd.read_csv('app/csvy/akks.csv')
+
+    except Exception as err:
+        frame.server()
+        df = pd.read_csv('app/csvy/akks.csv')
+
+    if (df['login'] == username).any():
+        return "Данный логин уже существует."
+
     return ''

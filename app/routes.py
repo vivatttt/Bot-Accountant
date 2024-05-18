@@ -4,6 +4,9 @@ from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
 from app.utils.process_form_data import process_form_data
+from app.data_of_entering import Data_enter
+from app.data_of_transaction import Data_trans
+
 
 
 routes = Blueprint('routes', __name__)
@@ -62,13 +65,16 @@ def users_post():
             user=user,
             error=error
         ), 422
-    
-    # ТУТ ОБРАБОТКА И ДОБАВЛЕНИЕ В БАЗУ ДАННЫХ
 
     username = user['username']
     password = hash_password(user['password'])
-    
-    # Здесь вход в аккаунт
+
+    Adding_user = Data_enter()
+    Adding_user.done_registration(login_acc=username, password_acc=password)
+    inde = Adding_user.enter_acc(username, password)
+
+    # Adding_user.change_goal(inde, 10000, 1)
+    # Adding_user.change_goal(inde, 100)
 
     return redirect('/users/succesfully_created', code=302)
 
