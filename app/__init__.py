@@ -17,6 +17,7 @@ app.secret_key = SECRET_KEY
 # Устанавливаем срок действия куки сессии на 7 дней
 app.permanent_session_lifetime = timedelta(days=7)
 
+
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/george/learning/projects/InterviewPrepareHelper/database.db' 
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  
 
@@ -24,3 +25,5 @@ app.permanent_session_lifetime = timedelta(days=7)
 # migrate = Migrate(app, db)
 
 # from app import models
+from app.data_of_entering import Data_enter
+from app.data_of_transaction import Data_trans
