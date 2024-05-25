@@ -1,5 +1,5 @@
 from app import app
-from flask import Blueprint, redirect, render_template, request, session, flash
+from flask import Blueprint, redirect, render_template, request, session, flash, url_for
 from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
@@ -22,16 +22,10 @@ def main():
         )
     
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
-    user = {
-        'username': '',
-        'password': '',
-        'password_confirmation': ''
-    }
-    error = ''
-    return render_template(
-        'register_page.html',
-        user=user,
-        error=error
+
+    return redirect(
+        url_for('show_register'),
+        code=302
     )
 
 # login - GET, POST
@@ -42,7 +36,11 @@ def main():
 def show_register():
 
     if 'username' in session:
-        return redirect('/', code=302)
+        return redirect(
+            url_for('main'), 
+            code=302
+            )
+    
     user = {
         'username' : '',
         'password' : '',
@@ -62,6 +60,7 @@ def do_register():
     user = process_form_data(request.form.to_dict())
 
     error = validate(user)
+
 
     if error:
         return render_template(
