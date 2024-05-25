@@ -16,7 +16,9 @@
     <input type="password" id="password_confirmation" name="password_confirmation"  value="{{ user.password_confirmation }}">
     <br>
     <input type="submit" value="Зарегистрироваться">
-
+    <br>
+    <br>
+    <a href="{{ url_for('show_login') }}">Log in</a>
     {% if error %}
     <div>
         <p>Error : {{ error }}</p>
