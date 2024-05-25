@@ -185,31 +185,36 @@ def make_transaction():
 
     }
     '''
-    user_transaction = Data_trans()
 
     inde = int(session.get('inde', ''))
-    if not inde:
-        # тут обработка ошибки
-        pass
-    error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
+    signed_amount = int(transaction['amount'])
+
+    add_info = Data_enter()
+    
+    if transaction['type'] == 'expense':
+        signed_amount = -signed_amount
+
+    error = add_info.change_data(inde, "budget", signed_amount, 1)
 
     if error:
-        
+
         return render_template(
             'transactions_page.html',
             transaction=transaction,
             error=error
         ), 422
     
-    # изменение текущего бюджета
-    add_info = Data_enter()
+    user_transaction = Data_trans()
+    error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
     
-    signed_amount = int(transaction['amount'])
-    if transaction['type'] == 'expense':
-        signed_amount = -signed_amount
-
-    # изменение состояния копилки
-    add_info.change_data(inde, "budget", signed_amount, 1)
+    if error:
+        # если выходим по этой ошибке, то нужно вернуть измененную ранее сумму бюджета
+        add_info.change_data(inde, "budget", -signed_amount, 1)
+        return render_template(
+            'transactions_page.html',
+            transaction=transaction,
+            error=error
+        ), 422
 
     flash('Transaction succesfully added', 'success')
     return render_template(
@@ -237,16 +242,17 @@ def add_to_goal():
 
     }
     '''
+
     goal = request.form.to_dict()
     inde = int(session.get('inde'))
-    if not inde:
-        # тут обработка ошибки
-        pass
+ 
+    signed_amount = int(goal['amount'])
+    if goal['type'] == 'expense':
+        signed_amount = -signed_amount
 
-    # тут добавление транзакции в бд
-    goal_tran = Data_goal()
-    error = goal_tran.add_goal(inde, goal['amount'], goal['type'])
+    add_info = Data_enter()
     
+    error = add_info.change_data(inde, "moneybox", signed_amount, 1)
     if error:
         return render_template(
             'goal_page.html',
@@ -254,15 +260,13 @@ def add_to_goal():
             error=error
         ), 422
 
-    # изменение текущего бюджета
-    add_info = Data_enter()
-    signed_amount = int(goal['amount'])
-    if goal['type'] == 'expense':
-        signed_amount = -signed_amount
-    # изменение состояния копилки
-    error = add_info.change_data(inde, "moneybox", signed_amount, 1)
-
+    # тут добавление транзакции в бд
+    goal_tran = Data_goal()
+    error = goal_tran.add_goal(inde, goal['amount'], goal['type'])
+    
     if error:
+        # если выходим по этой ошибке, то нужно вернуть измененную ранее сумму в копилке
+        add_info.change_data(inde, "moneybox", -signed_amount, 1)
         return render_template(
             'goal_page.html',
             goal=goal,
