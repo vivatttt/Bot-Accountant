@@ -1,5 +1,13 @@
 from app import app
-from flask import Blueprint, redirect, render_template, request, session, flash, url_for
+from flask import (Blueprint, 
+                   redirect, 
+                   render_template, 
+                   request, 
+                   session, 
+                   flash, 
+                   url_for,
+                   get_flashed_messages)
+
 from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
@@ -133,7 +141,10 @@ def do_login():
     session['username'] = user['username'] # добавление имени пользователя в куки
     session['inde'] = login_result['inde']
 
-    return redirect('/', code=302)
+    return redirect(
+        url_for('main'),
+        code=302
+        )
 
 
 
@@ -145,11 +156,51 @@ def analytics():
     )
 
 # страница добавлением / удалением транизакций
-@app.route('/transactions')
-def transactions():
+@app.get('/transactions')
+def show_transaction():
     return render_template(
-        'transactions_page.html'
+        'transactions_page.html',
+        transaction={},
+        error=''
     )
+
+
+@app.post('/transactions')
+def make_transaction():
+    transaction = request.form.to_dict()
+    '''
+    transaction = {
+        amount :
+        type :
+        category :
+        date :
+        description : 
+
+    }
+    '''
+    user_transaction = Data_trans()
+
+    inde = session.get('inde', '')
+    if not inde:
+        # тут обработка ошибки
+        print('ERROR INDE')
+    error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
+
+    if error:
+        
+        return render_template(
+            'transactions_page.html',
+            transaction=transaction,
+            error=error
+        ), 422
+    
+    flash('Transaction succesfully added', 'success')
+    return render_template(
+        'transactions_page.html',
+        transaction={},
+        error=''
+    )
+
 
 # страница с бюджетом
 @app.route('/budget')
