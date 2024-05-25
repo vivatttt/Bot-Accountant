@@ -44,6 +44,10 @@ class Data_enter:
     def change_data(self, inde, what_change, for_change, flag=0):
         df = pd.read_csv('app/csvy/akks.csv')
         if flag == 1 and (what_change == 'moneybox' or what_change == 'budget'):
+
+            if df.at[inde, what_change] + for_change < 0:
+                return "ВЫполнить операцию невозможно."
+
             df.at[inde, what_change] += for_change
         elif flag == 1:
             df.at[inde, "goal"] = for_change
@@ -51,6 +55,7 @@ class Data_enter:
         else:
             df.at[inde, what_change] = for_change
         df.to_csv('app/csvy/akks.csv', index=False)
+        return ""
 
     def del_akk(self, inde):
         df = pd.read_csv('app/csvy/akks.csv')
