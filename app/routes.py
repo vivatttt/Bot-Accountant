@@ -181,10 +181,9 @@ def make_transaction():
     user_transaction = Data_trans()
 
     inde = session.get('inde', '')
-    print(inde)
     if not inde:
         # тут обработка ошибки
-        print('ERROR INDE')
+        pass
     error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
 
     if error:
@@ -203,11 +202,47 @@ def make_transaction():
     )
 
 
-# страница с бюджетом
-@app.route('/goal')
-def budget():
+# страница с целью
+@app.get('/goal')
+def show_goal():
     return render_template(
-        'goal_page.html'
+        'goal_page.html',
+        goal={},
+        error=''
+    )
+# добавление транзакции в цели
+@app.post('/goal')
+def add_to_goal():
+    '''
+    goal = {
+        amount :
+        type :
+
+    }
+    '''
+    inde = session.get('inde', '')
+    if not inde:
+        # тут обработка ошибки
+        pass
+
+    # тут добавление транзакции в бд
+    # изменение текущего бюджета
+
+    flash('You became closer to the goal!', 'success')
+    return render_template(
+        'goal_page.html',
+        goal={},
+        error=''
     )
 
+# изменение цели
+@app.post('/goal-new')
+def new_goal():
+    '''
+    goal = {
+        new_amount :
+    }
+    '''
+
+    # тут обновление цели пользователя
 
