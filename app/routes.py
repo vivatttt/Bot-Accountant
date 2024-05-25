@@ -1,5 +1,13 @@
 from app import app
-from flask import Blueprint, redirect, render_template, request, session, flash
+from flask import (Blueprint, 
+                   redirect, 
+                   render_template, 
+                   request, 
+                   session, 
+                   flash, 
+                   url_for,
+                   get_flashed_messages)
+
 from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
@@ -20,19 +28,12 @@ def main():
         return render_template(
             'main_page.html'
         )
+    
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
-    user = {
-        'username': '',
-        'password': '',
-        'password_confirmation': ''
-    }
-    error = ''
-    # add_user = Data_enter()
-    # add_user.change_data(1, "goal", 100, 11)
-    return render_template(
-        'register_page.html',
-        user=user,
-        error=error
+
+    return redirect(
+        url_for('show_register'),
+        code=302
     )
 
 # login - GET, POST
@@ -43,7 +44,11 @@ def main():
 def show_register():
 
     if 'username' in session:
-        return redirect('/', code=302)
+        return redirect(
+            url_for('main'), 
+            code=302
+            )
+    
     user = {
         'username' : '',
         'password' : '',
@@ -64,6 +69,7 @@ def do_register():
 
     error = validate(user)
 
+
     if error:
         return render_template(
             'register_page.html',
@@ -79,7 +85,7 @@ def do_register():
     # Добавление в базу данных
     add_user = Data_enter()
     add_user.done_registration(username, password)
-    inde = add_user.enter_acc(username, password)
+    inde = add_user.enter_acc(username, password)['inde']
 
     # Здесь вход в аккаунт
 
@@ -98,7 +104,6 @@ def show_login():
     user = user = {
         'username' : '',
         'password' : '',
-        'password_confirmation' : ''
     }
     error = ''
 
@@ -136,7 +141,10 @@ def do_login():
     session['username'] = user['username'] # добавление имени пользователя в куки
     session['inde'] = login_result['inde']
 
-    return redirect('/', code=302)
+    return redirect(
+        url_for('main'),
+        code=302
+        )
 
 
 
@@ -148,17 +156,93 @@ def analytics():
     )
 
 # страница добавлением / удалением транизакций
-@app.route('/transactions')
-def transactions():
+@app.get('/transactions')
+def show_transaction():
     return render_template(
-        'transactions_page.html'
+        'transactions_page.html',
+        transaction={},
+        error=''
     )
 
-# страница с бюджетом
-@app.route('/budget')
-def budget():
+
+@app.post('/transactions')
+def make_transaction():
+    transaction = request.form.to_dict()
+    '''
+    transaction = {
+        amount :
+        type :
+        category :
+        date :
+        description : 
+
+    }
+    '''
+    user_transaction = Data_trans()
+
+    inde = session.get('inde', '')
+    if not inde:
+        # тут обработка ошибки
+        pass
+    error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
+
+    if error:
+        
+        return render_template(
+            'transactions_page.html',
+            transaction=transaction,
+            error=error
+        ), 422
+    
+    flash('Transaction succesfully added', 'success')
     return render_template(
-        'budget_page.html'
+        'transactions_page.html',
+        transaction={},
+        error=''
     )
 
+
+# страница с целью
+@app.get('/goal')
+def show_goal():
+    return render_template(
+        'goal_page.html',
+        goal={},
+        error=''
+    )
+# добавление транзакции в цели
+@app.post('/goal')
+def add_to_goal():
+    '''
+    goal = {
+        amount :
+        type :
+
+    }
+    '''
+    inde = session.get('inde', '')
+    if not inde:
+        # тут обработка ошибки
+        pass
+
+    # тут добавление транзакции в бд
+    # изменение текущего бюджета
+
+    flash('You became closer to the goal!', 'success')
+    return render_template(
+        'goal_page.html',
+        goal={},
+        error=''
+    )
+
+# изменение цели
+@app.post('/goal-new')
+def new_goal():
+    '''
+    goal = {
+        new_amount :
+    }
+    '''
+
+    # тут обновление цели пользователя
 
