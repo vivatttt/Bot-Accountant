@@ -36,3 +36,7 @@ id_user,amount,type,category,date,description
 "{'error': '', 'inde': '3'}",123,expense,food,2001-10-10,gioy
 "{'error': '', 'inde': '3'}",123,expense,food,2004-02-20,dfg
 3,10000,expense,food,2024-05-25,poel
+1,100000000,income,food,2005-11-18,llasdkajisjd
+1,1900,income,food,2005-11-18,sdhj
+1,90,expense,food,2005-11-18,dkjfhg
+1,90,expense,food,1111-11-11,12

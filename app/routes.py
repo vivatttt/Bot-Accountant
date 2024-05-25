@@ -15,7 +15,7 @@ from app.utils.process_form_data import process_form_data
 from app.data_of_entering import Data_enter
 from app.data_of_transaction import Data_trans
 from app.data_of_goal import Data_goal
-
+import pandas as pd
 
 routes = Blueprint('routes', __name__)
 app.secret_key = 'daria_dusheiko'
@@ -23,10 +23,17 @@ app.secret_key = 'daria_dusheiko'
 @app.route('/')
 def main():
     if 'username' in session:
-
+        inde = session.get('inde')
+        
         # если пользователь уже зашел в свой аккаунт
+        user_info = Data_enter()
+        data_info = user_info.info_user(int(inde))
+
         return render_template(
-            'main_page.html'
+            'main_page.html',
+            cur_goal=data_info[0],
+            moneybox=data_info[1],
+            budget=data_info[2]
         )
     
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
@@ -180,7 +187,7 @@ def make_transaction():
     '''
     user_transaction = Data_trans()
 
-    inde = session.get('inde', '')
+    inde = int(session.get('inde', ''))
     if not inde:
         # тут обработка ошибки
         pass
@@ -194,6 +201,16 @@ def make_transaction():
             error=error
         ), 422
     
+    # изменение текущего бюджета
+    add_info = Data_enter()
+    
+    signed_amount = int(transaction['amount'])
+    if transaction['type'] == 'expense':
+        signed_amount = -signed_amount
+
+    # изменение состояния копилки
+    add_info.change_data(inde, "budget", signed_amount, 1)
+
     flash('Transaction succesfully added', 'success')
     return render_template(
         'transactions_page.html',
@@ -221,20 +238,37 @@ def add_to_goal():
     }
     '''
     goal = request.form.to_dict()
-    inde = session.get('inde', '')
+    inde = int(session.get('inde'))
     if not inde:
         # тут обработка ошибки
         pass
 
     # тут добавление транзакции в бд
     goal_tran = Data_goal()
-    goal_tran.add_goal(inde, goal['amount'], goal['type'])
+    error = goal_tran.add_goal(inde, goal['amount'], goal['type'])
     
+    if error:
+        return render_template(
+            'goal_page.html',
+            goal=goal,
+            error=error
+        ), 422
+
     # изменение текущего бюджета
     add_info = Data_enter()
-    signed_amount = goal['amount'] if goal['type'] == 'income' else -goal['amount']
-    add_info.change_data(inde, "moneybox", signed_amount)
+    signed_amount = int(goal['amount'])
+    if goal['type'] == 'expense':
+        signed_amount = -signed_amount
+    # изменение состояния копилки
+    error = add_info.change_data(inde, "moneybox", signed_amount, 1)
 
+    if error:
+        return render_template(
+            'goal_page.html',
+            goal=goal,
+            error=error
+        ), 422
+    
     flash('You became closer to the goal!', 'success')
     return render_template(
         'goal_page.html',
@@ -251,5 +285,19 @@ def new_goal():
     }
     '''
 
+    inde = int(session.get('inde'))
+    new_amount = int(request.form.get('new_amount'))
     # тут обновление цели пользователя
+    del_cha = Data_enter()
+    del_cha.change_data(inde, "goal", new_amount, 1)
+
+    del_goal = Data_goal()
+    del_goal.del_transaction(inde)
+
+    flash('Goal succesfully updated', 'success')
+
+    return redirect(
+        url_for('add_to_goal'),
+        code=302
+    )
 

@@ -44,9 +44,9 @@ class Data_enter:
     def change_data(self, inde, what_change, for_change, flag=0):
         df = pd.read_csv('app/csvy/akks.csv')
         if flag == 1 and (what_change == 'moneybox' or what_change == 'budget'):
-
+            
             if df.at[inde, what_change] + for_change < 0:
-                return "ВЫполнить операцию невозможно."
+                return "Выполнить операцию невозможно. Недостаточно средств на счете"
 
             df.at[inde, what_change] += for_change
         elif flag == 1:
@@ -62,4 +62,9 @@ class Data_enter:
         df = df.drop(index=inde)
         df.to_csv('app/csvy/akks.csv', index=False)
 
+    def info_user(self, inde):
+        df = pd.read_csv('app/csvy/akks.csv')
+       
+        return [df.at[inde, "goal"], df.at[inde, "moneybox"], df.at[inde, "budget"]]
+        
 
