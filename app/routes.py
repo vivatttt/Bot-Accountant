@@ -27,6 +27,8 @@ def main():
         'password_confirmation': ''
     }
     error = ''
+    # add_user = Data_enter()
+    # add_user.change_data(1, "goal", 100, 11)
     return render_template(
         'register_page.html',
         user=user,
