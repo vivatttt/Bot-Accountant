@@ -12,30 +12,18 @@ class Data_enter:
 
 
     def server(self):
-        df = pd.DataFrame(columns=["login", "password", "goal"], )
+        df = pd.DataFrame(columns=["login", "password", "res", "goal"], )
         df.to_csv('app/csvy/akks.csv', index=False)
 
 
     def done_registration(self, login_acc, password_acc):
         df = pd.read_csv('app/csvy/akks.csv')
 
-        df_1 = pd.DataFrame(data=[[login_acc, password_acc, "0/0"]],
-                            columns=["login", "password", "goal"])
+        df_1 = pd.DataFrame(data=[[login_acc, password_acc, 0, 0]],
+                            columns=["login", "password", "res", "goal"])
 
         df = pd.concat([df, df_1], ignore_index=True)
         df.to_csv('app/csvy/akks.csv', index=False)
-
-    # def change_goal(self, log, amountic, flag=0):
-    #     df = pd.read_csv('app/csvy/akks.csv')
-    #     search_inde = df[df["login"] == log]
-    #     what_change = search_inde["goal"]
-    #     k = what_change.index('/')
-    #
-    #     if flag == 1:
-    #         df.at[inde, "goal"] = what_change[:k] + str(amountic)
-    #     else:
-    #         df.at[inde, "goal"] = str(amountic) + what_change[k + 1:]
-    #     df.to_csv('app/csvy/akks.csv', index=False)
 
 
     def enter_acc(self, login_acc, password_acc):
@@ -54,10 +42,14 @@ class Data_enter:
             return {"error": "Invalid login data", "inde": ""}
 
 
-    def change_data(self, inde, what_change, for_change):
-        df = pd.read_csv('app/csvy/akks.csv')
-        df.at[inde, what_change] = for_change
-        df.to_csv('app/csvy/akks.csv', index=False)
+    # def change_data(self, inde, what_change, for_change, flag=0):
+    #     df = pd.read_csv('app/csvy/akks.csv')
+    #     if flag == 11:
+    #         df.at[inde, what_change] += for_change
+    #     elif:
+    #         df.at[inde, "goal"] = for_change
+    #         df.at[inde, what_change] = 0
+    #     df.to_csv('app/csvy/akks.csv', index=False)
 
     def del_akk(self, inde):
         df = pd.read_csv('app/csvy/akks.csv')
