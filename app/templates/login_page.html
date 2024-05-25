@@ -4,23 +4,26 @@
 
 {% block content %}
 
-
-<form action="/login" method="post">
-
-
-    <input type="text" id="username" name="username" value="{{ user.username }}">
-    <br>
-
-    <input type="password" id="password" name="password" value="{{ user.password }}">
-    <br>
-  
-    <input type="submit" value="Зарегистрироваться">
-
-    {% if error %}
-    <div>
-        <p>Error : {{ error }}</p>
+<div class="reg_form">
+    <div class="top_buttns">
+        <span class="curent_page">Log in</span>
+        <span class="slash"> / </span>
+        <a href="{{ url_for('show_register') }}">register</a>
     </div>
-    {% endif %}
+    <form action="/log in" method="post">
+        <div class="form-row form-error" style="display:none;"></div>
+        <input id="username" class="form-input1" type="input"  placeholder="username" required><br>
+        <input id="password" class="form-input2" type="input"  placeholder="password" required><br>
+       
+        <button class="submitt" type="submit">Log in</button>
+        {% if error %}
+        <div>
+            <p>Error : {{ error }}</p>
+        </div>
+        {% endif %}
+
+    </form>
+</div>
 
 </form>
 
