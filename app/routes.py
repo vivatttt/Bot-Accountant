@@ -85,7 +85,7 @@ def do_register():
     # Добавление в базу данных
     add_user = Data_enter()
     add_user.done_registration(username, password)
-    inde = add_user.enter_acc(username, password)
+    inde = add_user.enter_acc(username, password)['inde']
 
     # Здесь вход в аккаунт
 
@@ -181,6 +181,7 @@ def make_transaction():
     user_transaction = Data_trans()
 
     inde = session.get('inde', '')
+    print(inde)
     if not inde:
         # тут обработка ошибки
         print('ERROR INDE')
@@ -203,10 +204,10 @@ def make_transaction():
 
 
 # страница с бюджетом
-@app.route('/budget')
+@app.route('/goal')
 def budget():
     return render_template(
-        'budget_page.html'
+        'goal_page.html'
     )
 
 

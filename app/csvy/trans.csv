@@ -34,3 +34,5 @@ id_user,amount,type,category,date,description
 "{'error': '', 'inde': '3'}",1337,income,transportation,2023-10-18,123
 "{'error': '', 'inde': '3'}",123,expense,food,2025-11-18,ksdkjfk
 "{'error': '', 'inde': '3'}",123,expense,food,2001-10-10,gioy
+"{'error': '', 'inde': '3'}",123,expense,food,2004-02-20,dfg
+3,10000,expense,food,2024-05-25,poel
