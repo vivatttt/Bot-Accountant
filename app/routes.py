@@ -14,7 +14,7 @@ from app.utils.hash_password import hash_password
 from app.utils.process_form_data import process_form_data
 from app.data_of_entering import Data_enter
 from app.data_of_transaction import Data_trans
-
+from app.data_of_goal import Data_goal
 
 
 routes = Blueprint('routes', __name__)
@@ -220,13 +220,20 @@ def add_to_goal():
 
     }
     '''
+    goal = request.form.to_dict()
     inde = session.get('inde', '')
     if not inde:
         # тут обработка ошибки
         pass
 
     # тут добавление транзакции в бд
+    goal_tran = Data_goal()
+    goal_tran.add_goal(inde, goal['amount'], goal['type'])
+    
     # изменение текущего бюджета
+    add_info = Data_enter()
+    signed_amount = goal['amount'] if goal['type'] == 'income' else -goal['amount']
+    add_info.change_data(inde, "moneybox", signed_amount)
 
     flash('You became closer to the goal!', 'success')
     return render_template(
