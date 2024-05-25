@@ -31,6 +31,7 @@ class Data_trans:
                     current_date = date.today()
                 else:
                     current_date = user_date
+
                 df_1 = pd.DataFrame(
                     data=[[inde, user_amount, user_type, user_category, current_date, user_description]],
                     columns=['id_user', "amount", "type", "category", "date", "description"], )
@@ -53,6 +54,7 @@ class Data_trans:
     def my_cash(self, inde):
         plus = self.type_summ(inde, "Доход")
         minus = self.type_summ(inde, "Расход")
+
         return (plus - minus)
 
     def count_of_category(self, inde):
