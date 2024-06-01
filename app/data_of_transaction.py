@@ -81,9 +81,11 @@ class Data_trans:
         search_inde = search_inde.loc[search_inde['date'] >= current_date]
 
         cater = []
+        counts_values = list(search_inde['category'].value_counts())
+        unique_values = list(search_inde['category'].drop_duplicates())
 
-        for i in categories:
-            search_category_out = search_inde[search_inde[i] == user_category]
+        for i in range(len(unique_values)):
+            search_category_out = search_inde[search_inde["category"] == i]
             search_category_out = search_category_out[search_category_out["type"] == "Expense"]
             summa = search_category_out['amount'].sum()
             cater.append([i, summa])

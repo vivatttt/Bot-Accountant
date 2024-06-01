@@ -1,9 +1,11 @@
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from app.data_of_transaction import Data_trans
 import os
+from app.utils.names import GRAPH_FOLDER
 
 
-GRAPH_FOLDER = 'app/data'
 
 def generate_pie_chart(inde, type, period):
     '''
@@ -15,21 +17,27 @@ def generate_pie_chart(inde, type, period):
     '''
 
 
-
     # здесь получение данных за период period
     transactions = Data_trans()
     transactions.time_ago(inde, period, type)
 
     values = transactions.category_out(inde, period*30)
-    fig, ax = plt.subplot()
+
+    values = [el[0] for el in values]
+
+    fig, ax = plt.subplots()
 
     ax.pie(values, autopct='%1.1f%%', startangle=90)
     ax.axis('equal')
 
-    filename = 'pie_chart.png'
-    filepath = os.path.join(GRAPH_FOLDER, filename)
+    filename = f'pie_chart_{period}.png'
+
+    filepath = os.path.join('app/' + GRAPH_FOLDER, filename)
+    print(filepath)
     fig.savefig(filepath)
     plt.close(fig)
+
+    return filename
 
 
     

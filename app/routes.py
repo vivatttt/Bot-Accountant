@@ -18,9 +18,9 @@ from app.data_of_entering import Data_enter
 from app.data_of_transaction import Data_trans
 from app.data_of_goal import Data_goal
 import pandas as pd
-from app.analytics import (
-                        generate_pie_chart
-)
+from app.analytics.analytics import generate_pie_chart
+from app.utils.names import GRAPH_FOLDER
+
 
 routes = Blueprint('routes', __name__)
 app.secret_key = 'daria_dusheiko'
@@ -163,7 +163,6 @@ def do_login():
 @app.route('/analytics')
 def analytics():
 
-    GRAPH_FOLDER = 'app/data'
 
     inde = session.get('inde')
 
@@ -177,6 +176,7 @@ def analytics():
     pie_chart_6_month_filename = generate_pie_chart(inde=inde, period=6, type="Expense")
     pie_chart_6_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_6_month_filename)
 
+    print(pie_chart_1_month_filepath)
 
     return render_template(
         'analytics_page.html',
