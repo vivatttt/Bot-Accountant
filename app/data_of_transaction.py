@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import date
 from dateutil.relativedelta import relativedelta
-
+from app.utils.names import categories, types
 class Data_trans:
     def __init__(self):
         super(Data_trans, self).__init__()
@@ -69,14 +69,25 @@ class Data_trans:
             counts.append([unique_values[i], counts_values[i]])
         return counts
 
-    def category_out(self, inde, user_category):
+    def category_out(self, inde, days_1):
         df = pd.read_csv('app/csvy/trans.csv')
         search_inde = df[df["id_user"] == inde]
 
-        search_category_out = search_inde[search_inde["category"] == user_category]
-        search_category_out = search_category_out[search_category_out["type"] == "Expense"]
-        summa = search_category_out['amount'].sum()
-        return summa
+        current_date = date.today()
+        current_date = current_date - relativedelta(days=days_1)
+
+        search_inde = search_inde.loc[:, :]
+        search_inde['date'] = (pd.to_datetime(search_inde['date']).dt.date)
+        search_inde = search_inde.loc[search_inde['date'] >= current_date]
+
+        cater = []
+
+        for i in categories:
+            search_category_out = search_inde[search_inde[i] == user_category]
+            search_category_out = search_category_out[search_category_out["type"] == "Expense"]
+            summa = search_category_out['amount'].sum()
+            cater.append([i, summa])
+        return cater
 
     def time_ago(self, inde, days_1, type_trans, categories=[]):
         df = pd.read_csv('app/csvy/trans.csv')

@@ -43,3 +43,7 @@ id_user,amount,type,category,date,description
 1,1811,expense,food,1111-11-11,1
 1,1711,expense,food,0011-11-11,1123
 1,1000,income,food,0111-11-11,1
+2,1000,income,food,2024-05-10,wef
+2,10,expense,food,2024-05-10,hg
+2,100,expense,transportation,2024-05-11,qjsyd
+2,55,expense,utilities,2024-05-12,wef
