@@ -23,7 +23,7 @@ class Data_trans:
         df = pd.read_csv('app/csvy/trans.csv')
 
         if "" in (user_amount, user_type, user_category, user_description):
-            return "Не все поля заполнены."
+            return "Not all fields are filled in."
 
         if user_amount.isdigit():
             if int(user_amount) > 0:
@@ -41,7 +41,7 @@ class Data_trans:
                 return ""
 
 
-        return "Неверный ввод суммы транзакции."
+        return "Incorrect entry of the transaction amount."
 
     def type_summ(self, inde, user_type):
         df = pd.read_csv('app/csvy/trans.csv')
@@ -52,8 +52,8 @@ class Data_trans:
         return summa
 
     def my_cash(self, inde):
-        plus = self.type_summ(inde, "Доход")
-        minus = self.type_summ(inde, "Расход")
+        plus = self.type_summ(inde, "Income")
+        minus = self.type_summ(inde, "Expense")
 
         return (plus - minus)
 
@@ -74,7 +74,7 @@ class Data_trans:
         search_inde = df[df["id_user"] == inde]
 
         search_category_out = search_inde[search_inde["category"] == user_category]
-        search_category_out = search_category_out[search_category_out["type"] == "Расход"]
+        search_category_out = search_category_out[search_category_out["type"] == "Expense"]
         summa = search_category_out['amount'].sum()
         return summa
 
