@@ -22,7 +22,7 @@ class Data_goal:
         df = pd.read_csv('app/csvy/goal.csv')
 
         if "" in (user_amount, user_type):
-            return "Не все поля заполнены."
+            return "Not all fields are filled in."
 
         if user_amount.isdigit():
             if int(user_amount) > 0:
@@ -37,7 +37,7 @@ class Data_goal:
                 return ""
 
 
-        return "Неверный ввод суммы транзакции."
+        return "Incorrect entry of the transaction amount."
 
     def type_summ(self, inde, user_type):
         df = pd.read_csv('app/csvy/goal.csv')
