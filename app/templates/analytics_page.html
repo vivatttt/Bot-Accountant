@@ -8,4 +8,18 @@
 
     <p>Это страница аналитики</p>
 
+    <h1>Pie Chart</h1>
+
+    <img src="{{ pie_chart_1  }}" alt="Generated Pie Chart">
+
+    <img src="{{ pie_chart_3  }}" alt="Generated Pie Chart">
+
+    <img src="{{ pie_chart_6  }}" alt="Generated Pie Chart">
+
+    <script>
+        window.addEventListener('beforeunload', function (e) {
+            navigator.sendBeacon('/delete_graph', new URLSearchParams({filename: '{{ graph_url.split('/')[-1] }}'}));
+        });
+    </script>
+
 {% endblock content %}

@@ -4,7 +4,7 @@ import os
 
 GRAPH_FOLDER = 'app/data'
 
-def generate_pie_chart(period):
+def generate_pie_chart(inde, period):
     '''
         Круговая диаграмма по категориям
 
@@ -26,6 +26,10 @@ def generate_pie_chart(period):
     filepath = os.path.join(GRAPH_FOLDER, filename)
     fig.savefig(filepath)
     plt.close(fig)
+
+    return filename
+
+
 
 
     
