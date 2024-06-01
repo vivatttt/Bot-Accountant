@@ -1,13 +1,15 @@
 from app import app
-from flask import (Blueprint, 
+from flask import (
+                    Blueprint, 
                    redirect, 
                    render_template, 
                    request, 
                    session, 
                    flash, 
                    url_for,
-                   get_flashed_messages)
-
+                   get_flashed_messages
+                   )
+import os
 from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
@@ -16,6 +18,9 @@ from app.data_of_entering import Data_enter
 from app.data_of_transaction import Data_trans
 from app.data_of_goal import Data_goal
 import pandas as pd
+from app.analytics import (
+                        generate_pie_chart
+)
 
 routes = Blueprint('routes', __name__)
 app.secret_key = 'daria_dusheiko'
@@ -154,12 +159,30 @@ def do_login():
         )
 
 
-
 # страница аналитики
 @app.route('/analytics')
 def analytics():
+
+    GRAPH_FOLDER = 'app/data'
+
+    inde = session.get('inde')
+
+    # генерируем круговую диаграмму
+    pie_chart_1_month_filename = generate_pie_chart(inde=inde, period=1, type="Expense")
+    pie_chart_1_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_1_month_filename)
+
+    pie_chart_3_month_filename = generate_pie_chart(inde=inde, period=3, type="Expense")
+    pie_chart_3_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_3_month_filename)
+
+    pie_chart_6_month_filename = generate_pie_chart(inde=inde, period=6, type="Expense")
+    pie_chart_6_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_6_month_filename)
+
+
     return render_template(
-        'analytics_page.html'
+        'analytics_page.html',
+        pie_chart_1=pie_chart_1_month_filepath,
+        pie_chart_3=pie_chart_3_month_filepath,
+        pie_chart_6=pie_chart_6_month_filepath
     )
 
 # страница добавлением / удалением транизакций
