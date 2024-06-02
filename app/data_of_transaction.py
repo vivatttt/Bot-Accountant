@@ -69,7 +69,7 @@ class Data_trans:
             counts.append([unique_values[i], counts_values[i]])
         return counts
 
-    def category_out(self, inde, days_1):
+    def category_out(self, inde, days_1, type):
         df = pd.read_csv('app/csvy/trans.csv')
         search_inde = df[df["id_user"] == inde]
 
@@ -81,14 +81,14 @@ class Data_trans:
         search_inde = search_inde.loc[search_inde['date'] >= current_date]
 
         cater = []
-        counts_values = list(search_inde['category'].value_counts())
         unique_values = list(search_inde['category'].drop_duplicates())
 
-        for i in range(len(unique_values)):
+        for i in unique_values:
             search_category_out = search_inde[search_inde["category"] == i]
-            search_category_out = search_category_out[search_category_out["type"] == "Expense"]
+            search_category_out = search_category_out[search_category_out["type"] == type]
             summa = search_category_out['amount'].sum()
-            cater.append([i, summa])
+            if summa != 0:
+                cater.append([i, summa])
         return cater
 
     def time_ago(self, inde, days_1, type_trans, categories=[]):
