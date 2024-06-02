@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from app.utils.names import categories, types
+from app.utils.names import CATEGORIES, TYPES
 class Data_trans:
     def __init__(self):
         super(Data_trans, self).__init__()
@@ -104,8 +104,8 @@ class Data_trans:
         search = search.loc[search['date'] >= current_date]
 
         endy = pd.DataFrame(columns=['id_user', "amount", "type", "category", "date", "description"], )
-
-        for i in categories:
+        
+        for i in CATEGORIES:
             new = search[search["category"] == i]
             endy = endy._append(new)
 

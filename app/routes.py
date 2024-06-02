@@ -1,4 +1,5 @@
 from app import app
+import plotly.graph_objs as go
 from flask import (
                     Blueprint, 
                    redirect, 
@@ -18,8 +19,8 @@ from app.data_of_entering import Data_enter
 from app.data_of_transaction import Data_trans
 from app.data_of_goal import Data_goal
 import pandas as pd
-from app.analytics.analytics import generate_pie_chart
-from app.utils.names import GRAPH_FOLDER
+from app.analytics.analytics import get_inf_for_pie_chart
+from app.utils.names import GRAPH_FOLDER, CATEGORIES, TYPES
 
 
 routes = Blueprint('routes', __name__)
@@ -163,26 +164,17 @@ def do_login():
 @app.route('/analytics')
 def analytics():
 
-
     inde = session.get('inde')
 
-    # генерируем круговую диаграмму
-    pie_chart_1_month_filename = generate_pie_chart(inde=inde, period=1, type="Expense")
-    pie_chart_1_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_1_month_filename)
+    labels = CATEGORIES
+    values = get_inf_for_pie_chart(inde, "income", 3)
 
-    pie_chart_3_month_filename = generate_pie_chart(inde=inde, period=3, type="Expense")
-    pie_chart_3_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_3_month_filename)
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
 
-    pie_chart_6_month_filename = generate_pie_chart(inde=inde, period=6, type="Expense")
-    pie_chart_6_month_filepath = os.path.join(GRAPH_FOLDER, pie_chart_6_month_filename)
-
-    print(pie_chart_1_month_filepath)
-
+    html_content = fig.to_html(full_html=False)
     return render_template(
         'analytics_page.html',
-        pie_chart_1=pie_chart_1_month_filepath,
-        pie_chart_3=pie_chart_3_month_filepath,
-        pie_chart_6=pie_chart_6_month_filepath
+        html_content=html_content
     )
 
 # страница добавлением / удалением транизакций
