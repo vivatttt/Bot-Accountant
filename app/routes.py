@@ -164,21 +164,62 @@ def do_login():
 @app.route('/analytics')
 def analytics():
 
+    if 'username' not in session:
+        return redirect(
+            url_for('show_register'),
+            code=302
+        )
+
     inde = session.get('inde')
+    diagrams = {
+        'pie_chart' : {
+            'income' : [],
+            'expense' : []
+        },
+    }
 
+    '''
+    diagrams = {
+        'pie_chart' : {
+            'income' : [1, 3, 6month]
+            'expense' : [1, 3, 6month]
+        }
+    }
+    '''
+
+
+
+    labels, values = get_inf_for_pie_chart(inde, "income", 1)
+    print(labels, values)
+    diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
     labels, values = get_inf_for_pie_chart(inde, "income", 3)
+    diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    labels, values = get_inf_for_pie_chart(inde, "income", 6)
+    diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    
+    labels, values = get_inf_for_pie_chart(inde, "expense", 1)
+    diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    labels, values = get_inf_for_pie_chart(inde, "expense", 3)
+    diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    labels, values = get_inf_for_pie_chart(inde, "expense", 6)
+    diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    
 
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-
-    html_content = fig.to_html(full_html=False)
     return render_template(
         'analytics_page.html',
-        html_content=html_content
+        diagrams=diagrams
     )
 
 # страница добавлением / удалением транизакций
 @app.get('/transactions')
 def show_transaction():
+    
+    if 'username' not in session:
+        return redirect(
+            url_for('show_register'),
+            code=302
+        )
+
     return render_template(
         'transactions_page.html',
         transaction={},
@@ -217,7 +258,7 @@ def make_transaction():
             transaction=transaction,
             error=error
         ), 422
-    
+    print(transaction)
     user_transaction = Data_trans()
     error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
     
@@ -241,6 +282,13 @@ def make_transaction():
 # страница с целью
 @app.get('/goal')
 def show_goal():
+
+    if 'username' not in session:
+        return redirect(
+            url_for('show_register'),
+            code=302
+        )
+
     return render_template(
         'goal_page.html',
         goal={},

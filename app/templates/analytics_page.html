@@ -9,7 +9,37 @@
     <p>Это страница аналитики</p>
 
     <h1>Pie Chart</h1>
+        
+        <div>
+            <label for="">Income for 1 month</label>
+            <div>
+                {{ diagrams['pie_chart']['income'][0] | safe }}
+            </div>
+            <label for="">Income for 3 month</label>
+            <div>
+                {{ diagrams['pie_chart']['income'][1] | safe }}
+            </div>
+            <label for="">Income for 6 month</label>
+            <div>
+                {{ diagrams['pie_chart']['income'][2] | safe }}
+            </div>
+        </div>
 
-        {{ html_content | safe }}
+        <div>
+            <label for="">Expenses for 1 month</label>
+            <div>
+                {{ diagrams['pie_chart']['expense'][0] | safe }}
+            </div>
+            <label for="">Expenses for 3 month</label>
+            <div>
+                {{ diagrams['pie_chart']['expense'][1] | safe }}
+            </div>
+            <label for="">Expenses for 6 month</label>
+            <div>
+                {{ diagrams['pie_chart']['expense'][2] | safe }}
+            </div>
+        </div>
+        
+      
 
 {% endblock content %}

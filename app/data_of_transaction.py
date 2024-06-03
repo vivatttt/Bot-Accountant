@@ -71,18 +71,19 @@ class Data_trans:
 
     def category_out(self, inde, days_1, type):
         df = pd.read_csv('app/csvy/trans.csv')
+     
         search_inde = df[df["id_user"] == inde]
-
+        
         current_date = date.today()
         current_date = current_date - relativedelta(days=days_1)
 
         search_inde = search_inde.loc[:, :]
         search_inde['date'] = (pd.to_datetime(search_inde['date']).dt.date)
         search_inde = search_inde.loc[search_inde['date'] >= current_date]
-
+  
         cater = []
         unique_values = list(search_inde['category'].drop_duplicates())
-
+        
         for i in unique_values:
             search_category_out = search_inde[search_inde["category"] == i]
             search_category_out = search_category_out[search_category_out["type"] == type]
@@ -93,16 +94,19 @@ class Data_trans:
 
     def time_ago(self, inde, days_1, type_trans, categories=[]):
         df = pd.read_csv('app/csvy/trans.csv')
+        
+       
         search_inde = df[df["id_user"] == inde]
+        
         search = search_inde[search_inde["type"] == type_trans]
-
+        
         current_date = date.today()
         current_date = current_date - relativedelta(days=days_1)
 
         search = search.loc[:, :]
         search['date'] = (pd.to_datetime(search['date']).dt.date)
         search = search.loc[search['date'] >= current_date]
-
+        
         endy = pd.DataFrame(columns=['id_user', "amount", "type", "category", "date", "description"], )
         
         for i in CATEGORIES:
