@@ -198,10 +198,18 @@ button[class ="brt"]{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; 
+    height: 100%; 
     width: 100%;
     background-color: #2B2D42;
 }
+.logo{
+    margin: 60px auto;
+    display: flex;
+    justify-content: center;
+    width: 370px;
+    height: 100px;
+}
+
 .reg_form{
     display: flex;
     flex-direction: column;
@@ -286,12 +294,5 @@ button[type="submit"]{
     }
 }
 
-.logo{
-    margin: 40px auto;
-    display: flex;
-    justify-content: center;
-    width: 370px;
-    height: 100px;
-}
 
 
