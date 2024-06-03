@@ -367,3 +367,12 @@ def new_goal():
         code=302
     )
 
+# выход из аккаунта
+@app.get('/exit')
+def exit():
+    session.clear()
+
+    return redirect(
+        url_for('main'),
+        code=302
+    )
