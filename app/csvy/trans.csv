@@ -56,3 +56,4 @@ id_user,amount,type,category,date,description
 3,30,income,utilities,2000-05-20,ttt
 3,100,income,transportation,2024-06-01,rr
 3,11,income,entertainment,2024-05-03,iii
+3,100,income,food,2023-12-19,ttt

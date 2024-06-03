@@ -50,7 +50,7 @@ class Data_enter:
                 money_left = df.at[inde, 'moneybox']
 
             print(money_left + for_change, df.at[inde, 'budget'])
-            if (money_left + for_change < 0) or ((money_left + for_change) > df.at[inde, 'budget']):
+            if (money_left + for_change < 0) or ((money_left + for_change) > df.at[inde, 'budget'] and what_change != "budget"):
                 return "It is impossible to perform the operation. Insufficient funds in the account"
 
             df.at[inde, what_change] += for_change
