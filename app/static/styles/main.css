@@ -21,7 +21,7 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
     display: block;
@@ -73,7 +73,7 @@ border: 0;
     justify-content: space-between;
     height: 50px;
     width: 100%;
-    self-align: flex-start;
+    align-self: flex-start;
 }
 
 .name{
@@ -81,7 +81,8 @@ border: 0;
     height: 30px;
     width: 150px;
 }
-button{
+
+button[class ="brt"]{
     cursor: pointer;
     border: none;
     background-color: transparent;
@@ -190,10 +191,22 @@ button{
     .dropdown:active .dropdown-content {
         display: block;
         }
-} 
+}
+.starter_container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    width: 100%;
+    background-color: #2B2D42;
+}
 .reg_form{
-    position:relative;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 30%;
     margin: auto;
 }
@@ -205,9 +218,9 @@ button{
     background-color: transparent;
 }
 .top_buttns{
-    margin: auto;
+    margin: 40px auto;
     font-family: "Montserrat", sans-serif;
-    font-size: 200%;
+    font-size: 60px;
     font-weight: 600;
 }
 .curent_page{
@@ -227,13 +240,13 @@ button{
     }
 }
 input{
-    padding: 1em;
+    margin: 10px auto;
+    padding: 0.5em;
     width: 90%;
-    height: 20%;
     background-color: transparent;
-    border: 5px solid #8D99AE; 
+    border: 3px solid #ffffff; 
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 40px;
     font-family: "Montserrat", sans-serif;
     color: #ffffff; 
     font-weight: normal;
@@ -244,25 +257,23 @@ input:focus{
 }
 ::placeholder{
     position: absolute;
-    top: 10px;
     color: #404459;
     opacity: 1;
-    font-size: 30px;
+    font-size: 40px;
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
 }
 
 
-.submitt{
-    margin: auto;
-    cursor: pointer;
-    height: 25%;
-    width: 30%;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: bolder;
-    font-size: 20px;
-    color: #8D99AE;
+button[type="submit"]{
+    background-color: transparent;
+    position: relative;
+    margin: 20px auto;
+    width: 125px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #404459;
 }
 @media(hover: hover){
     .submitt:hover{
@@ -276,11 +287,11 @@ input:focus{
 }
 
 .logo{
+    margin: 40px auto;
     display: flex;
     justify-content: center;
     width: 370px;
-    height: 200px;
+    height: 100px;
 }
 
-/*# Login */
 
