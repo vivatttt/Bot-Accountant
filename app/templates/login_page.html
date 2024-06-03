@@ -1,29 +1,38 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
 
-{% block title %}{% endblock title %}
+    <link rel="stylesheet" href="/static/styles/main.css">
+    
+</head>
+<body>  
+    <div class="starter_container">
+        <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
+        <div class="reg_form">
+            <div class="top_buttns">
+                <span class="curent_page">Log in</span>
+                <span class="slash"> / </span>
+                <a href="{{ url_for('show_register') }}">register</a>
+            </div>
+            <form action="/login" method="post">
+                <div class="form-row form-error" style="display:none;"></div>
+                <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
+                <input id="password" name="password" class="form-input2" type="input"  placeholder="password" required><br>
+            
+                <button class="submitt" type="submit">Log in</button>
+                {% if error %}
+                <div>
+                    <p>Error : {{ error }}</p>
+                </div>
+                {% endif %}
 
-{% block content %}
-
-
-<form action="/login" method="post">
-
-
-    <input type="text" id="username" name="username" value="{{ user.username }}">
-    <br>
-
-    <input type="password" id="password" name="password" value="{{ user.password }}">
-    <br>
-  
-    <input type="submit" value="Зарегистрироваться">
-
-    {% if error %}
-    <div>
-        <p>Error : {{ error }}</p>
+            </form>
+        </div>
     </div>
-    {% endif %}
-
-</form>
-
-
-
-{% endblock content %}
+</body>
+</html>

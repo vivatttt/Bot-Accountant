@@ -1,32 +1,39 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
 
-{% block title %}{% endblock title %}
-
-{% block content %}
-
-
-<form action="/register" method="post">
-
-
-    <input type="text" id="username" name="username" value="{{ user.username }}">
-    <br>
-
-    <input type="password" id="password" name="password" value="{{ user.password }}">
-    <br>
-    <input type="password" id="password_confirmation" name="password_confirmation"  value="{{ user.password_confirmation }}">
-    <br>
-    <input type="submit" value="Зарегистрироваться">
-    <br>
-    <br>
-    <a href="{{ url_for('show_login') }}">Log in</a>
-    {% if error %}
-    <div>
-        <p>Error : {{ error }}</p>
+    <link rel="stylesheet" href="/static/styles/main.css">
+    
+</head>
+<body>  
+    <div class="starter_container">
+        <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
+        <div class="reg_form">
+            <div class="top_buttns">
+                <a class="login" href="{{ url_for('show_login') }}">Log in</a>
+                <span class="slash"> / </span>
+                <span class="curent_page">Register</span>
+            </div>
+            <form action="/register" method="post">
+                <div class="form-row form-error" style="display:none;"></div>
+                <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
+                <input id="password" name="password" class="form-input2" type="input"  placeholder="password" required><br>
+                <input id="password_confirmation" name="password_confirmation" class="form-input3" type="input"  placeholder="password confirmation" required><br>
+                <button class="submitt" type="submit">Register</button>
+                {% if error %}
+                <div>
+                    <p>Error : {{ error }}</p>
+                </div>
+                {% endif %}
+            </form>
+        </div>
     </div>
-    {% endif %}
-
-</form>
 
 
-
-{% endblock content %}
+</body>
+</html>
