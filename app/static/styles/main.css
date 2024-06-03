@@ -274,3 +274,13 @@ input:focus{
         color: #ffffff;
     }
 }
+
+.logo{
+    display: flex;
+    justify-content: center;
+    width: 370px;
+    height: 200px;
+}
+
+/*# Login */
+

@@ -1,28 +1,40 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
 
-{% block title %}{% endblock title %}
+    <link rel="stylesheet" href="/static/styles/main.css">
+    
+</head>
+<body>  
+    <div class="wrapper">
+        <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
+        <div class="reg_form">
+            <div class="top_buttns">
+            <a class="login" href="{{ url_for('show_login') }}">Log in</a>
+            <span class="slash"> / </span>
+            <span class="curent_page">register</span>
+            </div>
+            <form action="/register" method="post">
+                <div class="form-row form-error" style="display:none;"></div>
+                <input id="username" class="form-input1" type="input"  placeholder="username" required><br>
+                <input id="password" class="form-input2" type="input"  placeholder="password" required><br>
+                <input id="password_confirmation" class="form-input3" type="input"  placeholder="password confirmation" required><br>
+                <button class="submitt" type="submit">register</button>
+                {% if error %}
+                <div>
+                    <p>Error : {{ error }}</p>
+                </div>
+                {% endif %}
 
-{% block content %}
-<div class="reg_form">
-    <div class="top_buttns">
-    <a class="login" href="{{ url_for('show_login') }}">Log in</a>
-    <span class="slash"> / </span>
-    <span class="curent_page">register</span>
-    </div>
-    <form action="/register" method="post">
-        <div class="form-row form-error" style="display:none;"></div>
-        <input id="username" class="form-input1" type="input"  placeholder="username" required><br>
-        <input id="password" class="form-input2" type="input"  placeholder="password" required><br>
-        <input id="password_confirmation" class="form-input3" type="input"  placeholder="password confirmation" required><br>
-        <button class="submitt" type="submit">register</button>
-        {% if error %}
-        <div>
-            <p>Error : {{ error }}</p>
+            </form>
         </div>
-        {% endif %}
-
-    </form>
-</div>
+    </div>
 
 
-{% endblock content %}
+</body>
+</html>
