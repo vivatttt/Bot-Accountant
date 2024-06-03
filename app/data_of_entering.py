@@ -44,13 +44,13 @@ class Data_enter:
     def change_data(self, inde, what_change, for_change, flag=0):
         df = pd.read_csv('app/csvy/akks.csv')
         if flag == 1 and what_change in {'budget', 'moneybox'}:
-            
             if what_change == 'budget':
                 money_left = df.at[inde, 'budget'] - df.at[inde, 'moneybox']
             else:
                 money_left = df.at[inde, 'moneybox']
 
-            if money_left + for_change < 0:
+            print(money_left + for_change, df.at[inde, 'budget'])
+            if (money_left + for_change < 0) or ((money_left + for_change) > df.at[inde, 'budget']):
                 return "It is impossible to perform the operation. Insufficient funds in the account"
 
             df.at[inde, what_change] += for_change

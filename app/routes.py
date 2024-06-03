@@ -166,8 +166,7 @@ def analytics():
 
     inde = session.get('inde')
 
-    labels = CATEGORIES
-    values = get_inf_for_pie_chart(inde, "income", 3)
+    labels, values = get_inf_for_pie_chart(inde, "income", 3)
 
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
 

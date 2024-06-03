@@ -47,3 +47,12 @@ id_user,amount,type,category,date,description
 2,10,expense,food,2024-05-10,hg
 2,100,expense,transportation,2024-05-11,qjsyd
 2,55,expense,utilities,2024-05-12,wef
+3,1000,income,food,2003-12-19,ккеке
+3,100,income,other,2024-05-16,цццц
+3,1000,expense,entertainment,2024-05-19,rrrrr
+3,100,income,utilities,2024-04-19,uuuu
+3,100,expense,utilities,2024-06-01,666
+3,100,income,transportation,2024-05-30,iiii
+3,30,income,utilities,2000-05-20,ttt
+3,100,income,transportation,2024-06-01,rr
+3,11,income,entertainment,2024-05-03,iii
