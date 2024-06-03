@@ -1,20 +1,26 @@
 from app import app
-from flask import (Blueprint, 
+import plotly.graph_objs as go
+from flask import (
+                    Blueprint, 
                    redirect, 
                    render_template, 
                    request, 
                    session, 
                    flash, 
                    url_for,
-                   get_flashed_messages)
-
+                   get_flashed_messages
+                   )
+import os
 from datetime import date, datetime
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
 from app.utils.process_form_data import process_form_data
 from app.data_of_entering import Data_enter
 from app.data_of_transaction import Data_trans
-
+from app.data_of_goal import Data_goal
+import pandas as pd
+from app.analytics.analytics import get_inf_for_pie_chart
+from app.utils.names import GRAPH_FOLDER, CATEGORIES, TYPES
 
 
 routes = Blueprint('routes', __name__)
@@ -23,10 +29,17 @@ app.secret_key = 'daria_dusheiko'
 @app.route('/')
 def main():
     if 'username' in session:
-
+        inde = session.get('inde')
+        
         # если пользователь уже зашел в свой аккаунт
+        user_info = Data_enter()
+        data_info = user_info.info_user(int(inde))
+
         return render_template(
-            'main_page.html'
+            'main_page.html',
+            cur_goal=data_info[0],
+            moneybox=data_info[1],
+            budget=data_info[2]
         )
     
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
@@ -147,12 +160,20 @@ def do_login():
         )
 
 
-
 # страница аналитики
 @app.route('/analytics')
 def analytics():
+
+    inde = session.get('inde')
+
+    labels, values = get_inf_for_pie_chart(inde, "income", 3)
+
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+
+    html_content = fig.to_html(full_html=False)
     return render_template(
-        'analytics_page.html'
+        'analytics_page.html',
+        html_content=html_content
     )
 
 # страница добавлением / удалением транизакций
@@ -178,23 +199,37 @@ def make_transaction():
 
     }
     '''
-    user_transaction = Data_trans()
 
-    inde = session.get('inde', '')
-    print(inde)
-    if not inde:
-        # тут обработка ошибки
-        print('ERROR INDE')
-    error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
+    inde = int(session.get('inde', ''))
+    signed_amount = int(transaction['amount'])
+
+    add_info = Data_enter()
+    
+    if transaction['type'] == 'expense':
+        signed_amount = -signed_amount
+
+    error = add_info.change_data(inde, "budget", signed_amount, 1)
 
     if error:
-        
+
         return render_template(
             'transactions_page.html',
             transaction=transaction,
             error=error
         ), 422
     
+    user_transaction = Data_trans()
+    error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
+    
+    if error:
+        # если выходим по этой ошибке, то нужно вернуть измененную ранее сумму бюджета
+        add_info.change_data(inde, "budget", -signed_amount, 1)
+        return render_template(
+            'transactions_page.html',
+            transaction=transaction,
+            error=error
+        ), 422
+
     flash('Transaction succesfully added', 'success')
     return render_template(
         'transactions_page.html',
@@ -203,11 +238,84 @@ def make_transaction():
     )
 
 
-# страница с бюджетом
-@app.route('/goal')
-def budget():
+# страница с целью
+@app.get('/goal')
+def show_goal():
     return render_template(
-        'goal_page.html'
+        'goal_page.html',
+        goal={},
+        error=''
+    )
+# добавление транзакции в цели
+@app.post('/goal')
+def add_to_goal():
+    '''
+    goal = {
+        amount :
+        type :
+
+    }
+    '''
+
+    goal = request.form.to_dict()
+    inde = int(session.get('inde'))
+ 
+    signed_amount = int(goal['amount'])
+    if goal['type'] == 'expense':
+        signed_amount = -signed_amount
+
+    add_info = Data_enter()
+    
+    error = add_info.change_data(inde, "moneybox", signed_amount, 1)
+    if error:
+        return render_template(
+            'goal_page.html',
+            goal=goal,
+            error=error
+        ), 422
+
+    # тут добавление транзакции в бд
+    goal_tran = Data_goal()
+    error = goal_tran.add_goal(inde, goal['amount'], goal['type'])
+    
+    if error:
+        # если выходим по этой ошибке, то нужно вернуть измененную ранее сумму в копилке
+        add_info.change_data(inde, "moneybox", -signed_amount, 1)
+        return render_template(
+            'goal_page.html',
+            goal=goal,
+            error=error
+        ), 422
+    
+    flash('You became closer to the goal!', 'success')
+    return render_template(
+        'goal_page.html',
+        goal={},
+        error=''
     )
 
+# изменение цели
+@app.post('/goal-new')
+def new_goal():
+    '''
+    goal = {
+        new_amount :
+    }
+    '''
+
+    inde = int(session.get('inde'))
+    new_amount = int(request.form.get('new_amount'))
+    # тут обновление цели пользователя
+    del_cha = Data_enter()
+    del_cha.change_data(inde, "goal", new_amount, 1)
+
+    del_goal = Data_goal()
+    del_goal.del_transaction(inde)
+
+    flash('Goal succesfully updated', 'success')
+
+    return redirect(
+        url_for('add_to_goal'),
+        code=302
+    )
 

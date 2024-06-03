@@ -2,8 +2,6 @@
 
 {% block title %}welcome{% endblock title %}
 
-
-
 {% block content %}
 
     <p>Это страница добавления/удаления транзакций</p>
@@ -22,7 +20,7 @@
 
         <div class="form-group">
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" value="{{ transaction.amount }}" required>
+            <input type="number" id="amount" name="amount" value="{{ transaction.get('amount', '') }}" required>
         </div>
 
         <div class="form-group">
@@ -51,7 +49,7 @@
 
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" value="{{ transaction.description }}" required></textarea>
+            <textarea id="description" name="description" rows="4" value="{{ transaction.get('description', '') }}" required></textarea>
         </div>
         <button type="submit">Submit</button>
 

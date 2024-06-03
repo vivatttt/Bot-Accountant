@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import date
 from dateutil.relativedelta import relativedelta
-
+from app.utils.names import CATEGORIES, TYPES
 class Data_trans:
     def __init__(self):
         super(Data_trans, self).__init__()
@@ -23,7 +23,7 @@ class Data_trans:
         df = pd.read_csv('app/csvy/trans.csv')
 
         if "" in (user_amount, user_type, user_category, user_description):
-            return "Не все поля заполнены."
+            return "Not all fields are filled in."
 
         if user_amount.isdigit():
             if int(user_amount) > 0:
@@ -31,6 +31,7 @@ class Data_trans:
                     current_date = date.today()
                 else:
                     current_date = user_date
+
                 df_1 = pd.DataFrame(
                     data=[[inde, user_amount, user_type, user_category, current_date, user_description]],
                     columns=['id_user', "amount", "type", "category", "date", "description"], )
@@ -40,7 +41,7 @@ class Data_trans:
                 return ""
 
 
-        return "Неверный ввод суммы транзакции."
+        return "Incorrect entry of the transaction amount."
 
     def type_summ(self, inde, user_type):
         df = pd.read_csv('app/csvy/trans.csv')
@@ -51,8 +52,9 @@ class Data_trans:
         return summa
 
     def my_cash(self, inde):
-        plus = self.type_summ(inde, "Доход")
-        minus = self.type_summ(inde, "Расход")
+        plus = self.type_summ(inde, "Income")
+        minus = self.type_summ(inde, "Expense")
+
         return (plus - minus)
 
     def count_of_category(self, inde):
@@ -67,14 +69,27 @@ class Data_trans:
             counts.append([unique_values[i], counts_values[i]])
         return counts
 
-    def category_out(self, inde, user_category):
+    def category_out(self, inde, days_1, type):
         df = pd.read_csv('app/csvy/trans.csv')
         search_inde = df[df["id_user"] == inde]
 
-        search_category_out = search_inde[search_inde["category"] == user_category]
-        search_category_out = search_category_out[search_category_out["type"] == "Расход"]
-        summa = search_category_out['amount'].sum()
-        return summa
+        current_date = date.today()
+        current_date = current_date - relativedelta(days=days_1)
+
+        search_inde = search_inde.loc[:, :]
+        search_inde['date'] = (pd.to_datetime(search_inde['date']).dt.date)
+        search_inde = search_inde.loc[search_inde['date'] >= current_date]
+
+        cater = []
+        unique_values = list(search_inde['category'].drop_duplicates())
+
+        for i in unique_values:
+            search_category_out = search_inde[search_inde["category"] == i]
+            search_category_out = search_category_out[search_category_out["type"] == type]
+            summa = search_category_out['amount'].sum()
+            if summa != 0:
+                cater.append([i, summa])
+        return cater
 
     def time_ago(self, inde, days_1, type_trans, categories=[]):
         df = pd.read_csv('app/csvy/trans.csv')
@@ -89,8 +104,8 @@ class Data_trans:
         search = search.loc[search['date'] >= current_date]
 
         endy = pd.DataFrame(columns=['id_user', "amount", "type", "category", "date", "description"], )
-
-        for i in categories:
+        
+        for i in CATEGORIES:
             new = search[search["category"] == i]
             endy = endy._append(new)
 

@@ -36,3 +36,23 @@ id_user,amount,type,category,date,description
 "{'error': '', 'inde': '3'}",123,expense,food,2001-10-10,gioy
 "{'error': '', 'inde': '3'}",123,expense,food,2004-02-20,dfg
 3,10000,expense,food,2024-05-25,poel
+1,100000000,income,food,2005-11-18,llasdkajisjd
+1,1900,income,food,2005-11-18,sdhj
+1,90,expense,food,2005-11-18,dkjfhg
+1,90,expense,food,1111-11-11,12
+1,1811,expense,food,1111-11-11,1
+1,1711,expense,food,0011-11-11,1123
+1,1000,income,food,0111-11-11,1
+2,1000,income,food,2024-05-10,wef
+2,10,expense,food,2024-05-10,hg
+2,100,expense,transportation,2024-05-11,qjsyd
+2,55,expense,utilities,2024-05-12,wef
+3,1000,income,food,2003-12-19,ккеке
+3,100,income,other,2024-05-16,цццц
+3,1000,expense,entertainment,2024-05-19,rrrrr
+3,100,income,utilities,2024-04-19,uuuu
+3,100,expense,utilities,2024-06-01,666
+3,100,income,transportation,2024-05-30,iiii
+3,30,income,utilities,2000-05-20,ttt
+3,100,income,transportation,2024-06-01,rr
+3,11,income,entertainment,2024-05-03,iii

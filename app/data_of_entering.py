@@ -12,15 +12,15 @@ class Data_enter:
 
 
     def server(self):
-        df = pd.DataFrame(columns=["login", "password", "res", "goal"], )
+        df = pd.DataFrame(columns=["login", "password", "moneybox", "goal", "budget"], )
         df.to_csv('app/csvy/akks.csv', index=False)
 
 
     def done_registration(self, login_acc, password_acc):
         df = pd.read_csv('app/csvy/akks.csv')
 
-        df_1 = pd.DataFrame(data=[[login_acc, password_acc, 0, 0]],
-                            columns=["login", "password", "res", "goal"])
+        df_1 = pd.DataFrame(data=[[login_acc, password_acc, 0, 0, 0]],
+                            columns=["login", "password", "moneybox", "goal", "budget"])
 
         df = pd.concat([df, df_1], ignore_index=True)
         df.to_csv('app/csvy/akks.csv', index=False)
@@ -41,21 +41,35 @@ class Data_enter:
         except Exception as err:
             return {"error": "Invalid login data", "inde": ""}
 
+    def change_data(self, inde, what_change, for_change, flag=0):
+        df = pd.read_csv('app/csvy/akks.csv')
+        if flag == 1 and what_change in {'budget', 'moneybox'}:
+            if what_change == 'budget':
+                money_left = df.at[inde, 'budget'] - df.at[inde, 'moneybox']
+            else:
+                money_left = df.at[inde, 'moneybox']
 
-    # def change_data(self, inde, what_change, for_change, flag=0):
-    #     df = pd.read_csv('app/csvy/akks.csv')
-    #     if flag == 11:
-    #         df.at[inde, what_change] += for_change
-    #     elif:
-    #         df.at[inde, "goal"] = for_change
-    #         df.at[inde, what_change] = 0
-    #     df.to_csv('app/csvy/akks.csv', index=False)
+            print(money_left + for_change, df.at[inde, 'budget'])
+            if (money_left + for_change < 0) or ((money_left + for_change) > df.at[inde, 'budget']):
+                return "It is impossible to perform the operation. Insufficient funds in the account"
+
+            df.at[inde, what_change] += for_change
+        elif flag == 1:
+            df.at[inde, "goal"] = for_change
+            df.at[inde, "moneybox"] = 0
+        else:
+            df.at[inde, what_change] = for_change
+        df.to_csv('app/csvy/akks.csv', index=False)
+        return ""
 
     def del_akk(self, inde):
         df = pd.read_csv('app/csvy/akks.csv')
         df = df.drop(index=inde)
         df.to_csv('app/csvy/akks.csv', index=False)
 
+    def info_user(self, inde):
+        df = pd.read_csv('app/csvy/akks.csv')
+       
+        return [df.at[inde, "goal"], df.at[inde, "moneybox"], df.at[inde, "budget"]]
+        
 
-# if __name__ == "__main__":
-#     window = Data_enter()

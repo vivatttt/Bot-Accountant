@@ -1,11 +1,55 @@
 {% extends "layout.html" %}
 
-{% block title %}welcome{% endblock title %}
+{% block title %}goal{% endblock title %}
 
 
 
 {% block content %}
 
-    <p>Это страница с бюджетом</p>
+    <p>Это страница добавления/удаления транзакций</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="flash flash-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/goal" method="POST">
+
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="{{ goal.get('amount', '') }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <form action="/goal-new" method="POST">
+
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="new_amount" name="new_amount" value="{{ goal.get('new_amount', '') }}" required>
+        </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    {% if error %}
+        {{ error }}
+    {% endif %}
 
 {% endblock content %}
