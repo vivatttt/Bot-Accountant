@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import date
+from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 from app.utils.names import CATEGORIES, TYPES
 class Data_trans:
@@ -24,6 +24,11 @@ class Data_trans:
 
         if "" in (user_amount, user_type, user_category, user_description):
             return "Not all fields are filled in."
+
+        current_date = date.today()
+        check_user_date = datetime.strptime(str(user_date), "%Y-%m-%d").date()
+        if check_user_date > current_date:
+            return "Incorrect data."
 
         if user_amount.isdigit():
             if int(user_amount) > 0:
@@ -125,8 +130,10 @@ class Data_trans:
         df['date'] = pd.to_datetime(df['date'])
         
         search = df[df['id_user'] == inde]
-       
-        search['month'] = search['date'].dt.to_period('M')
+
+        search = search.copy()
+
+        search.loc[:, 'month'] = search['date'].dt.to_period('M')
         
         month_period = pd.Period(month, freq='M')
         

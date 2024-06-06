@@ -13,7 +13,7 @@ def validate(user : Dict[str, str]) -> str:
     username, password, password_confirmartion = user['username'], user['password'], user['password_confirmation']
 
     if not username or not password or not password_confirmartion:
-        return "Поля не могут быть пустыми"
+        return "Fields cannot be empty"
     
     # Логин должен содержать только буквы, цифры и нижнее подчеркивание
     username_pattern = r'^\w+$'
@@ -21,11 +21,11 @@ def validate(user : Dict[str, str]) -> str:
     password_pattern = r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}$'
 
     if not re.match(username_pattern, username):
-        return "Логин может содержать только буквы, цифры и нижнее подчеркивание"
+        return "Login can only contain letters, numbers and underscores."
     if not re.match(password_pattern, password):
-        return "Пароль должен быть длиной от 6 до 16 символов и содержать как минимум одну цифру, одну букву в верхнем регистре и одну букву в нижнем регистре"
+        return "The password must be between 6 and 10 characters long and contain at least one number, one uppercase letter and one lowercase letter."
     if password != password_confirmartion:
-        return "Пароли не совпадают"
+        return "Password mismatch."
 
     frame = Data_enter()
 
@@ -37,6 +37,6 @@ def validate(user : Dict[str, str]) -> str:
         df = pd.read_csv('app/csvy/akks.csv')
 
     if (df['login'] == username).any():
-        return "Данный логин уже существует."
+        return "This login already exists."
 
     return ''

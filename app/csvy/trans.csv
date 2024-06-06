@@ -1,0 +1,11 @@
+id_user,amount,type,category,date,description
+1,1000,income,salary,2023-12-19,qqqqqq
+7,10,income,salary,2024-06-05,123
+7,20,expense,food,2024-06-05,123
+7,1000,income,salary,2024-05-11,123
+7,50,expense,food,2024-05-05,123
+7,1000,income,gift,2024-05-19,кккк
+7,100,expense,entertainment,2024-02-19,к
+7,100,expense,entertainment,2024-05-19,ннннн
+7,5400,income,other,2024-05-16,ее
+7,1010,income,award,2024-04-18,лллллл

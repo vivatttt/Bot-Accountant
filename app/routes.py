@@ -1,5 +1,6 @@
 from app import app
 import plotly.graph_objs as go
+import plotly.express as px
 from flask import (
                     Blueprint, 
                    redirect, 
@@ -75,6 +76,7 @@ def show_register():
         user=user,
         error=error
     )
+
 
 # страница обработки регистрации
 @app.post('/register')
@@ -178,6 +180,8 @@ def analytics():
             'income' : [],
             'expense' : []
         },
+        'line': [],
+        'circle': [],
     }
 
     '''
@@ -200,27 +204,52 @@ def analytics():
             fig.update_layout(
                 title={
                 "text": type + " for " + str(month) + " month:",
-                "y": 0.96,
-                "x": 0.5,
+                "y":0.96,
+                "x":0.5,
+
                 "xanchor":"center",
                 "yanchor":"top",
                 'font': {'size': 30, 'color': 'white'},
-                })
+                }, legend=dict(font=dict(size=15, color='white')))
             html_code = fig.to_html(full_html=False)
-
             diagrams['pie_chart'][type].append(html_code)
-    # labels, values = get_inf_for_pie_chart(inde, "income", 3)
-    # diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    # labels, values = get_inf_for_pie_chart(inde, "income", 6)
-    # diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    #
-    # labels, values = get_inf_for_pie_chart(inde, "expense", 1)
-    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    # labels, values = get_inf_for_pie_chart(inde, "expense", 3)
-    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    # labels, values = get_inf_for_pie_chart(inde, "expense", 6)
-    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    
+
+    goal_tran = Data_goal()
+    summ, date = goal_tran.type_information(int(inde))
+    if summ != []:
+        fig = px.line(y=summ, x=date, title='Life of goal')
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
+        fig.update_layout(
+            title={
+                "text": "Life of goal:",
+                "y": 0.96,
+                "x": 0.5,
+                "xanchor": "center",
+                "yanchor": "top",
+                'font': {'size': 30, 'color': 'white'},
+            })
+        fig.update_layout(
+            font=dict(color='white'),
+            title=dict(
+                font=dict(color='white', size=30)
+            ),
+            legend=dict(font=dict(size=20, color='white'))
+        )
+        fig.update_layout(
+            plot_bgcolor='rgba(0, 0, 0, 0)',
+            paper_bgcolor='rgb(57, 62, 70)',
+
+            font=dict(color='white'),
+            title=dict(
+                font=dict(color='white', size=30)
+            ),
+            legend=dict(font=dict(size=20, color='white')),
+        )
+        fig.update_traces(line=dict(color='rgb(248, 181, 0)'))
+        html_code = fig.to_html(full_html=False)
+        diagrams["line"].append(html_code)
+
+
     # генерируем столбчатые диаграммы расходов и доходов
     # за последние 6 месяцев
 
@@ -231,14 +260,14 @@ def analytics():
     fig.add_trace(go.Bar(
         x=days,
         y=incomes,
-        name='Доходы',
+        name='Incomes',
         marker=dict(color='rgb(92,99,110)')
     ))
     
     fig.add_trace(go.Bar(
         x=days,
         y=expenses,
-        name='Расходы',
+        name='Expenses',
         marker=dict(color='rgb(248,181,0)')
     ))
     
@@ -246,6 +275,7 @@ def analytics():
         barmode='group',
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgb(57, 62, 70)',
+
         font=dict(color='white'),
         title=dict(
             font=dict(color='white', size=30)
@@ -254,10 +284,30 @@ def analytics():
     )
 
     html_code = fig.to_html(full_html=False)
-
     diagrams['bar_chart'] = html_code
+
     diagrams['predict_expenses'] = predict(inde)
-    
+
+
+    labels, values = get_inf_for_pie_chart(inde, type, month)
+
+
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values, marker=dict(colors=colors), hole=0.7)])
+    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
+    fig.update_layout(
+        title={
+            "text": type + " for " + str(month) + " month:",
+            "y": 0.96,
+            "x": 0.5,
+
+            "xanchor": "center",
+            "yanchor": "top",
+            'font': {'size': 30, 'color': 'white'},
+        }, legend=dict(font=dict(size=15, color='white')))
+    html_code = fig.to_html(full_html=False)
+    diagrams['pie_chart'][type].append(html_code)
+
+
     return render_template(
         'analytics_page.html',
         diagrams=diagrams

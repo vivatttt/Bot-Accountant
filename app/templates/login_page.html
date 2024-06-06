@@ -11,28 +11,32 @@
     
 </head>
 <body>  
-    <div class="starter_container">
+    <div class="starter-container">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
-        <div class="reg_form">
-            <div class="top_buttns">
-                <span class="curent_page">Log in</span>
-                <span class="slash"> / </span>
-                <a href="{{ url_for('show_register') }}">register</a>
+        <div id="login_page" class="login-page">
+            <div class="form">
+              <form id="register_form" class="register-form">
+                <input type="text" placeholder="Username" />
+                <input type="password" placeholder="password" />
+                <input type="text" placeholder="email address" />
+                <input type="submit" class="btn" value="Sign up" />
+                <p class="message">
+                  Already registered?
+                  <a href="#">Sign In</a>
+                </p>
+              </form>
+              <form id="login_form" action="#" method="POST" class="login-form">
+                <input name="username" id="username" type="text" placeholder="username" />
+                <input name="password" id="password" type="password" placeholder="password" />
+                <input id="btnLg" type="submit" class="btn" value="Sign in" />
+                <p class="message">
+                  Not registered?
+                  <a href="#">Create an account</a>
+                </p>
+              </form>
             </div>
-            <form action="/login" method="post">
-                <div class="form-row form-error" style="display:none;"></div>
-                <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
-                <input id="password" name="password" class="form-input2" type="password"  placeholder="password" required><br>
-            
-                <button class="submitt" type="submit">Log in</button>
-                {% if error %}
-                <div>
-                    <p>Error : {{ error }}</p>
-                </div>
-                {% endif %}
-
-            </form>
-        </div>
+          </div>
     </div>
 </body>
 </html>

@@ -6,7 +6,11 @@
 
 {% block content %}
 
-    <p>Это страница добавления/удаления транзакций</p>
+    <div class="top_buttns">
+        <span class="curent_page">Add</span>
+        <span class="slash"> / </span>
+        <a href="#"> Eddit</a>
+    </div>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

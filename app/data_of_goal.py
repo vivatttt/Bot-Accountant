@@ -39,13 +39,22 @@ class Data_goal:
 
         return "Incorrect entry of the transaction amount."
 
-    def type_summ(self, inde, user_type):
+    def type_information(self, inde):
         df = pd.read_csv('app/csvy/goal.csv')
+        summ, data = [], []
+        mid = 0
         search_inde = df[df["id_user"] == inde]
 
-        search_type = search_inde[search_inde["type"] == user_type]
-        summa = search_type['amount'].sum()
-        return summa
+        search_inde = search_inde.reset_index()
+        for index, i in search_inde.iterrows():
+            if i["type"] == "income":
+                mid += i["amount"]
+            else:
+                mid -= i["amount"]
+            summ.append(mid)
+            data.append(i['date'])
+
+        return summ, data
 
     def my_cash(self, inde):
         plus = self.type_summ(inde, "Доход")
