@@ -187,23 +187,38 @@ def analytics():
     }
     '''
 
+    colors = ['rgb(248, 181, 0)', 'rgb(92, 99, 110)', 'rgb(57, 62, 70)', 'rgb(247, 247, 247)']
 
+    for i in TYPES:
+        for month in [1, 3, 6]:
+            labels, values = get_inf_for_pie_chart(inde, i, month)
 
-    labels, values = get_inf_for_pie_chart(inde, "income", 1)
-    print(labels, values)
-    diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    labels, values = get_inf_for_pie_chart(inde, "income", 3)
-    diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    labels, values = get_inf_for_pie_chart(inde, "income", 6)
-    diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    
-    labels, values = get_inf_for_pie_chart(inde, "expense", 1)
-    diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    labels, values = get_inf_for_pie_chart(inde, "expense", 3)
-    diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    labels, values = get_inf_for_pie_chart(inde, "expense", 6)
-    diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    
+            fig = go.Figure(data=[go.Pie(labels=labels, values=values, marker=dict(colors=colors), hole=0.15)])
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
+            fig.update_layout(
+                title={
+                "text":i+" for "+str(month)+" month:",
+                "y":0.96,
+                "x":0.5,
+                "xanchor":"center",
+                "yanchor":"top",
+                'font': {'size': 30, 'color': 'white'},
+                })
+            html_code = fig.to_html(full_html=False)
+
+            diagrams['pie_chart'][i].append(html_code)
+    # labels, values = get_inf_for_pie_chart(inde, "income", 3)
+    # diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    # labels, values = get_inf_for_pie_chart(inde, "income", 6)
+    # diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    #
+    # labels, values = get_inf_for_pie_chart(inde, "expense", 1)
+    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    # labels, values = get_inf_for_pie_chart(inde, "expense", 3)
+    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    # labels, values = get_inf_for_pie_chart(inde, "expense", 6)
+    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
+    #
 
     return render_template(
         'analytics_page.html',
@@ -258,7 +273,6 @@ def make_transaction():
             transaction=transaction,
             error=error
         ), 422
-    print(transaction)
     user_transaction = Data_trans()
     error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
     
