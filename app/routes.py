@@ -349,10 +349,18 @@ def show_transaction():
             url_for('show_register'),
             code=302
         )
+    inde = int(session.get('inde'))
+
+    df = pd.read_csv('app/csvy/trans.csv')
+    search = df[df["id_user"] == inde]
+    last_30_records = search.tail(30)
+    records = last_30_records.to_dict(orient='records')
+    
 
     return render_template(
         'transactions_page.html',
         transaction={},
+        transaction_df=records,
         error=''
     )
 
@@ -386,6 +394,7 @@ def make_transaction():
         return render_template(
             'transactions_page.html',
             transaction=transaction,
+            transaction_df=[],
             error=error
         ), 422
     
@@ -398,14 +407,15 @@ def make_transaction():
         return render_template(
             'transactions_page.html',
             transaction=transaction,
+            transaction_df=[],
             error=error
         ), 422
 
+    
     flash('Transaction succesfully added', 'success')
-    return render_template(
-        'transactions_page.html',
-        transaction={},
-        error=''
+    return redirect(
+        url_for(show_transaction),
+        code=302
     )
 
 
