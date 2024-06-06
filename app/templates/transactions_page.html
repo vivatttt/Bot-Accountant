@@ -45,7 +45,7 @@
                 <div class="description">
                     <textarea id="description" name="description" rows="1" placeholder="Add description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
                 </div>
-                <button class="add" type="add" onclick="addTransactionToTable()">Add</button>
+                <button class="add" type="submit" onclick="addTransactionToTable()">Add</button>
             </div>
             <table id="transactionTable">
                 <thead>
