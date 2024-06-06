@@ -40,7 +40,6 @@ def predict(inde):
     trace2 = go.Scatter(x=forecast['month'], y=forecast['amount'], mode='lines', name='Prediction expenses', line=dict(color='rgb(248,181,0)'))
 
     data = [trace1, trace2]
- 
     layout = go.Layout(title='Expenses predictions', xaxis=dict(title='Month'), yaxis=dict(title='Amount'))
 
     fig = go.Figure(data=data, layout=layout)
