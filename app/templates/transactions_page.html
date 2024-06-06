@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <span>Add new transaction</span>
+    
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -17,6 +17,7 @@
     {% endwith %}
 
     <div class="container" >
+        <h1 class="add-trns">Add new transaction</h1>
         <form class="transaction-form" method="post" action="/transactions">
                 <div class="amount">
                     <input type="number" value="{{ transaction.get('amount', '') }}" id="amount" name="amount" placeholder="Enter the amount" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
@@ -54,6 +55,7 @@
                         <th>Category</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,6 +86,7 @@
                 const categoryCell = newRow.insertCell(2);
                 const dateCell = newRow.insertCell(3);
                 const descriptionCell = newRow.insertCell(4);
+                const actionCell = newRow.insertCell(5);
         
                 amountCell.textContent = amount;
                 typeCell.textContent = type;
@@ -91,13 +94,21 @@
                 dateCell.textContent = date;
                 descriptionCell.textContent = description;
         
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('delete-btn');
+                deleteButton.onclick = function() {
+                table.deleteRow(newRow.rowIndex);
+                };
+                actionCell.appendChild(deleteButton);
+        
                 document.getElementById('amount').value = '';
                 document.getElementById('type').value = '';
                 document.getElementById('category').value = '';
                 document.getElementById('date').value = '';
                 document.getElementById('description').value = '';
+            }
         }
-    }
     </script>
 
 

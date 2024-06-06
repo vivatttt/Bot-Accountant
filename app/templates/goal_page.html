@@ -6,55 +6,90 @@
 
 {% block content %}
 
-    <div class="top_buttns">
-        <span class="curent_page">Add</span>
-        <span class="slash"> / </span>
-        <a href="#"> Eddit</a>
-    </div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <ul>
+        {% for category, message in messages %}
+            <li class="flash flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li class="flash flash-{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-    <form action="/goal" method="POST">
-
-        <div class="form-group">
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" value="{{ goal.get('amount', '') }}" required>
+<div class="container" >
+<h1 class="add-trns">Add new transaction</h1>
+<form class="transaction-form" method="post" action="/transactions">
+        <div class="amount">
+            <input type="number" value="{{ transaction.get('amount', '') }}" id="amount" name="amount" placeholder="Enter the amount" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
         </div>
-
-        <div class="form-group">
-            <label for="type">Type:</label>
-            <select id="type" name="type" required>
+        <div class="type">
+            <select id="type" name="type" required onInput="this.style.color='white';" onBlur="this.style.color='white';">
+                <option value="">Select type</option>
                 <option value="expense">Expense</option>
                 <option value="income">Income</option>
             </select>
         </div>
+        <button class="add" type="add" onclick="addTransactionToTable()">Add</button>
+    </div>
+    <table id="transactionTable">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</form>
+</div>
 
-        <button type="submit">Submit</button>
 
-    </form>
+{% if error %}
+{{ error }}
+{% endif %}
 
-    <form action="/goal-new" method="POST">
+<script>
+function addTransactionToTable() {
+    const amount = document.getElementById('amount').value;
+    const type = document.getElementById('type').value;
+    const category = document.getElementById('category').value;
+    const date = document.getElementById('date').value;
+    const description = document.getElementById('description').value;
 
-        <div class="form-group">
-            <label for="amount">Amount:</label>
-            <input type="number" id="new_amount" name="new_amount" value="{{ goal.get('new_amount', '') }}" required>
-        </div>
+    if (amount && type && category && date && description) {
+        const table = document.getElementById('transactionTable');
+        const newRow = table.insertRow(-1);
 
-        <button type="submit">Submit</button>
+        const amountCell = newRow.insertCell(0);
+        const typeCell = newRow.insertCell(1);
+        const categoryCell = newRow.insertCell(2);
+        const dateCell = newRow.insertCell(3);
+        const descriptionCell = newRow.insertCell(4);
+        const actionCell = newRow.insertCell(5);
 
-    </form>
+        amountCell.textContent = amount;
+        typeCell.textContent = type;
+        categoryCell.textContent = category;
+        dateCell.textContent = date;
+        descriptionCell.textContent = description;
 
-    {% if error %}
-        {{ error }}
-    {% endif %}
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-btn');
+        deleteButton.onclick = function() {
+        table.deleteRow(newRow.rowIndex);
+        };
+        actionCell.appendChild(deleteButton);
+
+        document.getElementById('amount').value = '';
+        document.getElementById('type').value = '';
+        document.getElementById('category').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('description').value = '';
+    }
+}
+</script>
     
 
 {% endblock content %}
