@@ -13,13 +13,13 @@
 <body>  
     <div class="starter-container">
         <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
-        <div class="log_form">
-            <div class="top_buttns">
-                <span class="curent_page">Log in</span>
-                <span class="slash"> / </span>
-                <a href="#">register</a>
-            </div>
-            <form action="/login" method="post">
+        <div class="reg_form">
+            <form id="login-form" action="/login" method="post" class="login_page">
+                <div class="top_buttns">
+                    <span class="curent_page">Log in</span>
+                    <span class="slash"> / </span>
+                    <a class="message" href="#">register</a>
+                </div>
                 <div class="form-row form-error" style="display:none;"></div>
                 <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
                 <input id="password" name="password" class="form-input2" type="password"  placeholder="password" required><br>
@@ -32,14 +32,12 @@
                 {% endif %}
 
             </form>
-        </div>
-        <div class="reg_form">
-            <div class="top_buttns">
-                <a class="login" href="#">Log in</a>
-                <span class="slash"> / </span>
-                <span class="curent_page">Register</span>
-            </div>
-            <form action="/register" method="post">
+            <form id="register-form" action="/register" method="post" class="register-form">
+                <div class="top_buttns">
+                    <a class="message" href="#" >Log in</a>
+                    <span class="slash"> / </span>
+                    <span class="curent_page">Register</span>
+                </div>
                 <div class="form-row form-error" style="display:none;"></div>
                 <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
                 <input id="password" name="password" class="form-input2" type="input"  placeholder="password" required><br>
@@ -51,8 +49,15 @@
                 </div>
                 {% endif %}
             </form>
+            <script>
+                $('.message a').click(function() {
+                    $('form').animate({
+                      height: "toggle",
+                      opacity: "toggle"
+                    }, "slow");
+                  });
+            </script>
         </div>
-        
     </div>
 </body>
 </html>

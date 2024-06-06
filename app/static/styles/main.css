@@ -225,6 +225,9 @@ button[class ="btn"]{
     height: 100px;
 }
 
+.form .register-form {
+    display: none;
+  }
 .reg_form{
     display: flex;
     flex-direction: column;
