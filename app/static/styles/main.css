@@ -1,86 +1,85 @@
 :root {
---default-font-family: -apple-system;
-}
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+    --default-font-family: "Montserrat", sans-serif;
+  }
+  
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed, 
+  figure, figcaption, footer, header, hgroup, 
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-body {
-    line-height: 1;
-}
-ol, ul {
-    list-style: none;
-}
-blockquote, q {
-    quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-body {
-    font-family: "Montserrat", sans-serif;
-    background-color: #2B2D42;
+    font-family: var(--default-font-family);
   }
   
-* {
-margin: 0;
-padding: 0;
-outline: 0;
-border: 0;
-}
-/*----------------------------------------------------------------
-
-----------------------------scroll-bar--------------------------*/
-
-::-webkit-scrollbar {
+  article, aside, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+  
+  body {
+    line-height: 1;
+    background-color: #2B2D42;
+    color: #8D99AE;
+  }
+  
+  ol, ul {
+    list-style: none;
+  }
+  
+  blockquote, q {
+    quotes: none;
+  }
+  
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content: '';
+    content: none;
+  }
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+  }
+  
+  ::-webkit-scrollbar {
     width: 0px;
-}
-
-.error{
-    font-family: "Montserrat", sans-serif;
+  }
+  
+  .error {
     font-size: larger;
     font-weight: 700;
     color: #BF00DF;
-}
-
-.starter-container{
+  }
+  
+  .starter-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Montserrat", sans-serif;
     font-size: small;
     font-weight: 700;
-
-}
-
-.wrepper{
+  }
+  
+  .wrepper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,13 +87,9 @@ border: 0;
     height: 100vh; 
     width: 100%;
     background-color: #2B2D42;
-}
-
-/*----------------------------------------------------------------
-
-----------------------------header--------------------------*/
-
-.header{
+  }
+  
+  .header {
     margin: auto;
     display: flex;
     align-items: center;
@@ -102,50 +97,50 @@ border: 0;
     height: 100px;
     width: 100%;
     align-self: flex-start;
-}
-
-.name{
+  }
+  
+  .name {
     padding: 30px 100px;
     height: 100px;
     width: 250px;
-}
-
-button[class ="btn"]{
+  }
+  
+  button[class="btn"] {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    font-family: "Montserrat", sans-serif;
     color: #8D99AE; 
-}
-.buttons{
+  }
+  
+  .buttons {
     padding: 0px 30px 0px;
     position: relative;
     display: flex;
     justify-content: space-evenly;
     height: 39px;
     width: 50%;
-}
-.btn{
+  }
+  
+  .btn {
     position: relative;
     height: 39px;
     font-size: 30px;
     font-weight: normal;
-}
-@media(hover: hover){
-    button:hover{
-        color: #ffffff;
+  }
+  
+  @media(hover: hover) {
+    button:hover {
+      color: #ffffff;
     }
-}
-@media(hover: none){
-    button:active{
-        color: #ffffff;
+  }
+  
+  @media(hover: none) {
+    button:active {
+      color: #ffffff;
     }
-}
-
-/*----------------------------------------------------------------
-
-----------------------------login form--------------------------*/
-.starter_container{
+  }
+  
+  .starter_container {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -154,18 +149,18 @@ button[class ="btn"]{
     height: 100%; 
     width: 100%;
     background-color: #2B2D42;
-}
-.logo{
+  }
+  
+  .logo {
     margin: 5% auto;
     display: flex;
     justify-content: center;
     width: 200px;
-}
-
-.login-page {
+  }
+  
+  .login-page {
     width: 40%;
     padding: auto;
-
   }
   
   .form {
@@ -176,8 +171,7 @@ button[class ="btn"]{
     text-align: center;
   }
   
-input, select, textarea {
-    font-family:  "Montserrat", sans-serif;
+  input, select, textarea {
     width: 100%;
     border-radius: 15px;
     border: 4px solid #8D99AE;
@@ -187,46 +181,36 @@ input, select, textarea {
     font-size: 35px;
     background: transparent;
     box-shadow: inset 0 0 -10px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    color: #404459;
   }
-  @media(hover: hover){
-    input:hover{
-        border: 4px solid white;
+  
+  @media(hover: hover) {
+    input:hover {
+      border: 4px solid white;
     }
-}
-@media(hover: none){
-    input:active{
-        border: 4px solid white;
+  }
+  
+  @media(hover: none) {
+    input:active {
+      border: 4px solid white;
     }
-}
-
-input,select::placeholder{
+  }
+  
+  input::placeholder,
+  select::placeholder,
+  textarea::placeholder {
     color: #404459;
-    font-family:  "Montserrat", sans-serif;
     font-size: 35px;
     font-weight: 100;
-}
-input::placeholder{
-    color: #404459;
-    font-family:  "Montserrat", sans-serif;
-    font-size: 35px;
-    font-weight: 100;
-}
-textarea::placeholder{
-    color: #404459;
-    font-family:  "Montserrat", sans-serif;
-    font-size: 35px;
-    font-weight: 100;
-}
-.form input:hover,
-.form input:active,
-.form input:focus {
+  }
+  
+  .form input:hover,
+  .form input:active,
+  .form input:focus {
     color: #ffffff;
-}
-
-
+  }
+  
   .form .btn {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
     width: 50%;
     height: auto;
     border: none;
@@ -234,25 +218,24 @@ textarea::placeholder{
     color: #8D99AE;
     font-size: 30px;
     cursor: pointer;
-    
   }
   
-@media(hover: hover){
-    .form .btn:hover{
-        color: #ffffff;
+  @media(hover: hover) {
+    .form .btn:hover {
+      color: #ffffff;
     }
-}
-@media(hover: none){
-    .form .btn:active{
-        color: #ffffff;
+  }
+  
+  @media(hover: none) {
+    .form .btn:active {
+      color: #ffffff;
     }
-}
+  }
   
   .form .message {
     margin: 5% auto;
     color: white;
     font-size: 35px;
-    font-family: "Montserrat", sans-serif;
     font-weight: 300;
   }
   
@@ -260,19 +243,20 @@ textarea::placeholder{
     color: #8D99AE;
     text-decoration: none;
   }
-
-@media(hover: hover){
-    .form .message a:hover{
-        color: #ffffff;
+  
+  @media(hover: hover) {
+    .form .message a:hover {
+      color: #ffffff;
     }
-}
-@media(hover: none){
-    .form .message a:active{
-        color: #ffffff;
+  }
+  
+  @media(hover: none) {
+    .form .message a:active {
+      color: #ffffff;
     }
-}
-
-.form .register-form {
+  }
+  
+  .form .register-form {
     display: none;
   }
   
@@ -302,103 +286,107 @@ textarea::placeholder{
   .infoo span .fa {
     color: #ffffff;
   }
-
-
-/*----------------------------------------------------------------
-
-----------------------------Transactions--------------------------*/
-.add-trns{
+  
+  .add-trns {
     display: flex;
     position: relative;
     font-family: "Montserrat", sans-serif;
-    margin: auto;
+    margin: 20px auto;
     padding: 20px;
     font-size: 50px;
     font-weight: normal;
     color: #ffffff;
-}
-.container {
+    justify-content: center;
+    }
+    
+    .container {
     text-align: center;
     max-width: 50%;
     margin: 0 auto;
     padding: 20px;
-}
-
-.transaction-form {
+    }
+    
+    .transaction-form {
     font-family: "Montserrat", sans-serif;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
     margin-bottom: 20px;
-}
-
-.amount, .type, .category, .date, .description {
+    }
+    
+    .amount, .type, .category, .date, .description {
     display: flex;
     flex-direction: column;
-}
-
-select option:first-child {
-    color: white; 
-  }
-  
-select option {
-    background-color: #2B2D42; 
-    color: #fff; 
-  }
-.delete-btn {
-    background-color: transparent; 
-    color: #BF00DF; 
+    }
+    
+    select option:first-child {
+    color: white;
+    }
+    
+    select option {
+    background-color: #2B2D42;
+    color: #fff;
+    }
+    
+    .delete-btn {
+    background-color: transparent;
+    color: #BF00DF;
     border: none;
     padding: 5px 10px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 14px;
-  }
-  
-  @media(hover: hover){
-    .delete-btn:hover{
-        box-shadow: 0px 0px 20px 0 #201e2f, 0 0px 0px 0 #201e2f;
-        color: #BF00DF; 
     }
-}
-@media(hover: none){
-    .delete-btn:active{
-        box-shadow: 0px 0px 20px 0 #201e2f, 0 0px 0px 0 #201e2f;
-        color: #BF00DF; 
+    
+    @media(hover: hover) {
+    .delete-btn:hover {
+    box-shadow: 0px 0px 20px 0 #201e2f, 0 0px 0px 0 #201e2f;
+    color: #BF00DF;
     }
-}
-button[type="add"]{
-    font-family:  "Montserrat", sans-serif;
+    }
+    
+    @media(hover: none) {
+    .delete-btn:active {
+    box-shadow: 0px 0px 20px 0 #201e2f, 0 0px 0px 0 #201e2f;
+    color: #BF00DF;
+    }
+    }
+    
+    button[type="add"] {
+    font-family: "Montserrat", sans-serif;
     width: 100%;
     border-radius: 15px;
     border: 4px solid #8D99AE;
     margin: 10px 0 10px;
-    padding: 4%;    
+    padding: 4%;
+    
     box-sizing: border-box;
     font-size: 35px;
     background: transparent;
     color: #ffffff;
     cursor: pointer;
     box-shadow: 10px 0px 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-@media(hover: hover){
-    button[type="add"]:hover{
-        border: 4px solid #ffffff;
-        box-shadow: 10px 0px 20px 0 rgba(255, 255, 255, 0.2), 0 5px 5px 0 rgba(255, 255, 255, 0.24);
     }
-}
-@media(hover: none){
-    button[type="add"]:active{
-        border: 4px solid #ffffff;
-        box-shadow: 10px 0px 20px 0 rgba(255, 255, 255, 0.2), 0 5px 5px 0 rgba(255, 255, 255, 0.24);
+    
+    @media(hover: hover) {
+    button[type="add"]:hover {
+    border: 4px solid #ffffff;
+    box-shadow: 10px 0px 20px 0 rgba(255, 255, 255, 0.2), 0 5px 5px 0 rgba(255, 255, 255, 0.24);
     }
-}
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); 
-}
-  
-
-table {
+    }
+    
+    @media(hover: none) {
+    button[type="add"]:active {
+    border: 4px solid #ffffff;
+    box-shadow: 10px 0px 20px 0 rgba(255, 255, 255, 0.2), 0 5px 5px 0 rgba(255, 255, 255, 0.24);
+    }
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    }
+    
+    table {
     font-family: "Montserrat", sans-serif;
     margin: auto;
     width: 60%;
@@ -407,14 +395,14 @@ table {
     color: white;
     font-size: 15px;
     font-weight: 300;
-}
-
-th, td {
+    }
+    
+    th, td {
     padding: 10px;
     text-align: left;
     border-bottom: 3px solid #8D99AE;
-}
-
-th {
+    }
+    
+    th {
     background-color: transparent;
-}
+    }

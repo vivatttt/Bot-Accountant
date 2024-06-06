@@ -43,7 +43,7 @@
                     <input type="date" id="date" name="date" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
                 </div>
                 <div class="description">
-                    <textarea id="description" name="description" rows="1" placeholder="Enter description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
+                    <textarea id="description" name="description" rows="1" placeholder="Add description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
                 </div>
                 <button class="add" type="add" onclick="addTransactionToTable()">Add</button>
             </div>
