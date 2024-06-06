@@ -23,19 +23,19 @@
                 </div>
                 <div class="type">
                     <select id="type" name="type" required>
-                        <option value="">Select type</option>
+                        <!-- <option value="">Select type</option> -->
                         <option value="expense">Expense</option>
                         <option value="income">Income</option>
                     </select>
                 </div>
                 <div class="category">
                     <select id="category" name="category" required>
-                        <option value="">Select category</option>
-                        <option value="food">Food</option>
-                        <option value="transportation">Transportation</option>
-                        <option value="utilities">Utilities</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="other">Other</option>
+                        <!-- <option value="">Select category</option> -->
+                        <option value="food">food</option>
+                        <option value="transportation">transportation</option>
+                        <option value="utilities">utilities</option>
+                        <option value="entertainment">entertainment</option>
+                        <option value="other">other</option>
                     </select>
                 </div>
                 <div class="date">
@@ -44,7 +44,8 @@
                 <div class="description">
                     <textarea id="description" name="description" rows="4" placeholder="Enter description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
                 </div>
-                <button type="button" onclick="addTransactionToTable()">Add</button>
+                <!-- <button type="button" onclick="addTransactionToTable()">Add</button> -->
+                <button type="submit">Add</button>
             </div>
             <table id="transactionTable">
                 <thead>
@@ -109,9 +110,9 @@
             // В зависимости от выбранного значения заполняем второй селектор
             let options = [];
             if (selectedValue === 'expense') {               
-                options = ['Food', 'Transportation', 'Utilities', 'Entertainment', 'Other'];
+                options = ['food', 'transportation', 'utilities', 'entertainment', 'other'];
             } else {
-                options = ['Salary', 'Award', 'Gift', 'Other'];            
+                options = ['salary', 'award', 'gift', 'other'];            
             }
             // Добавляем новые опции в второй селектор
             options.forEach(option => {                const newOption = document.createElement('option');

@@ -313,7 +313,6 @@ def analytics():
 
     html_code = fig.to_html(full_html=False)
     diagrams['bar_chart'] = html_code
-
     diagrams['predict_expenses'] = predict(inde)
 
 
@@ -371,8 +370,8 @@ def make_transaction():
 
     }
     '''
-
-    inde = int(session.get('inde', ''))
+    print(transaction)
+    inde = int(session.get('inde'))
     signed_amount = int(transaction['amount'])
 
     add_info = Data_enter()
@@ -389,6 +388,7 @@ def make_transaction():
             transaction=transaction,
             error=error
         ), 422
+    
     user_transaction = Data_trans()
     error = user_transaction.add_transection(inde, transaction.get('amount'), transaction.get('type'), transaction.get('category'), transaction.get('description'), transaction.get('date'))
     

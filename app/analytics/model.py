@@ -17,6 +17,7 @@ def predict(inde):
     search['month'] = search['date'].dt.to_period('M')
     sum_by_month = search.groupby('month')['amount'].sum().reset_index()
 
+    print(sum_by_month)
 
     model = SARIMAX(sum_by_month['amount'],  
                     order = (0, 1, 1),  
