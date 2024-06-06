@@ -19,11 +19,9 @@
     <div class="container" >
         <formclass="transaction-form" method="post" action="/transactions">
                 <div class="amount">
-                    <label for="amount">Amount:</label>
                     <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
                 </div>
                 <div class="type">
-                    <label for="type">Type:</label>
                     <select id="type" name="type" required>
                         <option value="">Select type</option>
                         <option value="expense">Expense</option>
@@ -31,7 +29,6 @@
                     </select>
                 </div>
                 <div class="category">
-                    <label for="category">Category:</label>
                     <select id="category" name="category" required>
                         <option value="">Select category</option>
                         <option value="food">Food</option>
@@ -42,11 +39,9 @@
                     </select>
                 </div>
                 <div class="date">
-                    <label for="date">Date:</label>
                     <input type="date" id="date" name="date" required>
                 </div>
                 <div class="description">
-                    <label for="description">Description:</label>
                     <textarea id="description" name="description" rows="4" placeholder="Enter description" required></textarea>
                 </div>
                 <button type="button" onclick="addTransactionToTable()">Add</button>
