@@ -21,12 +21,15 @@
                     <a href="#">sign in </a>
                     / register
                   </p>
-
                 <input class="username" placeholder="username" name="username"  onInput="this.style.color='white';" onBlur="this.style.color='white';"required />
                 <input class="password" placeholder="password" type="password" name="password" onInput="this.style.color='white';" onBlur="this.style.color='white';" required />
                 <input class="password_confirmation" placeholder="password confirmation" type="password" onInput="this.style.color='white';" onBlur="this.style.color='white';" name="password_confirmation" required />
-
                 <input type="submit" class="btn" value="register" />
+                {% if error %}
+                <div class="error">
+                  {{ error }}
+                </div>
+                {% endif %}
               </form>
               <form id="login_form" action="/auth" method="POST" class="login-form">
                 <p class="message">
@@ -41,12 +44,6 @@
             </div>
           </div>
     </div>
-
-    {% if error %}
-    <div>
-      {{ error }}
-    </div>
-    {% endif %}
 
     <script>
         $('.message a').click(function() {
