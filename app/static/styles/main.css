@@ -406,3 +406,185 @@
     th {
     background-color: transparent;
     }
+
+/*----------------------------------------------------------------
+    goal
+-----------------------------------------------------------------*/
+
+.footer {
+    background-color: #2B2D42;
+    color: #8D99AE;
+    font-family: "Montserrat", sans-serif;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+    .top_buttns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      
+      .curent_page {
+        font-size: 30px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      
+      .slash {
+        font-size: 30px;
+        color: #8D99AE;
+        margin: 0 10px;
+      }
+      
+      .btn {
+        font-size: 30px;
+        color: #8D99AE;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      @media(hover: hover) {
+        .btn:hover {
+          color: #ffffff;
+        }
+      }
+      
+      @media(hover: none) {
+        .btn:active {
+          color: #ffffff;
+        }
+      }
+      
+      .flash {
+        font-size: 20px;
+        color: #BF00DF;
+        margin-bottom: 20px;
+      }
+      
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 50%;
+      }
+      
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+      
+      .label {
+        font-size: 20px;
+        font-weight: 700;
+        color: #8D99AE;
+        margin-bottom: 10px;
+      }
+      
+      .input {
+        width: 100%;
+        border-radius: 15px;
+        border: 4px solid #8D99AE;
+        padding: 10px;
+        box-sizing: border-box;
+        font-size: 20px;
+        background: transparent;
+        box-shadow: inset 0 0 -10px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        color: #404459;
+      }
+      
+      @media(hover: hover) {
+        .input:hover {
+          border: 4px solid white;
+        }
+      }
+      
+      @media(hover: none) {
+        .input:active {
+          border: 4px solid white;
+        }
+      }
+      
+      .input::placeholder {
+        color: #404459;
+        font-size: 20px;
+        font-weight: 100;
+      }
+      
+      .form button[type="submit"] {
+        width: 50%;
+        height: auto;
+        border: none;
+        margin: 0;
+        color: #8D99AE;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: transparent;
+      }
+      
+      @media(hover: hover) {
+        .form button[type="submit"]:hover {
+          color: #ffffff;
+        }
+      }
+      
+      @media(hover: none) {
+        .form button[type="submit"]:active {
+          color: #ffffff;
+        }
+      }
+
+/*----------------------------------------------------------------
+   analitics
+-----------------------------------------------------------------*/
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #2B2D42;
+  }
+  
+  .page-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 30px;
+  }
+  
+  .pie-charts-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .pie-chart-container {
+    width: 400px;
+    margin: 0 20px;
+  }
+  
+  .line-chart-container {
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 30px;
+  }
+  
+  .bar-chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+  }
+  
+  .predict-expenses-container {
+    width: 100%;
+    max-width: 800px;
+  }
+  

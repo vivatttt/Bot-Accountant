@@ -2,55 +2,44 @@
 
 {% block title %}welcome{% endblock title %}
 
-
-
 {% block content %}
+<div class="wrapper">
+    <h1 class="page-title">Analytics page</h1>
 
-    <p>Это страница аналитики</p>
-
-    <h1>Pie Chart</h1>
-
-    <div style="width: 100%; align-items: center; justify-content: center">
-        <div style="width: 500px;">
-            <div>
-                {{ diagrams['pie_chart']['income'][0] | safe }}
-            </div>
-            <div>
-                {{ diagrams['pie_chart']['income'][1] | safe }}
-            </div>
-            <div>
-                {{ diagrams['pie_chart']['income'][2] | safe }}
-            </div>
+    <div class="pie-charts-row">
+        <div class="pie-chart-container">
+            {{ diagrams['pie_chart']['income'][0] | safe }}
         </div>
-
-        <div style="width: 500px;">
-            <div>
-                {{ diagrams['pie_chart']['expense'][0] | safe }}
-            </div>
-            <div>
-                {{ diagrams['pie_chart']['expense'][1] | safe }}
-            </div>
-            <div>
-                {{ diagrams['pie_chart']['expense'][2] | safe }}
-            </div>
+        <div class="pie-chart-container">
+            {{ diagrams['pie_chart']['income'][1] | safe }}
         </div>
-
-        <div style="width: 1100px;">
-                {{ diagrams['line'][0] | safe }}
+        <div class="pie-chart-container">
+            {{ diagrams['pie_chart']['income'][2] | safe }}
         </div>
     </div>
-        <div>
-            <div>
-                {{ diagrams['bar_chart'] | safe }}
-            </div>
-        </div>
 
-        <div>
-            <div>
-                {{ diagrams['predict_expenses'] | safe }}
-            </div>
-      
+    <div class="pie-charts-row">
+        <div class="pie-chart-container">
+            {{ diagrams['pie_chart']['expense'][0] | safe }}
         </div>
-        
-      
+        <div class="pie-chart-container">
+            {{ diagrams['pie_chart']['expense'][1] | safe }}
+        </div>
+        <div class="pie-chart-container">
+            {{ diagrams['pie_chart']['expense'][2] | safe }}
+        </div>
+    </div>
+
+    <div class="line-chart-container">
+        {{ diagrams['line'][0] | safe }}
+    </div>
+
+    <div class="bar-chart-container">
+        {{ diagrams['bar_chart'] | safe }}
+    </div>
+
+    <div class="predict-expenses-container">
+        {{ diagrams['predict_expenses'] | safe }}
+    </div>
+</div>
 {% endblock content %}
