@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <span>Add new transaction</span>
+    
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -17,24 +17,23 @@
     {% endwith %}
 
     <div class="container" >
+        <h1 class="add-trns">Add new transaction</h1>
         <form class="transaction-form" method="post" action="/transactions">
                 <div class="amount">
                     <input type="number" value="{{ transaction.get('amount', '') }}" id="amount" name="amount" placeholder="Enter the amount" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
                 </div>
                 <div class="type">
-<<<<<<< HEAD
-                    <select id="type" name="type" required>
-                        <!-- <option value="">Select type</option> -->
-=======
+
+                    
                     <select id="type" name="type" required onInput="this.style.color='white';" onBlur="this.style.color='white';">
-                        <option value="">Select type</option>
->>>>>>> d7a796a4c789ae069a64771bbe81592fb1f1c680
-                        <option value="expense">Expense</option>
-                        <option value="income">Income</option>
+                        <!-- <option value="">Select type</option> -->
+
+                        <option value="expense">expense</option>
+                        <option value="income">income</option>
                     </select>
                 </div>
                 <div class="category">
-\
+
                     <select id="category" name="category" required required onInput="this.style.color='white';" onBlur="this.style.color='white';">
                         <!-- <option value="">Select category</option> -->
                         <option value="food">food</option>
@@ -64,6 +63,7 @@
                         <th>Category</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,36 +78,47 @@
     {% endif %}
 
     <script>
-        function addTransactionToTable() {
-            const amount = document.getElementById('amount').value;
-            const type = document.getElementById('type').value;
-            const category = document.getElementById('category').value;
-            const date = document.getElementById('date').value;
-            const description = document.getElementById('description').value;
+        // function addTransactionToTable() {
+        //     const amount = document.getElementById('amount').value;
+        //     const type = document.getElementById('type').value;
+        //     const category = document.getElementById('category').value;
+        //     const date = document.getElementById('date').value;
+        //     const description = document.getElementById('description').value;
         
-            if (amount && type && category && date && description) {
-                const table = document.getElementById('transactionTable');
-                const newRow = table.insertRow(-1);
+        //     if (amount && type && category && date && description) {
+        //         const table = document.getElementById('transactionTable');
+        //         const newRow = table.insertRow(-1);
         
-                const amountCell = newRow.insertCell(0);
-                const typeCell = newRow.insertCell(1);
-                const categoryCell = newRow.insertCell(2);
-                const dateCell = newRow.insertCell(3);
-                const descriptionCell = newRow.insertCell(4);
+        //         const amountCell = newRow.insertCell(0);
+        //         const typeCell = newRow.insertCell(1);
+        //         const categoryCell = newRow.insertCell(2);
+        //         const dateCell = newRow.insertCell(3);
+        //         const descriptionCell = newRow.insertCell(4);
+        //         const actionCell = newRow.insertCell(5);
         
-                amountCell.textContent = amount;
-                typeCell.textContent = type;
-                categoryCell.textContent = category;
-                dateCell.textContent = date;
-                descriptionCell.textContent = description;
+        //         amountCell.textContent = amount;
+        //         typeCell.textContent = type;
+        //         categoryCell.textContent = category;
+        //         dateCell.textContent = date;
+        //         descriptionCell.textContent = description;
         
-                document.getElementById('amount').value = '';
-                document.getElementById('type').value = '';
-                document.getElementById('category').value = '';
-                document.getElementById('date').value = '';
-                document.getElementById('description').value = '';
-        }
-    }
+        //         const deleteButton = document.createElement('button');
+        //         deleteButton.textContent = 'Delete';
+        //         deleteButton.classList.add('delete-btn');
+        //         deleteButton.onclick = function() {
+        //         table.deleteRow(newRow.rowIndex);
+        //         };
+        //         actionCell.appendChild(deleteButton);
+        
+        //         document.getElementById('amount').value = '';
+        //         document.getElementById('type').value = '';
+        //         document.getElementById('category').value = '';
+        //         document.getElementById('date').value = '';
+        //         document.getElementById('description').value = '';
+        //     }
+        // }
+
+    
 
     function updateSecondSelector() {            // Получаем выбранное значение первого селектора
             const firstSelector = document.getElementById('type');            
@@ -130,7 +141,9 @@
         }
         // Добавляем обработчик события для первого селектора        
         window.onload = function() {
-            document.getElementById('type').addEventListener('change', updateSecondSelector);        };
+            document.getElementById('type').addEventListener('change', updateSecondSelector);   
+        };
+        
     </script>
 
 

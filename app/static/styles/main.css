@@ -307,8 +307,18 @@ textarea::placeholder{
 /*----------------------------------------------------------------
 
 ----------------------------Transactions--------------------------*/
-
+.add-trns{
+    display: flex;
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+    margin: auto;
+    padding: 20px;
+    font-size: 50px;
+    font-weight: normal;
+    color: #ffffff;
+}
 .container {
+    text-align: center;
     max-width: 50%;
     margin: 0 auto;
     padding: 20px;
@@ -328,14 +338,43 @@ textarea::placeholder{
     flex-direction: column;
 }
 
-
+select option:first-child {
+    color: white; 
+  }
+  
+select option {
+    background-color: #2B2D42; 
+    color: #fff; 
+  }
+.delete-btn {
+    background-color: transparent; 
+    color: #BF00DF; 
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  @media(hover: hover){
+    .delete-btn:hover{
+        box-shadow: 0px 0px 20px 0 #201e2f, 0 0px 0px 0 #201e2f;
+        color: #BF00DF; 
+    }
+}
+@media(hover: none){
+    .delete-btn:active{
+        box-shadow: 0px 0px 20px 0 #201e2f, 0 0px 0px 0 #201e2f;
+        color: #BF00DF; 
+    }
+}
 button[type="add"]{
     font-family:  "Montserrat", sans-serif;
     width: 100%;
     border-radius: 15px;
     border: 4px solid #8D99AE;
     margin: 10px 0 10px;
-    padding: 4%;
+    padding: 4%;    
     box-sizing: border-box;
     font-size: 35px;
     background: transparent;
@@ -346,22 +385,20 @@ button[type="add"]{
 @media(hover: hover){
     button[type="add"]:hover{
         border: 4px solid #ffffff;
+        box-shadow: 10px 0px 20px 0 rgba(255, 255, 255, 0.2), 0 5px 5px 0 rgba(255, 255, 255, 0.24);
     }
 }
 @media(hover: none){
     button[type="add"]:active{
         border: 4px solid #ffffff;
+        box-shadow: 10px 0px 20px 0 rgba(255, 255, 255, 0.2), 0 5px 5px 0 rgba(255, 255, 255, 0.24);
     }
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
-    color: rgba(0, 0, 0, 0);
-    opacity: 1;
-    display: block;
-    background: url() no-repeat;
-    width: 20px;
-    height: 20px;
-    border-width: thin;
+    filter: invert(1); 
 }
+  
+
 table {
     font-family: "Montserrat", sans-serif;
     margin: auto;
