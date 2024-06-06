@@ -245,16 +245,16 @@ def analytics():
     goal_tran = Data_goal()
     summ, date = goal_tran.type_information(int(inde))
     if summ != []:
-        fig = px.line(y=summ, x=date, title='Life of goal')
+        fig = px.line(y=summ, x=date, title='Savings')
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
         fig.update_layout(
             title={
-                "text": "Life of goal:",
-                "y": 0.96,
-                "x": 0.5,
-                "xanchor": "center",
-                "yanchor": "top",
-                'font': {'size': 30, 'color': 'white'},
+                "text": "Savings",
+                # "y": 0.96,
+                # "x": 0.5,
+                # "xanchor": "center",
+                # "yanchor": "top",
+                # 'font': {'size': 30, 'color': 'white'},
             })
         fig.update_layout(
             font=dict(color='white'),
@@ -306,6 +306,7 @@ def analytics():
 
         font=dict(color='white'),
         title=dict(
+            text='Income and Expense Bar Chart',
             font=dict(color='white', size=30)
         ),
         legend=dict(font=dict(size=20, color='white'))

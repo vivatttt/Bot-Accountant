@@ -587,4 +587,100 @@
     width: 100%;
     max-width: 800px;
   }
+/*----------------------------------------------------------------
+   main page
+-----------------------------------------------------------------*/
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #2B2D42;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .page-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 30px;
+  }
+  
+  .info-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .info-block {
+    background-color: #8D99AE;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 10px;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .info-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2B2D42;
+    margin-bottom: 10px;
+  }
+  
+  .info-value {
+    font-size: 20px;
+    font-weight: 400;
+    color: #2B2D42;
+  }
+  
+  .quick-actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .btn {
+    font-size: 20px;
+    font-weight: 700;
+    color: #8D99AE;
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid #8D99AE;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
+  @media (hover: hover) {
+    .btn:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+  }
+  
+  @media (hover: none) {
+    .btn:active {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+  }
+  
+  .charts-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .chart-block {
+    background-color: #8D99AE;
+    border-radius: 10px;
+    padding: 20px;
+  }
   
