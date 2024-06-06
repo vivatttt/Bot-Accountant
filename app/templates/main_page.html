@@ -2,15 +2,33 @@
 
 {% block title %}welcome{% endblock title %}
 
-
-
 {% block content %}
-    
-    cur_goal : {{ cur_goal }} <br><br>
-    budget : {{ budget }} <br><br>
-    moneybox : {{ moneybox }} <br>
-    money_left : {{ budget - moneybox }} <br>
-    
+<div class="wrapper">
+    <h1 class="page-title">Dashboard</h1>
 
+    <div class="info-container">
+        <div class="info-block">
+            <h2 class="info-title">Current Goal</h2>
+            <p class="info-value">{{ cur_goal }}</p>
+        </div>
+        <div class="info-block">
+            <h2 class="info-title">Budget</h2>
+            <p class="info-value">{{ budget }}</p>
+        </div>
+        <div class="info-block">
+            <h2 class="info-title">Moneybox</h2>
+            <p class="info-value">{{ moneybox }}</p>
+        </div>
+        <div class="info-block">
+            <h2 class="info-title">Money Left</h2>
+            <p class="info-value">{{ budget - moneybox }}</p>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <a href="#" class="btn">Add Transaction</a>
+        <a href="#" class="btn">Edit Goal</a>
+    </div>
+
+</div>
 {% endblock content %}
-
