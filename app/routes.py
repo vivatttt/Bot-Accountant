@@ -20,6 +20,7 @@ from app.data_of_transaction import Data_trans
 from app.data_of_goal import Data_goal
 import pandas as pd
 from app.analytics.analytics import get_inf_for_pie_chart, get_inf_for_bar_chart
+from app.analytics.model import predict
 from app.utils.names import GRAPH_FOLDER, CATEGORIES, TYPES
 
 
@@ -188,7 +189,7 @@ def analytics():
     }
     '''
 
-    colors = ['rgb(248, 181, 0)', 'rgb(92, 99, 110)', 'rgb(57, 62, 70)', 'rgb(247, 247, 247)']
+    colors = ['rgb(248, 181, 0)', 'rgb(92, 99, 110)', 'rgb(57, 62, 70)', 'rgb(247, 247, 247)', 'rgb(150, 143, 135)']
     # генерируем круговые диаграммы
     for type in TYPES:
         for month in [1, 3, 6]:
@@ -255,7 +256,8 @@ def analytics():
     html_code = fig.to_html(full_html=False)
 
     diagrams['bar_chart'] = html_code
-
+    diagrams['predict_expenses'] = predict(inde)
+    
     return render_template(
         'analytics_page.html',
         diagrams=diagrams

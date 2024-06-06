@@ -1,6 +1,3 @@
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from app.data_of_transaction import Data_trans
 from datetime import datetime
 
