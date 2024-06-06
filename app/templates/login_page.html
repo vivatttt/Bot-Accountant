@@ -12,52 +12,31 @@
 </head>
 <body>  
     <div class="starter-container">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
-        <div class="reg_form">
-            <form id="login-form" action="/login" method="post" class="login_page">
-                <div class="top_buttns">
-                    <span class="curent_page">Log in</span>
-                    <span class="slash"> / </span>
-                    <a class="message" href="#">register</a>
-                </div>
-                <div class="form-row form-error" style="display:none;"></div>
-                <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
-                <input id="password" name="password" class="form-input2" type="password"  placeholder="password" required><br>
-            
-                <button class="submitt" type="submit">Log in</button>
-                {% if error %}
-                <div>
-                    <p>Error : {{ error }}</p>
-                </div>
-                {% endif %}
-
-            </form>
-            <form id="register-form" action="/register" method="post" class="register-form">
-                <div class="top_buttns">
-                    <a class="message" href="#" >Log in</a>
-                    <span class="slash"> / </span>
-                    <span class="curent_page">Register</span>
-                </div>
-                <div class="form-row form-error" style="display:none;"></div>
-                <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
-                <input id="password" name="password" class="form-input2" type="input"  placeholder="password" required><br>
-                <input id="password_confirmation" name="password_confirmation" class="form-input3" type="input"  placeholder="password confirmation" required><br>
-                <button class="submitt" type="submit">Register</button>
-                {% if error %}
-                <div>
-                    <p>Error : {{ error }}</p>
-                </div>
-                {% endif %}
-            </form>
-            <script>
-                $('.message a').click(function() {
-                    $('form').animate({
-                      height: "toggle",
-                      opacity: "toggle"
-                    }, "slow");
-                  });
-            </script>
-        </div>
+        <div id="login_page" class="login-page">
+            <div class="form">
+              <form id="register_form" class="register-form">
+                <input type="text" placeholder="Username" />
+                <input type="password" placeholder="password" />
+                <input type="text" placeholder="email address" />
+                <input type="submit" class="btn" value="Sign up" />
+                <p class="message">
+                  Already registered?
+                  <a href="#">Sign In</a>
+                </p>
+              </form>
+              <form id="login_form" action="#" method="POST" class="login-form">
+                <input name="username" id="username" type="text" placeholder="username" />
+                <input name="password" id="password" type="password" placeholder="password" />
+                <input id="btnLg" type="submit" class="btn" value="Sign in" />
+                <p class="message">
+                  Not registered?
+                  <a href="#">Create an account</a>
+                </p>
+              </form>
+            </div>
+          </div>
     </div>
 </body>
 </html>
