@@ -22,30 +22,39 @@
                     <input type="number" value="{{ transaction.get('amount', '') }}" id="amount" name="amount" placeholder="Enter the amount" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
                 </div>
                 <div class="type">
+<<<<<<< HEAD
                     <select id="type" name="type" required>
                         <!-- <option value="">Select type</option> -->
+=======
+                    <select id="type" name="type" required onInput="this.style.color='white';" onBlur="this.style.color='white';">
+                        <option value="">Select type</option>
+>>>>>>> d7a796a4c789ae069a64771bbe81592fb1f1c680
                         <option value="expense">Expense</option>
                         <option value="income">Income</option>
                     </select>
                 </div>
                 <div class="category">
-                    <select id="category" name="category" required>
+\
+                    <select id="category" name="category" required required onInput="this.style.color='white';" onBlur="this.style.color='white';">
                         <!-- <option value="">Select category</option> -->
                         <option value="food">food</option>
                         <option value="transportation">transportation</option>
                         <option value="utilities">utilities</option>
                         <option value="entertainment">entertainment</option>
                         <option value="other">other</option>
+
                     </select>
                 </div>
                 <div class="date">
                     <input type="date" id="date" name="date" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
                 </div>
                 <div class="description">
-                    <textarea id="description" name="description" rows="4" placeholder="Enter description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
+                    <textarea id="description" name="description" rows="1" placeholder="Enter description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
                 </div>
+
                 <!-- <button type="button" onclick="addTransactionToTable()">Add</button> -->
                 <button type="submit">Add</button>
+
             </div>
             <table id="transactionTable">
                 <thead>

@@ -55,12 +55,21 @@ padding: 0;
 outline: 0;
 border: 0;
 }
+/*----------------------------------------------------------------
+
+----------------------------scroll-bar--------------------------*/
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
 .error{
     font-family: "Montserrat", sans-serif;
     font-size: larger;
     font-weight: 700;
     color: #BF00DF;
 }
+
 .starter-container{
     display: flex;
     justify-content: center;
@@ -81,6 +90,9 @@ border: 0;
     background-color: #2B2D42;
 }
 
+/*----------------------------------------------------------------
+
+----------------------------header--------------------------*/
 
 .header{
     margin: auto;
@@ -129,84 +141,7 @@ button[class ="btn"]{
         color: #ffffff;
     }
 }
-.dropdown {
-    overflow: hidden;
-  }
-  
-.dropdown .dropbtn {
-    top: auto;
-    margin: auto;
-    position: relative;
-    font-size: 30px;  
-    color: #8D99AE;
-    background-color: transparent;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: normal;
-}
-  
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: transparent;
-    min-width: 18px;
-    
-}
-  
-.dropdown-content a {
-    float: none;
-    color: #ffffff;
-    padding: 5px 0px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    background-color: transparent;
-}
 
-.RUS-btn{
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    height: 30px;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 30px;
-    color: #8D99AE;
-}
-
-@media(hover: hover){
-    .dropdown .dropbtn:hover{
-        color: #ffffff;
-    }
-}
-@media(hover: none){
-    .dropdown .dropbtn:hover{
-        color: #ffffff;
-    }
-}
-
-@media(hover: hover){
-    .RUS-btn:hover{
-        color: #ffffff;
-    }
-}
-@media(hover: none){
-    .RUS-btn:active{
-        color: #ffffff;
-    }
-}
-@media(hover: hover){
-    .dropdown:hover .dropdown-content {
-        display: block;
-        }
-}
-@media(hover: none){
-    .dropdown:active .dropdown-content {
-        display: block;
-        }
-}
 /*----------------------------------------------------------------
 
 ----------------------------login form--------------------------*/
@@ -241,7 +176,7 @@ button[class ="btn"]{
     text-align: center;
   }
   
-  .form input {
+input, select, textarea {
     font-family:  "Montserrat", sans-serif;
     width: 100%;
     border-radius: 15px;
@@ -263,8 +198,20 @@ button[class ="btn"]{
         border: 4px solid white;
     }
 }
-  
+
+input,select::placeholder{
+    color: #404459;
+    font-family:  "Montserrat", sans-serif;
+    font-size: 35px;
+    font-weight: 100;
+}
 input::placeholder{
+    color: #404459;
+    font-family:  "Montserrat", sans-serif;
+    font-size: 35px;
+    font-weight: 100;
+}
+textarea::placeholder{
     color: #404459;
     font-family:  "Montserrat", sans-serif;
     font-size: 35px;
@@ -362,7 +309,7 @@ input::placeholder{
 ----------------------------Transactions--------------------------*/
 
 .container {
-    max-width: 800px;
+    max-width: 50%;
     margin: 0 auto;
     padding: 20px;
 }
@@ -381,37 +328,57 @@ input::placeholder{
     flex-direction: column;
 }
 
-input, select, textarea {
-    font-family: "Montserrat", sans-serif;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
 
-button {
-    padding: 10px 20px;
-    font-size: 30px;
-    font-family: "Montserrat", sans-serif;
-    background-color: transparent;
-    border-radius: 15px solid white;
-    box-shadow: inset 0 0 -10px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-table {
+button[type="add"]{
+    font-family:  "Montserrat", sans-serif;
     width: 100%;
+    border-radius: 15px;
+    border: 4px solid #8D99AE;
+    margin: 10px 0 10px;
+    padding: 4%;
+    box-sizing: border-box;
+    font-size: 35px;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 10px 0px 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+@media(hover: hover){
+    button[type="add"]:hover{
+        border: 4px solid #ffffff;
+    }
+}
+@media(hover: none){
+    button[type="add"]:active{
+        border: 4px solid #ffffff;
+    }
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url() no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+}
+table {
+    font-family: "Montserrat", sans-serif;
+    margin: auto;
+    width: 60%;
     border-collapse: collapse;
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
 }
 
 th, td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 3px solid #8D99AE;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: transparent;
 }
