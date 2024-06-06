@@ -7,7 +7,7 @@
     <div class="top_buttns">
         <span class="curent_page">Add</span>
         <span class="slash"> / </span>
-        <a href="#" class="btn">Eddit</a>
+        <a href="#" class="btn">Update</a>
     </div>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -29,8 +29,8 @@
         <div class="form-group">
             <label for="type" class="label">Type:</label>
             <select id="type" name="type" required class="input">
-                <option value="expense">Expense</option>
-                <option value="income">Income</option>
+                <option value="expense">Widthdraw</option>
+                <option value="income">Deposit</option>
             </select>
         </div>
 

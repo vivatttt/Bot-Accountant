@@ -415,7 +415,7 @@ def make_transaction():
     
     flash('Transaction succesfully added', 'success')
     return redirect(
-        url_for(show_transaction),
+        url_for('show_transaction'),
         code=302
     )
 
