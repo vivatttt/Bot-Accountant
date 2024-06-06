@@ -7,3 +7,7 @@ id_user,amount,type,category,date,description
 7,321,expense,entertainment,2024-01-18,123
 7,555,expense,food,2024-05-14,kkdnfg
 7,1,expense,entertainment,2024-06-01,выаыва
+8,10000,income,salary,2024-05-05,123
+8,5000,income,award,2024-02-01,123
+8,123,expense,food,2024-05-06,123
+8,400,expense,transportation,2024-05-04,123
