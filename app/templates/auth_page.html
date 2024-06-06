@@ -21,9 +21,11 @@
                     <a href="#">sign in </a>
                     / register
                   </p>
-                <input class="username" placeholder="username" name="username" required />
-                <input class="password" placeholder="password" type="password" name="password" required />
-                <input class="password_confirmation" placeholder="password confirmation" type="password" name="password_confirmation" required />
+
+                <input class="username" placeholder="username" name="username"  onInput="this.style.color='white';" onBlur="this.style.color='white';"required />
+                <input class="password" placeholder="password" type="password" name="password" onInput="this.style.color='white';" onBlur="this.style.color='white';" required />
+                <input class="password_confirmation" placeholder="password confirmation" type="password" onInput="this.style.color='white';" onBlur="this.style.color='white';" name="password_confirmation" required />
+
                 <input type="submit" class="btn" value="register" />
               </form>
               <form id="login_form" action="/auth" method="POST" class="login-form">
@@ -31,8 +33,9 @@
                     sign in /
                     <a href="#"> register</a>
                   </p>
-                <input class="username" id="username" type="text" placeholder="username" name="username" required />
-                <input class="password" id="password" type="password" placeholder="password" name="password" required />
+                <input class="username" id="username" type="text" placeholder="username" onInput="this.style.color='white';" onBlur="this.style.color='white';" name="username" required />
+                <input class="password" id="password" type="password" placeholder="password" onInput="this.style.color='white';" onBlur="this.style.color='white';" name="password" required />
+
                 <input id="btnLg" type="submit" class="btn" value="sign in" />
               </form>
             </div>
