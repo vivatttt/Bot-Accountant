@@ -21,9 +21,9 @@
                     <a href="#">sign in </a>
                     / register
                   </p>
-                <input class="username" placeholder="username" />
-                <input class="password" placeholder="password" />
-                <input class="password_confirmation" placeholder="password confirmation" />
+                <input class="username" placeholder="username" onInput="this.style.color='white';" onBlur="this.style.color='white';" />
+                <input class="password" placeholder="password" onInput="this.style.color='white';" onBlur="this.style.color='white';"/>
+                <input class="password_confirmation" placeholder="password confirmation" onInput="this.style.color='white';" onBlur="this.style.color='white';" />
                 <input type="submit" class="btn" value="register" />
               </form>
               <form id="login_form" action="/register" method="POST" class="login-form">
@@ -31,8 +31,8 @@
                     sign in /
                     <a href="#"> register</a>
                   </p>
-                <input class="username" id="username" type="text" placeholder="username" />
-                <input class="password" id="password" type="password" placeholder="password" />
+                <input class="username" id="username" type="text" placeholder="username" onInput="this.style.color='white';" onBlur="this.style.color='white';" />
+                <input class="password" id="password" type="password" placeholder="password" onInput="this.style.color='white';" onBlur="this.style.color='white';" />
                 <input id="btnLg" type="submit" class="btn" value="sign in" />
               </form>
             </div>

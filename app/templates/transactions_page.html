@@ -19,7 +19,7 @@
     <div class="container" >
         <formclass="transaction-form" method="post" action="/transactions">
                 <div class="amount">
-                    <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
+                    <input type="number" value="{{ transaction.get('amount', '') }}" id="amount" name="amount" placeholder="Enter the amount" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
                 </div>
                 <div class="type">
                     <select id="type" name="type" required>
@@ -39,10 +39,10 @@
                     </select>
                 </div>
                 <div class="date">
-                    <input type="date" id="date" name="date" required>
+                    <input type="date" id="date" name="date" onInput="this.style.color='white';" onBlur="this.style.color='white';" required>
                 </div>
                 <div class="description">
-                    <textarea id="description" name="description" rows="4" placeholder="Enter description" required></textarea>
+                    <textarea id="description" name="description" rows="4" placeholder="Enter description" value="{{ transaction.get('description', '') }}" onInput="this.style.color='white';" onBlur="this.style.color='white';" required></textarea>
                 </div>
                 <button type="button" onclick="addTransactionToTable()">Add</button>
             </div>

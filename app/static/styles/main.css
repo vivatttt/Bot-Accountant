@@ -264,7 +264,7 @@ input::placeholder{
 .form input:focus {
     color: #ffffff;
 }
-.form input:active::placeholder {
+.form input::selection {
     color: #ffffff;
 }
 .form input:focus::placeholder {
