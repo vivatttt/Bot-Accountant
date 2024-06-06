@@ -11,13 +11,13 @@
     
 </head>
 <body>  
-    <div class="starter_container">
+    <div class="starter-container">
         <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
-        <div class="reg_form">
+        <div class="log_form">
             <div class="top_buttns">
                 <span class="curent_page">Log in</span>
                 <span class="slash"> / </span>
-                <a href="{{ url_for('show_register') }}">register</a>
+                <a href="#">register</a>
             </div>
             <form action="/login" method="post">
                 <div class="form-row form-error" style="display:none;"></div>
@@ -33,6 +33,26 @@
 
             </form>
         </div>
+        <div class="reg_form">
+            <div class="top_buttns">
+                <a class="login" href="#">Log in</a>
+                <span class="slash"> / </span>
+                <span class="curent_page">Register</span>
+            </div>
+            <form action="/register" method="post">
+                <div class="form-row form-error" style="display:none;"></div>
+                <input id="username" name="username" class="form-input1" type="input"  placeholder="username" required><br>
+                <input id="password" name="password" class="form-input2" type="input"  placeholder="password" required><br>
+                <input id="password_confirmation" name="password_confirmation" class="form-input3" type="input"  placeholder="password confirmation" required><br>
+                <button class="submitt" type="submit">Register</button>
+                {% if error %}
+                <div>
+                    <p>Error : {{ error }}</p>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+        
     </div>
 </body>
 </html>
