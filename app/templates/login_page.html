@@ -13,30 +13,38 @@
 <body>  
     <div class="starter-container">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
         <div id="login_page" class="login-page">
+            <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
             <div class="form">
-              <form id="register_form" class="register-form">
-                <input type="text" placeholder="Username" />
-                <input type="password" placeholder="password" />
-                <input type="text" placeholder="email address" />
-                <input type="submit" class="btn" value="Sign up" />
+              <form id="register_form" class="register-form" method="post" action="/login">
                 <p class="message">
-                  Already registered?
-                  <a href="#">Sign In</a>
-                </p>
+                    <a href="#">sign in </a>
+                    / register
+                  </p>
+                <input class="username" placeholder="username" />
+                <input class="password" placeholder="password" />
+                <input class="password_confirmation" placeholder="password confirmation" />
+                <input type="submit" class="btn" value="register" />
               </form>
-              <form id="login_form" action="#" method="POST" class="login-form">
-                <input name="username" id="username" type="text" placeholder="username" />
-                <input name="password" id="password" type="password" placeholder="password" />
-                <input id="btnLg" type="submit" class="btn" value="Sign in" />
+              <form id="login_form" action="/register" method="POST" class="login-form">
                 <p class="message">
-                  Not registered?
-                  <a href="#">Create an account</a>
-                </p>
+                    sign in /
+                    <a href="#"> register</a>
+                  </p>
+                <input class="username" id="username" type="text" placeholder="username" />
+                <input class="password" id="password" type="password" placeholder="password" />
+                <input id="btnLg" type="submit" class="btn" value="sign in" />
               </form>
             </div>
           </div>
     </div>
+    <script>
+        $('.message a').click(function() {
+            $('form').animate({
+              height: "toggle",
+              opacity: "toggle"
+            }, "slow");
+          });
+    </script>
 </body>
 </html>
