@@ -47,16 +47,12 @@ def main():
     # если пользователь еще не зашел в свой аккунт / не зарегистрировался
 
     return redirect(
-        url_for('show_register'),
+        url_for('show_auth'),
         code=302
     )
 
-# login - GET, POST
-# register - GET, POST
-
-# страница отображения регистрации 
-@app.get('/register')
-def show_register():
+@app.get('/auth')
+def show_auth():
 
     if 'username' in session:
         return redirect(
@@ -64,28 +60,80 @@ def show_register():
             code=302
             )
     
-    user = {
+    user = user = {
         'username' : '',
         'password' : '',
-        'password_confirmation' : ''
     }
-    error = ""
+    error = ''
 
     return render_template(
-        'register_page.html',
+        'auth_page.html',
         user=user,
         error=error
     )
+
+@app.post('/auth')
+def do_auth():
+    user = process_form_data(request.form.to_dict())
+    
+    username = user['username']
+    password = hash_password(user['password'])
+
+
+    if 'password_confirmation' in user.keys():
+        error = validate(user)
+    
+        if error:
+            return render_template(
+                'auth_page.html',
+                user=user,
+                error=error
+            ), 422
+        # Добавление в базу данных
+        add_user = Data_enter()
+        add_user.done_registration(username, password)
+        inde = add_user.enter_acc(username, password)['inde']
+
+        # Здесь вход в аккаунт
+        session['inde'] = inde
+        session['username'] = username
+        flash('User succesfully created', 'success')
+
+        return redirect('/', code=302)
+
+    add_user = Data_enter()
+    login_result = add_user.enter_acc(username, password)
+
+    '''
+    user {
+        username : ...
+        password : ... !!! Не забываем, что сравниваем не пароль пользователя, а хеш пароля (функция hash_password)
+    }
+
+    error - строка
+    '''
+
+    if login_result['error']:
+        return render_template(
+            'auth_page.html',
+            user=user,
+            error=login_result['error']
+        ), 422
+
+    session['username'] = user['username']
+    session['inde'] = login_result['inde']
+
+    return redirect(
+        url_for('main'),
+        code=302
+        )
 
 
 # страница обработки регистрации
 @app.post('/register')
 def do_register():
     user = process_form_data(request.form.to_dict())
-
     error = validate(user)
-
-
     if error:
         return render_template(
             'register_page.html',
@@ -112,31 +160,11 @@ def do_register():
     return redirect('/', code=302)
 
 
-# страница отображения входа
-@app.get('/login')
-def show_login():
-    if 'username' in session:
-        return redirect('/', code=302)
-    user = user = {
-        'username' : '',
-        'password' : '',
-    }
-    error = ''
-
-    return render_template(
-        'login_page.html',
-        user=user,
-        error=error
-    )
-
-
 # страница обработки входа
 @app.post('/login')
 def do_login():
     user = process_form_data(request.form.to_dict())
-
     add_user = Data_enter()
-
     login_result = add_user.enter_acc(user['username'], hash_password(user['password']))
 
     '''

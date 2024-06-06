@@ -16,28 +16,35 @@
         <div id="login_page" class="login-page">
             <img class="logo" src="/static/imgs/logo.svg" alt=""></img>
             <div class="form">
-              <form id="register_form" class="register-form" method="post" action="/login">
+              <form id="register_form" class="register-form" method="post" action="/auth">
                 <p class="message">
                     <a href="#">sign in </a>
                     / register
                   </p>
-                <input class="username" placeholder="username" />
-                <input class="password" placeholder="password" />
-                <input class="password_confirmation" placeholder="password confirmation" />
+                <input class="username" placeholder="username" name="username" required />
+                <input class="password" placeholder="password" type="password" name="password" required />
+                <input class="password_confirmation" placeholder="password confirmation" type="password" name="password_confirmation" required />
                 <input type="submit" class="btn" value="register" />
               </form>
-              <form id="login_form" action="/register" method="POST" class="login-form">
+              <form id="login_form" action="/auth" method="POST" class="login-form">
                 <p class="message">
                     sign in /
                     <a href="#"> register</a>
                   </p>
-                <input class="username" id="username" type="text" placeholder="username" />
-                <input class="password" id="password" type="password" placeholder="password" />
+                <input class="username" id="username" type="text" placeholder="username" name="username" required />
+                <input class="password" id="password" type="password" placeholder="password" name="password" required />
                 <input id="btnLg" type="submit" class="btn" value="sign in" />
               </form>
             </div>
           </div>
     </div>
+
+    {% if error %}
+    <div>
+      {{ error }}
+    </div>
+    {% endif %}
+
     <script>
         $('.message a').click(function() {
             $('form').animate({
