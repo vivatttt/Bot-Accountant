@@ -18,12 +18,16 @@ def validate(user : Dict[str, str]) -> str:
     # Логин должен содержать только буквы, цифры и нижнее подчеркивание
     username_pattern = r'^\w+$'
     # Пароль должен быть длиной от 6 до 16 символов и содержать как минимум одну цифру, одну букву в верхнем регистре и одну букву в нижнем регистре
-    password_pattern = r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$'
+    password_pattern = r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}$'
 
     if not re.match(username_pattern, username):
         return "Login can only contain letters, numbers and underscores."
     if not re.match(password_pattern, password):
+<<<<<<< HEAD
         return "The password must be between 6 and 10 characters long and contain at least one number, one uppercase letter and one lowercase letter."
+=======
+        return "Пароль должен быть длиной от 6 до 16 символов и содержать как минимум одну цифру, одну букву в верхнем регистре и одну букву в нижнем регистре"
+>>>>>>> 1b3b74a00d5611474799d452bb8a76647cdc9095
     if password != password_confirmartion:
         return "Password mismatch."
 

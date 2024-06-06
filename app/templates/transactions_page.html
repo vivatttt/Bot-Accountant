@@ -136,4 +136,40 @@
         {{ error }}
     {% endif %}
 
+    <script>
+        function updateSecondSelector() {
+            // Получаем выбранное значение первого селектора
+            const firstSelector = document.getElementById('type');
+            const selectedValue = firstSelector.value;
+
+            // Получаем второй селектор
+            const secondSelector = document.getElementById('category');
+
+            // Очищаем второй селектор
+            secondSelector.innerHTML = '';
+
+            // В зависимости от выбранного значения заполняем второй селектор
+            let options = [];
+            if (selectedValue === 'expense') {
+                options = ['food', 'transportation', 'utilities', 'entertainment', 'other'];
+            } else {
+                options = ['salary', 'award', 'gift', 'other'];
+            }
+
+            // Добавляем новые опции в второй селектор
+            options.forEach(option => {
+                const newOption = document.createElement('option');
+                newOption.value = option;
+                newOption.textContent = option;
+                secondSelector.appendChild(newOption);
+            });
+        }
+
+        // Добавляем обработчик события для первого селектора
+        window.onload = function() {
+            document.getElementById('type').addEventListener('change', updateSecondSelector);
+        };
+    </script>
+
+
 {% endblock content %}
