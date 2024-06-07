@@ -31,3 +31,5 @@ id_user,amount,type,category,date,description
 0,10,income,award,2024-01-01,123
 0,10,income,gift,2024-01-01,123
 0,100,expense,other,2024-06-06,Gift for sister
+0,300,expense,food,2024-06-07,123
+0,10,income,salary,2024-06-06,123
