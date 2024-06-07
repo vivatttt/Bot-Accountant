@@ -426,29 +426,40 @@ translation
 /*----------------------------------------------------------------
     goal
 -----------------------------------------------------------------*/
-.form .btn {
+.goal-cont{
+    display: flex;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    margin: 8% auto;
+}
+
+
+.form-2 .btn {
     display: flex;
     justify-content: center;
     width: 50%;
     height: auto;
     border: none;
-    margin: auto;
+    margin: 10px auto;
     color: #8D99AE;
     font-size: 30px;
     cursor: pointer;
-  }
-  @media(hover: hover) {
-    .form .btn:hover {
+}
+
+@media(hover: hover) {
+    .form-2 .btn:hover {
       color: #ffffff;
     }
-  }
-  
-  @media(hover: none) {
-    .form .btn:active {
+}
+
+@media(hover: none) {
+    .form-2 .btn:active {
       color: #ffffff;
     }
-  }
-.form .top {
+}
+
+.form-2 .top {
     display: flex;
     margin: 2% auto;
     color: white;
@@ -456,24 +467,28 @@ translation
     font-weight: 300;
     text-decoration: none;
     justify-content: center;
-  }
-  
-.form .top a {
+}
+
+.form-2 .top a {
     color: #8D99AE;
     text-decoration: none;
-  }
-  
-  @media(hover: hover) {
-    .form .top a:hover {
+}
+
+@media(hover: hover) {
+    .form-2 .top a:hover {
       color: #ffffff;
     }
-  }
-  
-  @media(hover: none) {
-    .form .top a:active {
+}
+
+@media(hover: none) {
+    .form-2 .top a:active {
       color: #ffffff;
     }
-  }
+}
+
+.form-2 .Update-form{
+    display: none;
+}
 /*----------------------------------------------------------------
    analitics
 -----------------------------------------------------------------*/
@@ -526,6 +541,26 @@ translation
 /*----------------------------------------------------------------
    main page
 -----------------------------------------------------------------*/
+.quick-actions a{
+    display: contents;
+    margin: 2% auto;
+    color: #8D99AE;
+    font-size: 35px;
+    font-weight: 300;
+    text-decoration: none;
+    justify-content: center;
+}
+@media(hover: hover) {
+    .quick-actions a:hover {
+      color: #ffffff;
+    }
+  }
+  
+  @media(hover: none) {
+    .quick-actions a:active {
+      color: #ffffff;
+    }
+  }
 .wrapper {
     display: flex;
     flex-direction: column;

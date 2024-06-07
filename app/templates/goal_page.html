@@ -3,8 +3,7 @@
 {% block title %}goal{% endblock title %}
 
 {% block content %}
-<div class="wrepper">
-
+<div class="goal-cont">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
@@ -14,9 +13,8 @@
             </ul>
         {% endif %}
     {% endwith %}
-    <div id="login_page" class="login-page">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <div class="form">
+        <div class="form-2">
             <form action="/goal" method="POST" class="Add-form">
                 <p class="top">
                     Add / 
@@ -50,9 +48,7 @@
                 <div class="error">{{ error }}</div>
                 {% endif %}
             </form>
-            
         </div>
-    </div>
     <script>
         $('.top a').click(function() {
             $('form').animate({
