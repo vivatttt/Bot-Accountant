@@ -162,7 +162,7 @@ auth
   }
   
   .login-page {
-    width: 60%;
+    width: 50%;
     padding: auto;
     display: flex;
     flex-direction: column;
