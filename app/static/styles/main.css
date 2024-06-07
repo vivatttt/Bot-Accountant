@@ -87,7 +87,7 @@
     height: 100vh; 
     width: 100%;
     background-color: #2B2D42;
-  }
+}
   
   .header {
     margin: auto;
@@ -159,17 +159,25 @@
   }
   
   .login-page {
-    width: 40%;
+    width: 60%;
     padding: auto;
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
   
   .form {
     position: relative;
     z-index: 1;
     max-width: 100%;
-    padding: 1%;
+    padding: 5%;
     text-align: center;
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
   
   input, select, textarea {
     width: 100%;
