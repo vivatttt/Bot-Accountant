@@ -620,7 +620,7 @@ translation
   height: 400px;
   width: 400px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #404459 calc(var(--fill)), #2B2D42);
+  background: conic-gradient(from 0deg, #404459 calc(var(--fill)), transparent calc(var(--fill)));
   position: relative;
   margin-left: 10%;
   overflow: hidden; 
@@ -632,7 +632,7 @@ translation
   position: absolute;
   width: 100%; 
   height: 100%;
-  background: conic-gradient(from 0deg, #ffffff calc(var(--fill)), transparent);
+  background: conic-gradient(from 0deg, #ffffff calc(var(--fill)), transparent calc(var(--fill)) );
   border-radius: 50%;
   top: 0;
   left: 0;
