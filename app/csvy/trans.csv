@@ -34,3 +34,6 @@ id_user,amount,type,category,date,description
 0,300,expense,food,2024-06-07,123
 0,10,income,salary,2024-06-06,123
 1,2345,income,other,2024-05-28,укв
+1,1234,income,salary,2024-06-03,htty
+1,1234,expense,utilities,2024-06-07,tgtge
+1,88000,income,salary,2024-06-01,rtgetvre

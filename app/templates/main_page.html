@@ -6,7 +6,11 @@
 <div class="wrapper">
     <div class="main-container">
 
-        <div class="pie-chart" data-cur-goal="{{ cur_goal }}" data-budget="{{ budget }}" data-moneybox="{{ moneybox }}"></div>
+        <div class="pie-chart" data-cur-goal="{{ cur_goal }}" data-budget="{{ budget }}" data-moneybox="{{ moneybox }}">
+            <div class="circle"></div>
+            <p class="percenttxt" value="0">0%</p>
+        </div>
+        
         <div class="info-container">
             <div class="info-block">
                 <div class="info-block-content">
@@ -37,26 +41,24 @@
                 <div class="info-block-bg"></div>
             </div>
         </div>
-    </div>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            const pieChartElement = document.querySelector('.pie-chart');
-            const curGoalValue = Number(pieChartElement.dataset.curGoal);
-            const budgetValue = Number(pieChartElement.dataset.budget);
-            const moneyboxValue = Number(pieChartElement.dataset.moneybox);
-            if (!isNaN(curGoalValue) && !isNaN(budgetValue) && !isNaN(moneyboxValue)) {
+        </div>
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                const pieChartElement = document.querySelector('.pie-chart');
+                const curGoalValue = Number(pieChartElement.dataset.curGoal);
+                const moneyboxValue = Number(pieChartElement.dataset.moneybox);
                 const percentage = curGoalValue > 0 ? (moneyboxValue / curGoalValue) * 100 : 0;
                 pieChartElement.style.setProperty('--fill', percentage + '%');
         
-                const moneyLeftElement = document.getElementById('money_left');
-                moneyLeftElement.textContent = budgetValue - moneyboxValue;
-            } else {
-                console.error('One or more values are not numbers');
-            }
-        });
+                const percenttxtElement = pieChartElement.querySelector('.percenttxt');
+                percenttxtElement.textContent = percentage.toFixed(2) + '%';
         
-    </script>
-
+                const moneyLeftElement = document.getElementById('money_left');
+                const budgetValue = Number(pieChartElement.dataset.budget);
+                moneyLeftElement.textContent = budgetValue - moneyboxValue;
+            });
+        </script>
+        
         
 </div>
 {% endblock content %}

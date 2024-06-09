@@ -196,13 +196,13 @@ input, select, textarea {
   }
   
   @media(hover: hover) {
-    input:hover {
+    input:hover, select:hover, textarea:hover{
       border: 4px solid white;
     }
   }
   
   @media(hover: none) {
-    input:active {
+    input:hover, select:hover, textarea:hover{
       border: 4px solid white;
     }
   }
@@ -343,7 +343,7 @@ translation
     background-color: #2B2D42;
     color: #fff;
     }
-    
+
     .delete-btn {
     background-color: transparent;
     color: #BF00DF;
@@ -375,7 +375,7 @@ translation
     border: 4px solid #8D99AE;
     margin: 10px 0 10px;
     padding: 4%;
-    
+    transition: border 0.3 ease-in-out;
     box-sizing: border-box;
     font-size: 35px;
     background: transparent;
@@ -553,37 +553,86 @@ translation
     }
   }
 
-.main-container{
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .main-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.pie-chart, .info-container {
-  flex: 1;
+.percenttxt {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    transition: color 0.5s ease-in-out;
 }
+
+  .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    background-color: #2B2D42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 .pie-chart {
   height: 400px;
-  width: 400px; 
+  width: 400px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #ffffff calc(var(--fill)), transparent calc(var(--fill)));
+  background: conic-gradient(from 0deg, #404459 calc(var(--fill)), #2B2D42);
   position: relative;
+  margin-left: 10%;
+  overflow: hidden; 
+  box-shadow:inset 5px 0px 10px 0 rgba(0.2, 0.2, 0.2, 0.2);
 }
 
 .pie-chart::before {
   content: '';
   position: absolute;
-  width: 400px; 
-  height: 400px; 
-  background: transparent;
-  box-shadow: inset 5px 0px 10px 0 rgba(0, 0, 0, 0.2);
+  width: 100%; 
+  height: 100%;
+  background: conic-gradient(from 0deg, #ffffff calc(var(--fill)), transparent);
   border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  opacity: 0; 
+  transition: opacity 0.5s ease-in-out; 
+  box-shadow:inset 5px 0px 10px 0 rgba(0.2, 0.2, 0.2, 0.2);
 }
+
+@media (hover: hover) {
+  .pie-chart:hover::before {
+      opacity: 1; 
+  }
+
+  .pie-chart:hover .percenttxt {
+      color: #404459;
+  }
+}
+
+@media (hover: none) {
+  .pie-chart:hover::before {
+      opacity: 1;
+  }
+
+  .pie-chart:hover .percenttxt {
+      color: #404459;
+  }
+}
+
 
 
   
@@ -599,7 +648,7 @@ translation
     display: grid;
     grid-template-columns: repeat(2, 2fr);
     grid-gap: 5px;
-    width: 10%;
+    width: 40%;
     margin-right: 10%;
   }
   
