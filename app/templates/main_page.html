@@ -4,41 +4,59 @@
 
 {% block content %}
 <div class="wrapper">
-    <h1 class="page-title">Welcome home</h1>
-    <div class="quick-actions">
-        <a href="{{ url_for('show_transaction') }}" class="btn">Add Transaction / </a>
-        <a href="{{ url_for('show_goal') }}" class="btn"> Edit Goal</a>
-    </div>
+    <div class="main-container">
 
-    <div class="info-container">
-        <div class="info-block">
-            <div class="info-block-content">
-                <h2 class="info-title">Current Goal</h2>
-                <p class="info-value">{{ cur_goal }}</p>
+        <div class="pie-chart" data-cur-goal="{{ cur_goal }}" data-budget="{{ budget }}" data-moneybox="{{ moneybox }}"></div>
+        <div class="info-container">
+            <div class="info-block">
+                <div class="info-block-content">
+                    <h2 class="info-title">Current Goal</h2>
+                    <p id="cur_goal" class="info-value">{{ cur_goal }}</p>
+                </div>
+                <div class="info-block-bg"></div>
             </div>
-            <div class="info-block-bg"></div>
-        </div>
-        <div class="info-block">
-            <div class="info-block-content">
-                <h2 class="info-title">Budget</h2>
-                <p class="info-value">{{ budget }}</p>
+            <div class="info-block">
+                <div class="info-block-content">
+                    <h2 class="info-title">Budget</h2>
+                    <p class="info-value">{{ budget }}</p>
+                </div>
+                <div class="info-block-bg"></div>
             </div>
-            <div class="info-block-bg"></div>
-        </div>
-        <div class="info-block">
-            <div class="info-block-content">
-                <h2 class="info-title">Moneybox</h2>
-                <p class="info-value">{{ moneybox }}</p>
+            <div class="info-block">
+                <div class="info-block-content">
+                    <h2 class="info-title">Moneybox</h2>
+                    <p id="moneybox" class="info-value">{{ moneybox }}</p>
+                </div>
+                <div class="info-block-bg"></div>
             </div>
-            <div class="info-block-bg"></div>
-        </div>
-        <div class="info-block">
-            <div class="info-block-content">
-                <h2 class="info-title">Money Left</h2>
-                <p class="info-value">{{ budget - moneybox }}</p>
+            <div class="info-block">
+                <div class="info-block-content">
+                    <h2 class="info-title">Money Left</h2>
+                    <p id="money_left" class="info-value">{{ budget - moneybox }}</p>
+                </div>
+                <div class="info-block-bg"></div>
             </div>
-            <div class="info-block-bg"></div>
         </div>
     </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const pieChartElement = document.querySelector('.pie-chart');
+            const curGoalValue = Number(pieChartElement.dataset.curGoal);
+            const budgetValue = Number(pieChartElement.dataset.budget);
+            const moneyboxValue = Number(pieChartElement.dataset.moneybox);
+            if (!isNaN(curGoalValue) && !isNaN(budgetValue) && !isNaN(moneyboxValue)) {
+                const percentage = curGoalValue > 0 ? (moneyboxValue / curGoalValue) * 100 : 0;
+                pieChartElement.style.setProperty('--fill', percentage + '%');
+        
+                const moneyLeftElement = document.getElementById('money_left');
+                moneyLeftElement.textContent = budgetValue - moneyboxValue;
+            } else {
+                console.error('One or more values are not numbers');
+            }
+        });
+        
+    </script>
+
+        
 </div>
 {% endblock content %}
