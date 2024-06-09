@@ -541,15 +541,43 @@ translation
 /*----------------------------------------------------------------
    main page
 -----------------------------------------------------------------*/
+.qout{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 57%;
+  font-size: 40px;
+  font-weight: 700;
+  color: #404459;
+  height: 100px;
+  transition: color 0.3s ease-in-out;
+}
+.chelendg{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #8D99AE;
+  height: 80px;
+  transition: color 0.3s ease-in-out;
+}
+
 @media(hover: hover) {
-    .quick-actions a:hover {
+   .qout:hover .chelendg{
       color: #ffffff;
+    }
+    .qout:hover{
+      color: #8D99AE;
     }
   }
   
   @media(hover: none) {
-    .quick-actions a:active {
+    .qout:hover .chelendg{
       color: #ffffff;
+    }
+    .qout:hover{
+      color: #8D99AE;
     }
   }
 
@@ -636,19 +664,12 @@ translation
 
 
   
-  .quick-actions {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 30px;
-  }
-  
   .info-container {
     align-self: flex-end;
     display: grid;
     grid-template-columns: repeat(2, 2fr);
     grid-gap: 5px;
-    width: 40%;
+    width: 35%;
     margin-right: 10%;
   }
   
@@ -698,7 +719,7 @@ translation
   
   .info-title {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 500;
     color: #ffffff;
     margin-bottom: 10px;
   }
