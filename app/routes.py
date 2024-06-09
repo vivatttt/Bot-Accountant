@@ -1,5 +1,6 @@
 from app import app
 import plotly.graph_objs as go
+import plotly.express as px
 from flask import (
                     Blueprint, 
                    redirect, 
@@ -75,6 +76,7 @@ def show_register():
         error=error
     )
 
+
 # страница обработки регистрации
 @app.post('/register')
 def do_register():
@@ -126,6 +128,7 @@ def show_login():
         error=error
     )
 
+
 # страница обработки входа
 @app.post('/login')
 def do_login():
@@ -176,6 +179,7 @@ def analytics():
             'income' : [],
             'expense' : []
         },
+        'line': [],
     }
 
     '''
@@ -197,28 +201,39 @@ def analytics():
             fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
             fig.update_layout(
                 title={
-                "text":i+" for "+str(month)+" month:",
+                "text": i + " for " + str(month) + " month:",
                 "y":0.96,
                 "x":0.5,
                 "xanchor":"center",
                 "yanchor":"top",
                 'font': {'size': 30, 'color': 'white'},
-                })
+                }, legend=dict(font=dict(size=15, color='white')))
             html_code = fig.to_html(full_html=False)
 
             diagrams['pie_chart'][i].append(html_code)
-    # labels, values = get_inf_for_pie_chart(inde, "income", 3)
-    # diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    # labels, values = get_inf_for_pie_chart(inde, "income", 6)
-    # diagrams['pie_chart']['income'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    #
-    # labels, values = get_inf_for_pie_chart(inde, "expense", 1)
-    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    # labels, values = get_inf_for_pie_chart(inde, "expense", 3)
-    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    # labels, values = get_inf_for_pie_chart(inde, "expense", 6)
-    # diagrams['pie_chart']['expense'].append(go.Figure(data=[go.Pie(labels=labels, values=values)]).to_html(full_html=False))
-    #
+
+    goal_tran = Data_goal()
+    summ, date = goal_tran.type_information(int(inde))
+    fig = px.line(y=summ, x=date, title='Life of goal')
+    fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
+    fig.update_layout(
+        title={
+            "text": "Life of goal:",
+            "y": 0.96,
+            "x": 0.5,
+            "xanchor": "center",
+            "yanchor": "top",
+            'font': {'size': 30, 'color': 'white'},
+        })
+    fig.update_layout(
+        font=dict(color='white'),
+        title=dict(
+            font=dict(color='white', size=30)
+        ),
+        legend=dict(font=dict(size=20, color='white'))
+    )
+    html_code = fig.to_html(full_html=False)
+    diagrams["line"].append(html_code)
 
     return render_template(
         'analytics_page.html',
