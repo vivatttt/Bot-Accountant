@@ -30,3 +30,4 @@ id_user,amount,type,category,date,description
 "
 0,10,income,award,2024-01-01,123
 0,10,income,gift,2024-01-01,123
+0,10,expense,transportation,2024-06-06,bus
