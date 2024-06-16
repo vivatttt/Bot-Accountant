@@ -49,6 +49,7 @@ def main():
     return redirect(
         url_for('show_auth'),
         code=302
+        
     )
 
 @app.get('/auth')

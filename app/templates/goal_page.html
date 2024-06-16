@@ -3,13 +3,7 @@
 {% block title %}goal{% endblock title %}
 
 {% block content %}
-<div class="wrepper">
-    <div class="top_buttns">
-        <span class="curent_page">Add</span>
-        <span class="slash"> / </span>
-        <a href="#" class="btn">Update</a>
-    </div>
-
+<div class="goal-cont">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
@@ -19,35 +13,50 @@
             </ul>
         {% endif %}
     {% endwith %}
-
-    <form action="/goal" method="POST" class="form">
-        <div class="form-group">
-            <label for="amount" class="label">Amount:</label>
-            <input type="number" id="amount" name="amount" value="{{ goal.get('amount', '') }}" required class="input">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <div class="form-2">
+            <form action="/goal" method="POST" class="Add-form">
+                <p class="top">
+                    Add / 
+                    <a href="#"> Update</a>
+                </p>
+                <div class="form-group">
+                    <input type="number" id="amount" name="amount" value="{{ goal.get('amount', '') }}" required class="input" placeholder="Amount">
+                </div>
+                <div class="form-group">
+                    <select id="type" name="type" required class="input">
+                        <option value="type">Select type</option>
+                        <option value="expense">Widthdraw</option>
+                        <option value="income">Deposit</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+                {% if error %}
+                <div class="error">{{ error }}</div>
+                {% endif %}
+            </form>
+            <form action="/goal-new" method="POST" class="Update-form">
+                <p class="top">
+                    <a href="#">Add </a>
+                    / Update
+                </p>
+                <div class="form-group">
+                    <input type="number" id="new_amount" name="new_amount" value="{{ goal.get('new_amount', '') }}" required class="input" placeholder="Amount">
+                </div>
+                <button type="submit" class="btn">Submit</button>
+                {% if error %}
+                <div class="error">{{ error }}</div>
+                {% endif %}
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="type" class="label">Type:</label>
-            <select id="type" name="type" required class="input">
-                <option value="expense">Widthdraw</option>
-                <option value="income">Deposit</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn">Submit</button>
-    </form>
-
-    <form action="/goal-new" method="POST" class="form">
-        <div class="form-group">
-            <label for="new_amount" class="label">Amount:</label>
-            <input type="number" id="new_amount" name="new_amount" value="{{ goal.get('new_amount', '') }}" required class="input">
-        </div>
-
-        <button type="submit" class="btn">Submit</button>
-    </form>
-
-    {% if error %}
-        <div class="error">{{ error }}</div>
-    {% endif %}
+    <script>
+        $('.top a').click(function() {
+            $('form').animate({
+            height: "toggle",
+            opacity: "toggle"
+            }, "slow");
+        });
+    </script>
 </div>
+
 {% endblock content %}
