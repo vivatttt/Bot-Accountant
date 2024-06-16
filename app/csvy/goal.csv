@@ -2,3 +2,5 @@ id_user,amount,type,date
 0,100,income,2024-06-07
 1,80000,income,2024-06-09
 2,30000,income,2024-06-10
+3,2000,income,2024-06-11
+3,20000,income,2024-06-11
