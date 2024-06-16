@@ -41,5 +41,20 @@
     <div class="predict-expenses-container">
         {{ diagrams['predict_expenses'] | safe }}
     </div>
+
+    <div class="predict-expenses-container">
+        {{ diagrams['predict_income'] | safe }}
+    </div>
+
+    <div class="predict-expenses-container">
+        {{ diagrams['predict_budget'] | safe }}
+    </div>
+
+    <div class="predict-expenses-container">
+        {{ diagrams['predict_goal'] | safe }}
+    </div>
+
+    {{ messages['goal_reached_at'] }}
+
 </div>
 {% endblock content %}

@@ -21,9 +21,9 @@ from app.data_of_transaction import Data_trans
 from app.data_of_goal import Data_goal
 import pandas as pd
 from app.analytics.analytics import get_inf_for_pie_chart, get_inf_for_bar_chart
-from app.analytics.model import predict
+from app.analytics.model import predict, predict_cumulative
 from app.utils.names import GRAPH_FOLDER, CATEGORIES, TYPES
-
+from app.analytics import utils
 
 routes = Blueprint('routes', __name__)
 app.secret_key = 'daria_dusheiko'
@@ -202,8 +202,14 @@ def analytics():
             url_for('show_register'),
             code=302
         )
+    inde = int(session.get('inde'))
+    enough_data_for_analytics, message = utils.check_enough_data_for_analytics(inde)
+    if not enough_data_for_analytics:
+        return render_template(
+            'not_enough_data_for_anaytics.html',
+            message=message
+        )
 
-    inde = session.get('inde')
     diagrams = {
         'pie_chart' : {
             'income' : [],
@@ -212,7 +218,7 @@ def analytics():
         'line': [],
         'circle': [],
     }
-
+    messages = dict()
     '''
     diagrams = {
         'pie_chart' : {
@@ -313,11 +319,14 @@ def analytics():
         legend=dict(font=dict(size=20, color='white'))
     )
 
-    html_code = fig.to_html(full_html=False)
-    diagrams['bar_chart'] = html_code
-    diagrams['predict_expenses'] = predict(inde)
-
-
+    diagrams['bar_chart'] = fig.to_html(full_html=False)
+    diagrams['predict_expenses'] = predict(inde, type="expense")
+    diagrams['predict_income'] = predict(inde, type="income")
+    diagrams['predict_budget'], _ = predict_cumulative(inde, 'budget')
+    diagrams['predict_goal'], goal_reached_at = predict_cumulative(inde, 'goal')
+    
+    messages['goal_reached_at'] = utils.process_goal_prediction(goal_reached_at)
+    
     labels, values = get_inf_for_pie_chart(inde, type, month)
 
 
@@ -337,9 +346,11 @@ def analytics():
     diagrams['pie_chart'][type].append(html_code)
 
 
+
     return render_template(
         'analytics_page.html',
-        diagrams=diagrams
+        diagrams=diagrams,
+        messages=messages
     )
 
 # страница добавлением / удалением транизакций
