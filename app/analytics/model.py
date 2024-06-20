@@ -1,7 +1,9 @@
 from statsmodels.tsa.statespace.sarimax import SARIMAX 
 import pandas as pd
 import warnings 
+from datetime import datetime
 import plotly.graph_objs as go
+from app.utils.names import COLOR
 warnings.filterwarnings("ignore") 
 
 
@@ -49,8 +51,8 @@ def predict(inde, type):
     
     fig.update_layout(
         barmode='group',
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgb(57, 62, 70)',
+        plot_bgcolor=COLOR,
+        paper_bgcolor=COLOR,
         font=dict(color='white'),
         title=dict(
             font=dict(color='white', size=30)
@@ -117,8 +119,8 @@ def predict_cumulative(inde, type):
     
     fig.update_layout(
         barmode='group',
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgb(57, 62, 70)',
+        plot_bgcolor=COLOR,
+        paper_bgcolor=COLOR,
         font=dict(color='white'),
         title=dict(
             font=dict(color='white', size=30)
@@ -126,16 +128,23 @@ def predict_cumulative(inde, type):
         legend=dict(font=dict(size=20, color='white'))
     )
 
-    goal_reached_at = None
-
+    goal_reached_at = ""
+    
+    
     if type == 'goal':
         df_accs = pd.read_csv('app/csvy/akks.csv')
      
         target_goal = df_accs.loc[inde, 'goal']
+        moneybox = df_accs.loc[inde, 'moneybox']
+        # Если цель уже достигнута, выставляем сегодняшнюю дату
+        if target_goal <= moneybox:
+            now = datetime.now()
+            goal_reached_at = now.strftime('%Y-%m')
 
-        for _, row in forecast.iterrows():
-            if row['goal'] > target_goal:
-                goal_reached_at = row['month']
-                break
+        else:
+            for _, row in forecast.iterrows():
+                if row['goal'] >= target_goal:
+                    goal_reached_at = row['month']
+                    break
 
     return fig.to_html(full_html=False), goal_reached_at

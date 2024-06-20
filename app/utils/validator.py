@@ -32,7 +32,7 @@ def validate(user : Dict[str, str]) -> str:
     try:
         df = pd.read_csv('app/csvy/akks.csv')
 
-    except Exception as err:
+    except Exception:
         frame.server()
         df = pd.read_csv('app/csvy/akks.csv')
 

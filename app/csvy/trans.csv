@@ -31,4 +31,4 @@ id_user,amount,type,category,date,description
 0,10,income,gift,2024-01-01,123
 0,10,expense,transportation,2024-06-06,bus
 0,3000,income,salary,2024-06-16,123
-0,100,income,salary,2024-05-16,sl;dif
+>>>>>>> 14092c6ca8ca5132887e3ecda991e5b83e90db04
