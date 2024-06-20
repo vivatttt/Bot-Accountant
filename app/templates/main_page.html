@@ -11,8 +11,8 @@
     {% endif %}
     <div class="main-container">
 
-        <div class="pie-chart" data-cur-goal="{{ cur_goal }}" data-budget="{{ budget }}" data-moneybox="{{ moneybox }}">
-            <div class="circle"></div>
+        <div class="pie-chart" id="pie-chart" data-cur-goal="{{ cur_goal }}" data-budget="{{ budget }}" data-moneybox="{{ moneybox }}">
+            <div class="circle" id="circle"></div>
             <p class="percenttxt" value="0">0%</p>
         </div>
         
@@ -61,6 +61,15 @@
                 const moneyLeftElement = document.getElementById('money_left');
                 const budgetValue = Number(pieChartElement.dataset.budget);
                 moneyLeftElement.textContent = budgetValue - moneyboxValue;
+
+                
+                
+                let circle = document.getElementById('pie-chart');
+          
+                if (percentage  >= 100) {
+                    circle.style.background = 'rgb(0,251,161)';
+                } 
+                
             });
         </script>
         
