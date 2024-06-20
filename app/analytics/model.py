@@ -2,6 +2,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 import pandas as pd
 import warnings 
 import plotly.graph_objs as go
+from app.utils.names import COLOR
 warnings.filterwarnings("ignore") 
 
 
@@ -49,8 +50,8 @@ def predict(inde, type):
     
     fig.update_layout(
         barmode='group',
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgb(57, 62, 70)',
+        plot_bgcolor=COLOR,
+        paper_bgcolor=COLOR,
         font=dict(color='white'),
         title=dict(
             font=dict(color='white', size=30)
@@ -117,8 +118,8 @@ def predict_cumulative(inde, type):
     
     fig.update_layout(
         barmode='group',
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgb(57, 62, 70)',
+        plot_bgcolor=COLOR,
+        paper_bgcolor=COLOR,
         font=dict(color='white'),
         title=dict(
             font=dict(color='white', size=30)
