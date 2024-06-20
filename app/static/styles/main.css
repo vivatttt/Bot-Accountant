@@ -623,6 +623,27 @@ translation
   height: 80px;
   transition: color 0.3s ease-in-out;
 }
+.winn{
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #00FFA3;
+  transition: color 0.3s ease-in-out;
+  -webkit-animation: glow 2s ease-in-out infinite alternate;
+  -moz-animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 2s ease-in-out infinite alternate;
+  margin-bottom: 10px;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 5px #2B2D42, 0 0 5px #2B2D42, 0 0 5px #2B2D42;
+  }
+  to {
+    text-shadow: 0 0 5px #00FFA3, 0 0 5px #00FFA3, 0 0 5px rgb(146, 214, 158);
+  }
+}
 .chelendg{
   display: flex;
   align-items: center;
