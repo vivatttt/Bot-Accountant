@@ -14,7 +14,7 @@ from app.data_of_goal import Data_goal
 import pandas as pd
 from app.analytics.analytics import get_inf_for_pie_chart, get_inf_for_bar_chart
 from app.analytics.model import predict, predict_cumulative
-from app.utils.names import TYPES
+from app.utils.names import TYPES, COLOR
 from app.analytics import utils
 
 load_dotenv()
@@ -246,27 +246,15 @@ def analytics():
     goal_tran = Data_goal()
     summ, date = goal_tran.type_information(int(inde))
     if summ != []:
-        fig = px.line(y=summ, x=date, title='Savings')
+        fig = px.line(labels={'x': 'Date', 'y':'Amount'}, y=summ, x=date, title='Savings')
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)')
         fig.update_layout(
             title={
                 "text": "Savings",
-                # "y": 0.96,
-                # "x": 0.5,
-                # "xanchor": "center",
-                # "yanchor": "top",
-                # 'font': {'size': 30, 'color': 'white'},
             })
         fig.update_layout(
-            font=dict(color='white'),
-            title=dict(
-                font=dict(color='white', size=30)
-            ),
-            legend=dict(font=dict(size=20, color='white'))
-        )
-        fig.update_layout(
             plot_bgcolor='rgba(0, 0, 0, 0)',
-            paper_bgcolor='rgb(57, 62, 70)',
+            paper_bgcolor=COLOR,
 
             font=dict(color='white'),
             title=dict(
@@ -303,7 +291,7 @@ def analytics():
     fig.update_layout(
         barmode='group',
         plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgb(57, 62, 70)',
+        paper_bgcolor=COLOR,
 
         font=dict(color='white'),
         title=dict(
