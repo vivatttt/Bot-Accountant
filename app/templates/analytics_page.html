@@ -29,7 +29,10 @@
             {{ diagrams['pie_chart']['expense'][2] | safe }}
         </div>
     </div>
-
+    <div class="massager">
+        <img class="AI" src="/static/imgs/AI.svg" alt=""></img>
+        <p class="goal_reached_at">{{ messages['goal_reached_at'] }}</p>
+    </div>
     <div class="grid-container">
         <div class="grid-item">
           <div class="line-chart-container">
@@ -51,11 +54,13 @@
             {{ diagrams['predict_income'] | safe }}
           </div>
         </div>
+        
         <div class="grid-item">
           <div class="predict-expenses-container">
             {{ diagrams['predict_budget'] | safe }}
           </div>
         </div>
+            
         <div class="grid-item">
           <div class="predict-expenses-container">
             {{ diagrams['predict_goal'] | safe }}
@@ -63,8 +68,5 @@
         </div>
       </div>
       
-    <div class="massager">
-        <p class="goal_reached_at">{{ messages['goal_reached_at'] }}</p>
-    </div>
 </div>
 {% endblock content %}
