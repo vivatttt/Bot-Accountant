@@ -30,31 +30,41 @@
         </div>
     </div>
 
-    <div class="line-chart-container">
-        {{ diagrams['line'][0] | safe }}
+    <div class="grid-container">
+        <div class="grid-item">
+          <div class="line-chart-container">
+            {{ diagrams['line'][0] | safe }}
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="bar-chart-container">
+            {{ diagrams['bar_chart'] | safe }}
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="predict-expenses-container">
+            {{ diagrams['predict_expenses'] | safe }}
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="predict-expenses-container">
+            {{ diagrams['predict_income'] | safe }}
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="predict-expenses-container">
+            {{ diagrams['predict_budget'] | safe }}
+          </div>
+        </div>
+        <div class="grid-item">
+          <div class="predict-expenses-container">
+            {{ diagrams['predict_goal'] | safe }}
+          </div>
+        </div>
+      </div>
+      
+    <div class="massager">
+        <p class="goal_reached_at">{{ messages['goal_reached_at'] }}</p>
     </div>
-
-    <div class="bar-chart-container">
-        {{ diagrams['bar_chart'] | safe }}
-    </div>
-
-    <div class="predict-expenses-container">
-        {{ diagrams['predict_expenses'] | safe }}
-    </div>
-
-    <div class="predict-expenses-container">
-        {{ diagrams['predict_income'] | safe }}
-    </div>
-
-    <div class="predict-expenses-container">
-        {{ diagrams['predict_budget'] | safe }}
-    </div>
-
-    <div class="predict-expenses-container">
-        {{ diagrams['predict_goal'] | safe }}
-    </div>
-
-    {{ messages['goal_reached_at'] }}
-
 </div>
 {% endblock content %}
