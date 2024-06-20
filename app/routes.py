@@ -1,18 +1,10 @@
 from app import app
 import plotly.graph_objs as go
 import plotly.express as px
-from flask import (
-                    Blueprint, 
-                   redirect, 
-                   render_template, 
-                   request, 
-                   session, 
-                   flash, 
-                   url_for,
-                   get_flashed_messages
-                   )
+from flask import Blueprint, redirect, render_template, request, session, flash, url_for
+
 import os
-from datetime import date, datetime
+from dotenv import load_dotenv                   
 from app.utils.validator import validate
 from app.utils.hash_password import hash_password
 from app.utils.process_form_data import process_form_data
@@ -22,11 +14,13 @@ from app.data_of_goal import Data_goal
 import pandas as pd
 from app.analytics.analytics import get_inf_for_pie_chart, get_inf_for_bar_chart
 from app.analytics.model import predict, predict_cumulative
-from app.utils.names import GRAPH_FOLDER, CATEGORIES, TYPES
+from app.utils.names import TYPES
 from app.analytics import utils
 
+load_dotenv()
 routes = Blueprint('routes', __name__)
-app.secret_key = 'daria_dusheiko'
+app.secret_key = os.getenv('SECRET_KEY')
+
 # главная страница
 @app.route('/')
 def main():
@@ -130,67 +124,67 @@ def do_auth():
         )
 
 
-# страница обработки регистрации
-@app.post('/register')
-def do_register():
-    user = process_form_data(request.form.to_dict())
-    error = validate(user)
-    if error:
-        return render_template(
-            'register_page.html',
-            user=user,
-            error=error
-        ), 422
+# # страница обработки регистрации
+# @app.post('/register')
+# def do_register():
+#     user = process_form_data(request.form.to_dict())
+#     error = validate(user)
+#     if error:
+#         return render_template(
+#             'register_page.html',
+#             user=user,
+#             error=error
+#         ), 422
 
-    username = user['username']
-    password = hash_password(user['password'])
+#     username = user['username']
+#     password = hash_password(user['password'])
 
-    # Поменять структуру done_registration()
+#     # Поменять структуру done_registration()
 
-    # Добавление в базу данных
-    add_user = Data_enter()
-    add_user.done_registration(username, password)
-    inde = add_user.enter_acc(username, password)['inde']
+#     # Добавление в базу данных
+#     add_user = Data_enter()
+#     add_user.done_registration(username, password)
+#     inde = add_user.enter_acc(username, password)['inde']
 
-    # Здесь вход в аккаунт
+#     # Здесь вход в аккаунт
 
-    session['inde'] = inde # добавление имени пользователя в куки
-    session['username'] = username
-    flash('User succesfully created', 'success')
+#     session['inde'] = inde # добавление имени пользователя в куки
+#     session['username'] = username
+#     flash('User succesfully created', 'success')
 
-    return redirect('/', code=302)
+#     return redirect('/', code=302)
 
 
-# страница обработки входа
-@app.post('/login')
-def do_login():
-    user = process_form_data(request.form.to_dict())
-    add_user = Data_enter()
-    login_result = add_user.enter_acc(user['username'], hash_password(user['password']))
+# # страница обработки входа
+# @app.post('/login')
+# def do_login():
+#     user = process_form_data(request.form.to_dict())
+#     add_user = Data_enter()
+#     login_result = add_user.enter_acc(user['username'], hash_password(user['password']))
 
-    '''
-    user {
-        username : ...
-        password : ... !!! Не забываем, что сравниваем не пароль пользователя, а хеш пароля (функция hash_password)
-    }
+#     '''
+#     user {
+#         username : ...
+#         password : ... !!! Не забываем, что сравниваем не пароль пользователя, а хеш пароля (функция hash_password)
+#     }
 
-    error - строка
-    '''
+#     error - строка
+#     '''
 
-    if login_result['error']:
-        return render_template(
-            'login_page.html',
-            user=user,
-            error=login_result['error']
-        ), 422
+#     if login_result['error']:
+#         return render_template(
+#             'login_page.html',
+#             user=user,
+#             error=login_result['error']
+#         ), 422
 
-    session['username'] = user['username'] # добавление имени пользователя в куки
-    session['inde'] = login_result['inde']
+#     session['username'] = user['username'] # добавление имени пользователя в куки
+#     session['inde'] = login_result['inde']
 
-    return redirect(
-        url_for('main'),
-        code=302
-        )
+#     return redirect(
+#         url_for('main'),
+#         code=302
+#         )
 
 
 # страница аналитики
@@ -346,7 +340,6 @@ def analytics():
     diagrams['pie_chart'][type].append(html_code)
 
 
-
     return render_template(
         'analytics_page.html',
         diagrams=diagrams,
@@ -488,7 +481,7 @@ def add_to_goal():
             error=error
         ), 422
     
-    flash('You became closer to the goal!', 'success')
+    # flash('You became closer to the goal!', 'success')
     return render_template(
         'goal_page.html',
         goal={},
@@ -522,7 +515,7 @@ def new_goal():
 
 # выход из аккаунта
 @app.get('/exit')
-def exit():
+def exitt():
     session.clear()
 
     return redirect(
