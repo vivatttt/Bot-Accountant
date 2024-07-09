@@ -3,3 +3,7 @@ env
 venv
 csvy
 test
+.env
+akks.csv
+goal.csv
+trans.csv
